@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.ResourcesManagers;
+﻿using Assets.Scripts.Models.Setups;
+using Assets.Scripts.ResourcesManagers;
 using System.Collections;
 using UnityEngine;
 
@@ -6,19 +7,20 @@ namespace Assets.Scripts.MainManagers
 {
     class GameManager: MonoBehaviour
     {
-        private GameLoadingManager LoadingManager { get; set; }
-        private ObjectManager ObjectManager { get; set; }
+        private GameSpawnManager LoadingManager { get; set; }
 
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
 
-            LoadingManager = new GameLoadingManager();
+            LoadingManager = new GameSpawnManager(Resources.Load<LoadingSetup>("Setups/setup.asset"));
             LoadingManager.AddToQueue();
         }
 
         private void Start()
         {
+
+
             StartCoroutine(BaseManager.RunQueue());
         }
 
