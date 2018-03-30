@@ -11,3 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aabe4306f927f04ea6a16dcedc05f3d, type: 3}
   m_Name: setup
   m_EditorClassIdentifier: 
+  Map:
+    BundleID: world_01
+    Name: map_01

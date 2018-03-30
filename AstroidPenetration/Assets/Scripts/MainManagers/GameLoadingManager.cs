@@ -5,24 +5,17 @@ using UnityEngine.Assertions;
 
 namespace Assets.Scripts.MainManagers
 {
-    public class GameLoadingManager
+    public class GameLoadingManager: BaseManager
     {
-        public delegate void OnProgress(float progress);
-        public delegate void OnLoad();
+        private LoadingSetup LoadingSetup { get; set;}
 
         private Transform World { get; set; }
 
-        public  IEnumerator LoadWorld (LoadingSetup loadingSetup, OnProgress onProgress, OnLoad onLoad)
+        public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
         {
-            Assert.IsNotNull(loadingSetup);
-            Assert.IsNotNull(onProgress);
-            Assert.IsNotNull(onLoad);
-
-            World = new GameObject().transform;
-
-
-
-
+            World = new GameObject("World").transform;
+            onProgress(.01f);
+            onLoaded();
             yield return null;
         }
 

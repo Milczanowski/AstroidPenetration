@@ -7,7 +7,6 @@ namespace Assets.Scripts.ResourcesManagers
 {
     class ObjectManager
     {
-
         public static T Load<T>(string name)where T: UnityEngine.Object
         {
 
