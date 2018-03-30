@@ -3,7 +3,6 @@ using Assets.Scripts.Models.Setups;
 using Assets.Scripts.ResourcesManagers;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Assets.Scripts.MainManagers
 {
