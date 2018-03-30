@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Models.Setups
 {
-    class LoadingSetup:ScriptableObject
+    public class LoadingSetup:ScriptableObject
     {
         [SerializeField]
-        public PrefabInfo Map { get; set; }
+        public PrefabInfo Map = null;
 
     }
 }

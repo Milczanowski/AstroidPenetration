@@ -2,10 +2,13 @@
 
 namespace Assets.Scripts.Models
 {
-    class PrefabInfo:ScriptableObject
+    [System.Serializable]
+    public class PrefabInfo
     {
-        public string BundleID { get; set; }
+        [SerializeField]
+        public string BundleID = string.Empty;
 
-        public string Name { get; set; }
+        [SerializeField]
+        public string Name = string.Empty;
     }
 }

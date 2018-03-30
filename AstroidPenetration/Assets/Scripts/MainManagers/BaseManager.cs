@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Editor.Tools
+namespace Assets.Scripts.MainManagers
 {
-    class Tool
+    public class BaseManager
     {
     }
 }

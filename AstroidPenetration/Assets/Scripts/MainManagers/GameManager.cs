@@ -17,7 +17,7 @@ namespace Assets.Scripts.MainManagers
 
         private IEnumerator LoadGame()
         {
-            yield return null;
+            yield return LoadingManager.LoadWorld();
         }
     }
 }
