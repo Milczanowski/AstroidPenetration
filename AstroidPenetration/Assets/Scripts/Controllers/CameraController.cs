@@ -56,18 +56,17 @@ namespace Assets.Scripts.Controllers
             transform.LookAt(CurrentLookAt);
 
 
-            float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(playerPosition.x, playerPosition.z));
+            float distance = Vector3.Distance(CurrentPosition, playerPosition);
 
             if(distance > maxDistance)
-                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition, ref distanceVelocity, distanceSmoothTime);
-
-            if(distance < minDistance)
             {
-                Debug.Log(PlayerForward());
-             //   CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition, ref distanceVelocity, distanceSmoothTime);
+                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance), ref distanceVelocity, distanceSmoothTime);
             }
-
-            transform.position = CurrentPosition+ offSet;
+            else if(distance < minDistance)
+            {
+                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance), ref distanceVelocity, distanceSmoothTime);
+            }
+            transform.position = CurrentPosition + offSet;
         }
     }
 }
