@@ -11,6 +11,8 @@ namespace Assets.Scripts.Controllers
     public class CameraController: BaseController
     {
         private Func<Vector3> PlayerPosition;
+        private Func<Vector3> PlayerForward;
+
         private Vector3 distanceVelocity;
         private Vector3 rotationVelocity;
 
@@ -36,6 +38,11 @@ namespace Assets.Scripts.Controllers
                 return playerController.transform.position;
             };
 
+            PlayerForward = () =>
+            {
+                return playerController.transform.forward;
+            };
+
             CurrentLookAt = PlayerPosition();
             CurrentPosition = transform.position;
             yield return null;
@@ -53,6 +60,12 @@ namespace Assets.Scripts.Controllers
 
             if(distance > maxDistance)
                 CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition, ref distanceVelocity, distanceSmoothTime);
+
+            if(distance < minDistance)
+            {
+                Debug.Log(PlayerForward());
+             //   CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition, ref distanceVelocity, distanceSmoothTime);
+            }
 
             transform.position = CurrentPosition+ offSet;
         }
