@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 54109615062585982}
   - component: {fileID: 65340860054697832}
   - component: {fileID: 114321934050364852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: map_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,4 +125,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
