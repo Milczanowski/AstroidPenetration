@@ -8,5 +8,8 @@ namespace Assets.Scripts.Models.Setups
         [SerializeField]
         public SpawnObjectInfo Map = null;
 
+        [SerializeField]
+        public SpawnObjectInfo Player = null;
+
     }
 }

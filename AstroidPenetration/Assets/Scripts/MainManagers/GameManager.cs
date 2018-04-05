@@ -13,13 +13,12 @@ namespace Assets.Scripts.MainManagers
         {
             DontDestroyOnLoad(gameObject);
 
-            LoadingManager = new GameSpawnManager(Resources.Load<LoadingSetup>("Setups/setup.asset"));
+            LoadingManager = new GameSpawnManager(Resources.Load<LoadingSetup>("Setups/setup"));
             LoadingManager.AddToQueue();
         }
 
         private void Start()
         {
-
 
             StartCoroutine(BaseManager.RunQueue());
         }

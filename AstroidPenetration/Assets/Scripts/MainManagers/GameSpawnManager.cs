@@ -20,8 +20,9 @@ namespace Assets.Scripts.MainManagers
         {
             World = new GameObject("World").transform;
             onProgress(.01f);
-            Instantiate<GameManager>(Setup.Map, World);
-
+            Instantiate<GameObject>(Setup.Map, World);
+            onProgress(.02f);
+            Instantiate<GameObject>(Setup.Player, World);
             onLoaded();
             yield return null;
         }
