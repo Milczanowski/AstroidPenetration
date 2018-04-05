@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
     
 
@@ -30,7 +31,7 @@ namespace Assets.Scripts.MainManagers
         }
 
 
-        public static IEnumerator RunQueue()
+        public static IEnumerator RunQueue(OnLoaded onLoaded)
         {
             queueCount = Queue.Count;
             while(Queue.Count >0)
@@ -45,6 +46,9 @@ namespace Assets.Scripts.MainManagers
                     Queue.RemoveAt(0);
                 });
             }
+
+            if(onLoaded != null)
+                onLoaded.Invoke();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models.Setups;
+﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Models.Setups;
 using Assets.Scripts.ResourcesManagers;
 using System.Collections;
 using UnityEngine;
@@ -19,8 +20,10 @@ namespace Assets.Scripts.MainManagers
 
         private void Start()
         {
-
-            StartCoroutine(BaseManager.RunQueue());
+            StartCoroutine(BaseManager.RunQueue(()=>
+            {
+                StartCoroutine(BaseController.InitAll());
+            }));
         }
 
 
