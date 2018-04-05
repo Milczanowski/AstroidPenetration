@@ -14,6 +14,7 @@ namespace Assets.Scripts.Controllers
         private Func<Vector3> PlayerForward;
 
         private Vector3 distanceVelocity;
+        private Vector3 positionVelocity;
         private Vector3 rotationVelocity;
 
         [SerializeField]
@@ -26,6 +27,8 @@ namespace Assets.Scripts.Controllers
         private float distanceSmoothTime = .5f;
         [SerializeField]
         private float rotationSmoothTime = .5f;
+        [SerializeField]
+        private float positionSmoothTime = .5f;
 
         private Vector3 CurrentLookAt { get; set; }
         private Vector3 CurrentPosition { get; set; }
@@ -62,14 +65,14 @@ namespace Assets.Scripts.Controllers
             {
                 CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance),
                     ref distanceVelocity, distanceSmoothTime);
-                transform.position = CurrentPosition + offSet;
             }
             else if(distance < minDistance)
             {
                 CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance),
                     ref distanceVelocity, distanceSmoothTime);
-                transform.position = CurrentPosition + offSet;
             }
+
+            transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + offSet, ref positionVelocity, positionSmoothTime);
         }
     }
 }
