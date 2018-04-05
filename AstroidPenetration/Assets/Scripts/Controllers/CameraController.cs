@@ -52,7 +52,7 @@ namespace Assets.Scripts.Controllers
         {
             Vector3 playerPosition = PlayerPosition();
 
-            CurrentLookAt = Vector3.SmoothDamp(CurrentLookAt, playerPosition, ref rotationVelocity, rotationSmoothTime);
+            CurrentLookAt = Vector3.SmoothDamp(CurrentLookAt, playerPosition+ PlayerForward(), ref rotationVelocity, rotationSmoothTime);
             transform.LookAt(CurrentLookAt);
 
 
@@ -60,13 +60,16 @@ namespace Assets.Scripts.Controllers
 
             if(distance > maxDistance)
             {
-                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance), ref distanceVelocity, distanceSmoothTime);
+                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance),
+                    ref distanceVelocity, distanceSmoothTime);
+                transform.position = CurrentPosition + offSet;
             }
             else if(distance < minDistance)
             {
-                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance), ref distanceVelocity, distanceSmoothTime);
+                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance),
+                    ref distanceVelocity, distanceSmoothTime);
+                transform.position = CurrentPosition + offSet;
             }
-            transform.position = CurrentPosition + offSet;
         }
     }
 }

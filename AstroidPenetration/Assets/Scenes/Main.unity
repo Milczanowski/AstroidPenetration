@@ -205,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490e8e511161fc447a65a3463c87f226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offSet: {x: 0, y: 2, z: 0}
-  maxDistance: 7
+  offSet: {x: 0, y: 3, z: 0}
+  maxDistance: 9
   minDistance: 4
   distanceSmoothTime: 0.5
   rotationSmoothTime: 0.4

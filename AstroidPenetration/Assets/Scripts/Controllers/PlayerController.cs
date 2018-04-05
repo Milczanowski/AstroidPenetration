@@ -12,9 +12,10 @@ namespace Assets.Scripts.Controllers
         private CharacterController CharacterController = null;
 
         [SerializeField]
-        private float speed = .5f;
+        private float moveSpeed = .5f;
 
         private Vector3 TartgetPosition { get; set; }
+        private Vector3 CurrnetLookAt { get; set; }
 
         private void Move(Vector3 position)
         {
@@ -24,7 +25,9 @@ namespace Assets.Scripts.Controllers
         private void Update()
         {
             if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(TartgetPosition.x, TartgetPosition.z)) > .1f)
-                CharacterController.Move((TartgetPosition - transform.position).normalized * speed);
+                CharacterController.Move((TartgetPosition - transform.position).normalized * moveSpeed);
+
+            transform.LookAt(new Vector3(TartgetPosition.x, transform.position.y, TartgetPosition.z));
         }
 
         public void InitReference()
