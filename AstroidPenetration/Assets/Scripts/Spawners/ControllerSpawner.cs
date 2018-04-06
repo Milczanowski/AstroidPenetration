@@ -12,6 +12,7 @@ namespace Assets.Scripts.Spawners
             GameObject controllers = new GameObject("Controllers");
 
             controllers.AddComponent<GameplayController>();
+            controllers.AddComponent<EffectsController>();
 
             if(onProgress != null)
                 onProgress.Invoke(1);

@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Utils;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets.Scripts.Effects
@@ -10,8 +8,10 @@ namespace Assets.Scripts.Effects
     {
         private static Dictionary<EffectType, Effect> Effects = new Dictionary<EffectType, Effect>();
 
+        public event Delegates.OnEnd OnEnd;
+
         [SerializeField]
-        private EffectType Type;
+        private EffectType Type = EffectType.None;
 
         protected virtual void Awake()
         {
@@ -22,9 +22,17 @@ namespace Assets.Scripts.Effects
                 Debug.LogError("Doubled effect: " + Type + " " + name);
                 Destroy(gameObject);
             }
+
+            gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        protected void End()
+        {
+            if(OnEnd != null)
+                OnEnd.Invoke();
+        }
+
+        protected virtual void OnDestroy()
         {
             Effects.Remove(Type);
         }
@@ -32,5 +40,13 @@ namespace Assets.Scripts.Effects
         public abstract void Show();
 
         public abstract void Show(Vector3 position);
+
+        public static Effect GetEffect(EffectType type)
+        {
+            if(Effects.ContainsKey(type))
+                return Effects[type];
+
+            return null;
+        }
     }
 }

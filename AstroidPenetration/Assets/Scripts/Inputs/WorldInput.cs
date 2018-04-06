@@ -6,7 +6,7 @@ namespace Assets.Scripts.Inputs
     [RequireComponent(typeof(Collider))]
     class WorldInput: MonoBehaviour
     {
-        public static event Delegates.Vector3Target onClick;
+        public static event Delegates.Vector3Target OnClick;
 
         [SerializeField]
         private LayerMask LayerMask;
@@ -17,8 +17,8 @@ namespace Assets.Scripts.Inputs
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, LayerMask.value))
             {
-                if(onClick != null)
-                    onClick.Invoke(raycastHit.point);
+                if(OnClick != null)
+                    OnClick.Invoke(raycastHit.point);
             }
         }
     }

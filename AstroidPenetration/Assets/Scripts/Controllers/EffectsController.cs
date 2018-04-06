@@ -1,23 +1,24 @@
-﻿using System;
+﻿using Assets.Scripts.Effects;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
     class EffectsController:BaseController
     {
+        private Effect Arrows { get; set; }
+
         protected override IEnumerator Init()
         {
-            GetController<GameplayController>().onMove += ShowArrows;
+            Arrows = Effect.GetEffect(EffectType.Arrows);
+
+            GetController<GameplayController>().OnMove += ShowArrows;
             yield return null;
         }
 
-        public void ShowArrows(Vector3 position)
+        private void ShowArrows(Vector3 position)
         {
-
+            Arrows.Show(position);
         }
     }
 }

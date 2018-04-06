@@ -41,7 +41,7 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
-            GetController<GameplayController>().onMove += Move;
+            GetController<GameplayController>().OnMove += Move;
             CurrnetLookAt = transform.position;
             yield return null;
         }
