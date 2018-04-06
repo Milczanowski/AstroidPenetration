@@ -26,12 +26,5 @@ namespace Assets.Scripts.MainManagers
             onLoaded();
             yield return null;
         }
-
-        private T Instantiate<T>(SpawnObjectInfo info, Transform parent)where T: UnityEngine.Object
-        {
-            return Object.Instantiate<T>(ObjectManager.Load<T>(info.Name, info.BundleID), info.Position, info.Rotation, parent);
-        }
-
-
     }
 }

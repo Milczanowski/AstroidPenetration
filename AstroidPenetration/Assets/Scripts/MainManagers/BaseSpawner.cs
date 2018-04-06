@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Assets.Scripts.Models.Basics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-    
+using System.Runtime.Serialization;
+using UnityEngine;
 
 namespace Assets.Scripts.MainManagers
 {
@@ -49,6 +51,16 @@ namespace Assets.Scripts.MainManagers
 
             if(onLoaded != null)
                 onLoaded.Invoke();
+        }
+
+        protected T Instantiate<T>(SpawnObjectInfo info, Transform parent) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(info.Name, info.BundleID), info.Position, info.Rotation, parent);
+        }
+
+        protected T Instantiate<T>(PrefabInfo info, Transform parent) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(info.Name, info.BundleID), parent);
         }
     }
 }

@@ -6,16 +6,11 @@ namespace Assets.Scripts.MainManagers
 {
     public class ControllerSpawner:BaseSpawner
     {
-        private Transform Parent { get; set; }
-
-        public ControllerSpawner(Transform parent)
-        {
-            Parent = parent;
-        }
-
         public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
         {
-            Parent.gameObject.AddComponent<GameplayController>();
+            GameObject controllers = new GameObject("Controllers");
+
+            controllers.AddComponent<GameplayController>();
 
             if(onProgress != null)
                 onProgress.Invoke(1);

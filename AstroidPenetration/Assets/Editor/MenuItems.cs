@@ -16,11 +16,22 @@ namespace Assets.Editor
             }
         }
 
-        [MenuItem("Tools/Setups/Create empty")]
-        private static void CreateEmptyUp()
+        [MenuItem("Tools/Loading Setup/Create empty")]
+        private static void CreateEmptyLoadingSetup()
         {
-            LoadingSetup LoadingSetup = ScriptableObject.CreateInstance<LoadingSetup>();
-            AssetDatabase.CreateAsset(LoadingSetup, EditorUtility.SaveFilePanel("Choose the file name", "Assets/Resources/Setups/", "setup", "asset")
+            CreateEmptySetup<LoadingSetup>("setup");
+        }
+
+        [MenuItem("Tools/Effects Setup/Create empty")]
+        private static void CreateEmptyEffectsSetup()
+        {
+            CreateEmptySetup<EffectsSetup>("effects");
+        }
+
+        private static void CreateEmptySetup<T>(string filename, string extension = "asset") where T : ScriptableObject
+        {
+            T setup = ScriptableObject.CreateInstance<T>();
+            AssetDatabase.CreateAsset(setup, EditorUtility.SaveFilePanel("Choose the file name", "Assets/Resources/Setups/", filename, extension)
                 .Replace(ProjectPath, ""));
         }
     }

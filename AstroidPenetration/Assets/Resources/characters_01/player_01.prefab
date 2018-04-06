@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 143851119982630136}
-  moveSpeed: 10
+  moveSpeed: 15
   rotationSmoothTime: 0.1
 --- !u!136 &136345614385916790
 CapsuleCollider:

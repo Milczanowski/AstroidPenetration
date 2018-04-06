@@ -9,7 +9,7 @@ namespace Assets.Scripts.MainManagers
     class GameManager: MonoBehaviour
     {
         private GameSpawner GameSpawner { get; set; }
-
+        private EffectsSpawner EffectsSpawner { get; set; }
         private ControllerSpawner ControllerSpawner { get; set; }
 
         private void Awake()
@@ -19,7 +19,10 @@ namespace Assets.Scripts.MainManagers
             GameSpawner = new GameSpawner(Resources.Load<LoadingSetup>("Setups/setup"));
             GameSpawner.AddToQueue();
 
-            ControllerSpawner = new ControllerSpawner(new GameObject("Controllers").transform);
+            EffectsSpawner = new EffectsSpawner(Resources.Load<EffectsSetup>("Setups/effects"));
+            EffectsSpawner.AddToQueue();
+
+            ControllerSpawner = new ControllerSpawner();
             ControllerSpawner.AddToQueue();
         }
 
