@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Spawners
 {
-    class GameManager: MonoBehaviour
+    class SpawnersManager: MonoBehaviour
     {
         private GameSpawner GameSpawner { get; set; }
         private EffectsSpawner EffectsSpawner { get; set; }
