@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Models.Basics;
+using Assets.Scripts.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,10 +23,8 @@ namespace Assets.Scripts.Spawners
             }
         }
 
-        public delegate void OnProgress(float progress);
-        public delegate void OnLoaded();
 
-        public abstract IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded);
+        public abstract IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded);
 
         public void AddToQueue()
         {
@@ -33,7 +32,7 @@ namespace Assets.Scripts.Spawners
         }
 
 
-        public static IEnumerator RunQueue(OnLoaded onLoaded)
+        public static IEnumerator RunQueue(Delegates.OnEnd onLoaded)
         {
             queueCount = Queue.Count;
             while(Queue.Count >0)

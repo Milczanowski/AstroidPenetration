@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Models.Setups;
-using Assets.Scripts.ResourcesManagers;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Spawners

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Assets.Scripts.Spawners
 {
     public class ControllerSpawner:BaseSpawner
     {
-        public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
+        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
             GameObject controllers = new GameObject("Controllers");
 

@@ -11,7 +11,8 @@ namespace Assets.Scripts.Controllers
     {
         protected override IEnumerator Init()
         {
-            throw new NotImplementedException();
+            GetController<GameplayController>().onMove += ShowArrows;
+            yield return null;
         }
 
         public void ShowArrows(Vector3 position)

@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.Models.Basics;
-using Assets.Scripts.Models.Setups;
-using Assets.Scripts.ResourcesManagers;
+﻿using Assets.Scripts.Models.Setups;
+using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace Assets.Scripts.Spawners
             Setup = loadingSetup;
         }
 
-        public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
+        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
             Transform World = new GameObject("World").transform;
             onProgress(.01f);

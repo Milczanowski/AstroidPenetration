@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Models.Setups;
-using System;
+using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Assets.Scripts.Spawners
             EffectsSetup = effectsSetup;
         }
 
-        public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
+        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
             if(onProgress != null)
                 onProgress.Invoke(0);
