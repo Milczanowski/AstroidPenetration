@@ -9,7 +9,6 @@ namespace Assets.Scripts.MainManagers
     public class GameSpawner: BaseSpawner
     {
         private LoadingSetup Setup { get; set;}
-        private Transform World { get; set; }
 
         public GameSpawner(LoadingSetup loadingSetup)
         {
@@ -18,11 +17,13 @@ namespace Assets.Scripts.MainManagers
 
         public override IEnumerator Load(OnProgress onProgress, OnLoaded onLoaded)
         {
-            World = new GameObject("World").transform;
+            Transform World = new GameObject("World").transform;
             onProgress(.01f);
-            Instantiate<GameObject>(Setup.Map, World);
+            Setup.Map.Instantiate<GameObject>(World);
+
             onProgress(.02f);
-            Instantiate<GameObject>(Setup.Player, World);
+            Setup.Player.Instantiate<GameObject>(World);
+
             onLoaded();
             yield return null;
         }

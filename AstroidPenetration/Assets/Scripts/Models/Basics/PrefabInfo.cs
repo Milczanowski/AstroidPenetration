@@ -10,5 +10,10 @@ namespace Assets.Scripts.Models.Basics
 
         [SerializeField]
         public string Name = string.Empty;
+
+        public virtual T Instantiate<T>(Transform parent) where T : UnityEngine.Object
+        {
+            return Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), parent);
+        }
     }
 }

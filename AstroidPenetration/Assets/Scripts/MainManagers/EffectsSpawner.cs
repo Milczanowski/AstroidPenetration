@@ -20,8 +20,9 @@ namespace Assets.Scripts.MainManagers
                 onProgress.Invoke(0);
 
 
-            GameObject effects = new GameObject("Effects");
-            Instantiate<GameObject>(EffectsSetup.Arrow, effects.transform);
+            Transform effects = new GameObject("Effects").transform;
+
+            EffectsSetup.Arrow.Instantiate<GameObject>(effects);
 
             if(onProgress != null)
                 onProgress.Invoke(1);

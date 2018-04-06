@@ -10,5 +10,10 @@ namespace Assets.Scripts.Models.Basics
         public Vector3 Position = Vector3.zero;
         [SerializeField]
         public Quaternion Rotation = Quaternion.identity;
+
+        public override T Instantiate<T>(Transform parent)
+        {
+            return UnityEngine.Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), Position, Rotation, parent);
+        }
     }
 }
