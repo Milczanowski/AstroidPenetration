@@ -4,7 +4,7 @@ using Assets.Scripts.ResourcesManagers;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.MainManagers
+namespace Assets.Scripts.Spawners
 {
     public class GameSpawner: BaseSpawner
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Assets.Scripts.MainManagers
+namespace Assets.Scripts.Spawners
 {
     public  abstract class BaseSpawner
     {

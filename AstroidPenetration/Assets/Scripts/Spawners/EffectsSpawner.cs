@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.MainManagers
+namespace Assets.Scripts.Spawners
 {
     class EffectsSpawner:BaseSpawner
     {
