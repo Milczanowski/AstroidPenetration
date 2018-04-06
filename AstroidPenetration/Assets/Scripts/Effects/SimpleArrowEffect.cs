@@ -31,10 +31,17 @@ namespace Assets.Scripts.Effects
         {
             float startTime = 0;
 
+            arrowsParrent.localScale = Vector3.one;
+            float s = Random.Range(0, 10) > 5f ? speed : -speed;
+
             while(startTime <time)
             {
                 startTime += Time.deltaTime;
-                arrowsParrent.Rotate(new Vector3(0, speed * Time.deltaTime, 0));
+                arrowsParrent.Rotate(new Vector3(0, s * Time.deltaTime, 0));
+
+                float scale = 1 - (startTime / time);
+                arrowsParrent.localScale = new Vector3(scale, scale, scale);
+
                 yield return null;
             }
 
