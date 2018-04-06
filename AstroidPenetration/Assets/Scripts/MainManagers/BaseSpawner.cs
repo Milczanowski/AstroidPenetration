@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.MainManagers
 {
-    public  abstract class BaseManager
+    public  abstract class BaseSpawner
     {
-        private static List<BaseManager> Queue = new List<BaseManager>();
+        private static List<BaseSpawner> Queue = new List<BaseSpawner>();
 
         private static float queueProgress  = 0;
         private static float queueCount     = 0;

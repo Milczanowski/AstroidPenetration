@@ -209,7 +209,8 @@ MonoBehaviour:
   maxDistance: 9
   minDistance: 4
   distanceSmoothTime: 0.5
-  rotationSmoothTime: 0.4
+  rotationSmoothTime: 0.3
+  positionSmoothTime: 0.2
 --- !u!1001 &1415390561
 Prefab:
   m_ObjectHideFlags: 0

@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.MainManagers
 {
-    public class GameSpawnManager: BaseManager
+    public class GameSpawner: BaseSpawner
     {
         private LoadingSetup Setup { get; set;}
         private Transform World { get; set; }
 
-        public GameSpawnManager(LoadingSetup loadingSetup)
+        public GameSpawner(LoadingSetup loadingSetup)
         {
             Setup = loadingSetup;
         }

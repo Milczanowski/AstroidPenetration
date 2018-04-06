@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using Assets.Scripts.Inputs;
-using Assets.Scripts.Utils;
+﻿using Assets.Scripts.Utils;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -13,6 +12,10 @@ namespace Assets.Scripts.Controllers
 
         [SerializeField]
         private float moveSpeed = .5f;
+        [SerializeField]
+        private float rotationSmoothTime = .5f;
+
+        private Vector3 rotationVelocity = Vector3.zero;
 
         private Vector3 TartgetPosition { get; set; }
         private Vector3 CurrnetLookAt { get; set; }
@@ -24,10 +27,11 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(TartgetPosition.x, TartgetPosition.z)) > .1f)
-                CharacterController.Move((TartgetPosition - transform.position).normalized * moveSpeed);
+            CurrnetLookAt = Vector3.SmoothDamp(CurrnetLookAt, new Vector3(TartgetPosition.x, transform.position.y, TartgetPosition.z), ref rotationVelocity, rotationSmoothTime);
+            transform.LookAt(CurrnetLookAt + transform.forward);
 
-            transform.LookAt(new Vector3(TartgetPosition.x, transform.position.y, TartgetPosition.z));
+            if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(TartgetPosition.x, TartgetPosition.z)) > .1f)
+                CharacterController.Move((TartgetPosition - transform.position).normalized * moveSpeed * Time.deltaTime);
         }
 
         public void InitReference()
@@ -37,7 +41,8 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
-            WorldInput.onClick += Move;
+            GetController<GameplayController>().onMove += Move;
+            CurrnetLookAt = transform.position;
             yield return null;
         }
     }

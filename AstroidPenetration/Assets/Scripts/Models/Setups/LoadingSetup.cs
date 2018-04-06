@@ -10,6 +10,5 @@ namespace Assets.Scripts.Models.Setups
 
         [SerializeField]
         public SpawnObjectInfo Player = null;
-
     }
 }

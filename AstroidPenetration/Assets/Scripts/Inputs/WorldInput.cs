@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
+using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.Inputs
 {
     [RequireComponent(typeof(Collider))]
     class WorldInput: MonoBehaviour
     {
-        public delegate void OnClick(Vector3 position);
-
-        public static event OnClick onClick;
+        public static event Delegates.Vector3Target onClick;
 
         [SerializeField]
         private LayerMask LayerMask;

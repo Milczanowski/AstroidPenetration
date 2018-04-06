@@ -8,19 +8,24 @@ namespace Assets.Scripts.MainManagers
 {
     class GameManager: MonoBehaviour
     {
-        private GameSpawnManager LoadingManager { get; set; }
+        private GameSpawner GameSpawner { get; set; }
+
+        private ControllerSpawner ControllerSpawner { get; set; }
 
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
 
-            LoadingManager = new GameSpawnManager(Resources.Load<LoadingSetup>("Setups/setup"));
-            LoadingManager.AddToQueue();
+            GameSpawner = new GameSpawner(Resources.Load<LoadingSetup>("Setups/setup"));
+            GameSpawner.AddToQueue();
+
+            ControllerSpawner = new ControllerSpawner(new GameObject("Controllers").transform);
+            ControllerSpawner.AddToQueue();
         }
 
         private void Start()
         {
-            StartCoroutine(BaseManager.RunQueue(()=>
+            StartCoroutine(BaseSpawner.RunQueue(()=>
             {
                 StartCoroutine(BaseController.InitAll());
             }));
@@ -29,7 +34,7 @@ namespace Assets.Scripts.MainManagers
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(10, 10, 100, 50), BaseManager.Progress.ToString());
+            GUI.Label(new Rect(10, 10, 100, 50), BaseSpawner.Progress.ToString());
         }
     }
 }
