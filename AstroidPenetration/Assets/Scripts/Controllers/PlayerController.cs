@@ -42,7 +42,7 @@ namespace Assets.Scripts.Controllers
         protected override IEnumerator Init()
         {
             GetController<GameplayController>().OnMove += Move;
-            CurrnetLookAt = transform.position;
+            TartgetPosition = CurrnetLookAt = transform.position;
             yield return null;
         }
     }
