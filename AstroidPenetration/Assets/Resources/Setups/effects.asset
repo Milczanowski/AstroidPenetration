@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: effects
   m_EditorClassIdentifier: 
   Arrow:
-    BundleID: 
-    Name: 
+    BundleID: effects_01
+    Name: arrows_01
