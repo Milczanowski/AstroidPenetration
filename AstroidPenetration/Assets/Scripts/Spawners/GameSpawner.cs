@@ -23,6 +23,9 @@ namespace Assets.Scripts.Spawners
             onProgress(.02f);
             Setup.Player.Instantiate<GameObject>(World);
 
+            foreach(var tree in Setup.Trees)
+                tree.Instantiate<GameObject>(World);
+
             onLoaded();
             yield return null;
         }

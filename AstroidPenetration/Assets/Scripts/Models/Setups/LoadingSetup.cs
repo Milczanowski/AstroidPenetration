@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Models.Basics;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Models.Setups
@@ -10,5 +11,9 @@ namespace Assets.Scripts.Models.Setups
 
         [SerializeField]
         public SpawnObjectInfo Player = null;
+
+        [SerializeField]
+        public List<SpawnObjectInfo> Trees = null;
+
     }
 }
