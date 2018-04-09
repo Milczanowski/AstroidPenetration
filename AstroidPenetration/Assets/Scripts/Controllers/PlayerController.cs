@@ -15,23 +15,27 @@ namespace Assets.Scripts.Controllers
         [SerializeField]
         private float rotationSmoothTime = .5f;
 
-        private Vector3 rotationVelocity = Vector3.zero;
+        private float angleVelocity = 0;
 
         private Vector3 TartgetPosition { get; set; }
-        private Vector3 CurrnetLookAt { get; set; }
+        private float CurrnetAngle { get; set; }
+
+        private float TartgetAngle { get; set; }
+             
 
         private void Move(Vector3 position)
         {
             TartgetPosition = position;
+            TartgetAngle = Mathf.Rad2Deg * Mathf.Atan2(TartgetPosition.x - transform.position.x, TartgetPosition.z - transform.position.z);
         }
 
         private void Update()
         {
-            CurrnetLookAt = Vector3.SmoothDamp(CurrnetLookAt, new Vector3(TartgetPosition.x, transform.position.y, TartgetPosition.z), ref rotationVelocity, rotationSmoothTime);
-            transform.LookAt(CurrnetLookAt + transform.forward);
+            CurrnetAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TartgetAngle, ref angleVelocity, rotationSmoothTime);
+            transform.eulerAngles = new Vector3(0, CurrnetAngle, 0);
 
             if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(TartgetPosition.x, TartgetPosition.z)) > .1f)
-                CharacterController.Move((TartgetPosition - transform.position).normalized * moveSpeed * Time.deltaTime);
+                CharacterController.SimpleMove((TartgetPosition - transform.position).normalized * moveSpeed);
         }
 
         public void InitReference()
@@ -42,7 +46,8 @@ namespace Assets.Scripts.Controllers
         protected override IEnumerator Init()
         {
             GetController<GameplayController>().OnMove += Move;
-            TartgetPosition = CurrnetLookAt = transform.position;
+            TartgetPosition = transform.position;
+            TartgetAngle = CurrnetAngle = Mathf.Rad2Deg * Mathf.Atan2(TartgetPosition.x, TartgetPosition.z);
             yield return null;
         }
     }
