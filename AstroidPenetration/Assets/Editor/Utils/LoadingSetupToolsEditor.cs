@@ -1,5 +1,7 @@
-﻿using Assets.Scripts.Spawners;
+﻿using Assets.Scripts.Models.Basics;
+using Assets.Scripts.Spawners;
 using Assets.Scripts.Utils;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,16 +34,10 @@ namespace Assets.Editor.Utils
             {
                 if(GUILayout.Button("Save"))
                 {
-                    loadingSetup.loadingSetup.Trees.Clear();
 
-                    foreach(GameObject go in GameObject.FindGameObjectsWithTag("Trees"))
-                        loadingSetup.loadingSetup.Trees.Add(new Scripts.Models.Basics.SpawnObjectInfo(go.transform.position, go.transform.rotation, go.name.Replace("(Clone)", ""), "world_01"));
-
-                    loadingSetup.loadingSetup.Clouds.Clear();
-
-                    foreach(GameObject go in GameObject.FindGameObjectsWithTag("Clouds"))
-                        loadingSetup.loadingSetup.Clouds.Add(new Scripts.Models.Basics.SpawnObjectInfo(go.transform.position, go.transform.rotation, go.name.Replace("(Clone)", ""), "world_01"));
-
+                    loadingSetup.loadingSetup.Trees = FindWithTag("Trees");
+                    loadingSetup.loadingSetup.Clouds = FindWithTag("Clouds");
+                    loadingSetup.loadingSetup.Rocks = FindWithTag("Rocks");
 
                     EditorUtility.SetDirty(loadingSetup.loadingSetup);
                     AssetDatabase.SaveAssets();
@@ -50,5 +46,15 @@ namespace Assets.Editor.Utils
 
             base.OnInspectorGUI();
         }
-    }
+
+        private List<SpawnObjectInfo> FindWithTag(string tag)
+        {
+            List<SpawnObjectInfo> spawnObjects = new List<SpawnObjectInfo>();
+
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag(tag))
+                spawnObjects.Add(new SpawnObjectInfo(go.transform.position, go.transform.rotation, go.name.Replace("(Clone)", ""), "world_01"));
+
+            return spawnObjects;
+        }
+    }    
 }

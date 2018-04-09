@@ -123,3 +123,56 @@ MonoBehaviour:
     Name: cloud_02
     Position: {x: -209.7, y: 40.61195, z: 61.64462}
     Rotation: {x: 0.24951151, y: -0, z: -0, w: 0.96837187}
+  Rocks:
+  - BundleID: world_01
+    Name: rock_02
+    Position: {x: 42.362946, y: 1.4153726, z: -73.335434}
+    Rotation: {x: -0.1496945, y: -0.009011844, z: -0.059413224, w: 0.9869045}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: -9.5, y: 0, z: 0}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: 4.39, y: 0, z: -33.02}
+    Rotation: {x: -0, y: 0.49151185, z: -0, w: 0.8708709}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: 4.297534, y: 0.30450672, z: 33.86}
+    Rotation: {x: -0, y: -0, z: 0.14307724, w: 0.9897115}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: -56, y: 0, z: 21.63}
+    Rotation: {x: -0, y: 0.7097551, z: -0, w: 0.70444846}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: -52.44, y: 1.55, z: -14.35}
+    Rotation: {x: 0.014375594, y: -0.008165152, z: -0.072804265, w: 0.9972092}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: -35.514797, y: 0.649, z: -48.122208}
+    Rotation: {x: -0, y: -0.905947, z: -0, w: 0.42339113}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: -14.048, y: 1.3833793, z: 55.25487}
+    Rotation: {x: 0.054411784, y: -0, z: -0, w: -0.99851865}
+  - BundleID: world_01
+    Name: rock_01
+    Position: {x: 31.094524, y: 8.4611025, z: 0}
+    Rotation: {x: 0.004117336, y: 0.58175355, z: 0.00575634, w: 0.8133344}
+  - BundleID: world_01
+    Name: rock_02
+    Position: {x: 18.193468, y: 7.64, z: 14.433022}
+    Rotation: {x: -0, y: -0.536961, z: -0, w: 0.8436071}
+  - BundleID: world_01
+    Name: rock_02
+    Position: {x: -0.22643325, y: 0.24, z: -95.1634}
+    Rotation: {x: -0, y: -0.4603898, z: -0, w: 0.88771695}
+  - BundleID: world_01
+    Name: rock_02
+    Position: {x: -98.80549, y: 3.95, z: -50.081486}
+    Rotation: {x: -0, y: -0.8134066, z: -0, w: 0.5816956}
+  - BundleID: world_01
+    Name: rock_02
+    Position: {x: -114.2, y: 2.93, z: 20.13}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}

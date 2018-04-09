@@ -1,6 +1,8 @@
-﻿using Assets.Scripts.Models.Setups;
+﻿using Assets.Scripts.Models.Basics;
+using Assets.Scripts.Models.Setups;
 using Assets.Scripts.Utils;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Spawners
@@ -23,19 +25,24 @@ namespace Assets.Scripts.Spawners
             onProgress(.02f);
             Setup.Player.Instantiate<GameObject>(World);
 
-            Transform Trees = new GameObject("Trees").transform;
-            Trees.SetParent(World);
-
-            foreach(var tree in Setup.Trees)
-                tree.Instantiate<GameObject>(Trees);
-
-            Transform Clouds = new GameObject("Clouds").transform;
-            Clouds.SetParent(World);
-
-            foreach(var cloud in Setup.Clouds)
-                cloud.Instantiate<GameObject>(Clouds);
+            yield return Load<GameObject>(Setup.Trees, "Trees", World);
+            yield return Load<GameObject>(Setup.Clouds, "Clouds", World);
+            yield return Load<GameObject>(Setup.Rocks, "Rocks", World);
 
             onLoaded();
+            yield return null;
+        }
+
+        private IEnumerator Load<T>(List<SpawnObjectInfo> objList, string name  ,Transform parent) where T : Object
+        {
+            Transform objParent = new GameObject(name).transform;
+            objParent.SetParent(parent);
+
+            foreach(var obj in objList)
+            {
+                obj.Instantiate<T>(objParent);
+              //  yield return null;
+            }
             yield return null;
         }
     }
