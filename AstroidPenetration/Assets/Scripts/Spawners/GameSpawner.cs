@@ -23,8 +23,11 @@ namespace Assets.Scripts.Spawners
             onProgress(.02f);
             Setup.Player.Instantiate<GameObject>(World);
 
+            Transform Trees = new GameObject("Trees").transform;
+            Trees.SetParent(World);
+
             foreach(var tree in Setup.Trees)
-                tree.Instantiate<GameObject>(World);
+                tree.Instantiate<GameObject>(Trees);
 
             onLoaded();
             yield return null;
