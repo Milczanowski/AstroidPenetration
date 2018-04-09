@@ -16,6 +16,7 @@ namespace Assets.Scripts.Controllers
         private Vector3 distanceVelocity;
         private Vector3 positionVelocity;
         private Vector3 rotationVelocity;
+        private Vector3 offsetVelocity;
 
         [SerializeField]
         private Vector3 offSet = Vector3.up;
@@ -29,9 +30,16 @@ namespace Assets.Scripts.Controllers
         private float rotationSmoothTime = .5f;
         [SerializeField]
         private float positionSmoothTime = .5f;
+        [SerializeField]
+        private float offsetSmoothTime = .1f;
+        [SerializeField]
+        private LayerMask groudLayerMask;
+
 
         private Vector3 CurrentLookAt { get; set; }
         private Vector3 CurrentPosition { get; set; }
+        private Vector3 CurrentOffset { get; set; }
+        private Vector3 TargetOffset;
 
         protected override IEnumerator Init()
         {
@@ -72,7 +80,20 @@ namespace Assets.Scripts.Controllers
                     ref distanceVelocity, distanceSmoothTime);
             }
 
-            transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + offSet, ref positionVelocity, positionSmoothTime);
+
+            CurrentOffset = Vector3.SmoothDamp(CurrentOffset, TargetOffset, ref offsetVelocity, offsetSmoothTime);
+
+            transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + CurrentOffset, ref positionVelocity, positionSmoothTime);
+        }
+
+        private void FixedUpdate()
+        {
+            TargetOffset = offSet;
+
+            Ray ray = new Ray(transform.position, Vector3.down);
+            RaycastHit raycastHit;
+            if(Physics.Raycast(ray, out raycastHit, offSet.y, groudLayerMask.value))
+                TargetOffset.y += offSet.y -(transform.position.y - raycastHit.point.y);
         }
     }
 }

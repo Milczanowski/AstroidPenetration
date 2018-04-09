@@ -29,8 +29,8 @@ namespace Assets.Scripts.Effects
 
         public override void Show(Vector3 position, Vector3 rotation)
         {
-            Debug.Log(rotation);
             transform.up = rotation;
+            Show(position);
         }
 
         private IEnumerator Rotate()
