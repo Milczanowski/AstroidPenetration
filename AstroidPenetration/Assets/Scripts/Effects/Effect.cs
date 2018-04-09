@@ -41,6 +41,8 @@ namespace Assets.Scripts.Effects
 
         public abstract void Show(Vector3 position);
 
+        public abstract void Show(Vector3 position, Vector3 rotation);
+
         public static Effect GetEffect(EffectType type)
         {
             if(Effects.ContainsKey(type))

@@ -26,5 +26,9 @@ namespace Assets.Scripts.Effects
             animator = GetComponent<Animator>();
         }
 
+        public override void Show(Vector3 position, Vector3 rotation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,10 +8,12 @@ namespace Assets.Scripts.Controllers
     class GameplayController:BaseController
     {
         public event Delegates.Vector3Target OnMove;
+        public event Delegates.Vector3NormalTarget OnShowMark;
 
         protected override IEnumerator Init()
         {
-            WorldInput.OnClick += onMove;
+            WorldInput.OnClickTarget += onMove;
+            WorldInput.OnClickTargetNormal += onShowMark;
             yield return null;
         }
 
@@ -19,6 +21,12 @@ namespace Assets.Scripts.Controllers
         {
             if(OnMove != null)
                 OnMove.Invoke(target);
+        }
+
+        private void onShowMark(Vector3 target, Vector3 normal)
+        {
+            if(OnShowMark != null)
+                OnShowMark.Invoke(target, normal);
         }
     }
 }

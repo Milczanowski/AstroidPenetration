@@ -7,7 +7,9 @@ namespace Assets.Scripts.Inputs
 {
     class WorldInput: MonoBehaviour
     {
-        public static event Delegates.Vector3Target OnClick;
+        public static event Delegates.Vector3Target OnClickTarget;
+
+        public static event Delegates.Vector3NormalTarget OnClickTargetNormal;
 
         [SerializeField]
         private LayerMask LayerMask;
@@ -18,8 +20,11 @@ namespace Assets.Scripts.Inputs
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, LayerMask.value))
             {
-                if(OnClick != null)
-                    OnClick.Invoke(raycastHit.point);
+                if(OnClickTarget != null)
+                    OnClickTarget.Invoke(raycastHit.point);
+
+                if(OnClickTargetNormal != null)
+                    OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
             }
         }
     }

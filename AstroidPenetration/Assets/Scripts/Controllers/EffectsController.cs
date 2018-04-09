@@ -12,13 +12,13 @@ namespace Assets.Scripts.Controllers
         {
             Arrows = Effect.GetEffect(EffectType.Arrows);
 
-            GetController<GameplayController>().OnMove += ShowArrows;
+            GetController<GameplayController>().OnShowMark += ShowMark;
             yield return null;
         }
 
-        private void ShowArrows(Vector3 position)
+        private void ShowMark(Vector3 position, Vector3 normal)
         {
-            Arrows.Show(position);
+            Arrows.Show(position, normal);
         }
     }
 }

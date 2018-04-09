@@ -24,6 +24,8 @@ namespace Assets.Scripts.Inputs.Detectors
             {
                 if(onMouseDown != null)
                     onMouseDown.Invoke(raycastHit.point);
+
+    
             }
         }
     }
