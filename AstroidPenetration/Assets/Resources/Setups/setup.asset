@@ -42,3 +42,84 @@ MonoBehaviour:
     Name: tree_01
     Position: {x: -21.00451, y: -0.01999998, z: 29.337057}
     Rotation: {x: -0, y: -0.9079692, z: -0, w: 0.41903707}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -34.2, y: 0, z: -37.83}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: 8.06, y: 3.01, z: 0.35}
+    Rotation: {x: -0.04206954, y: -0.3503869, z: 0.1115398, w: 0.9289877}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -78.12, y: 4.31, z: -13.31}
+    Rotation: {x: -0, y: 0.9588198, z: -0, w: -0.28401524}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: 34.08, y: 8.68, z: -33.62}
+    Rotation: {x: -0, y: -0.578, z: -0, w: 0.8160368}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -7.93, y: 0, z: -42.56}
+    Rotation: {x: -0, y: -0.9268566, z: -0, w: 0.37541574}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -10.9, y: 0.33, z: 47.59}
+    Rotation: {x: -0, y: -0.7754407, z: -0, w: 0.6314205}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -59.1, y: 1.65712, z: -56.92464}
+    Rotation: {x: 0.034182537, y: 0.43114617, z: -0.016348194, w: 0.9014862}
+  - BundleID: world_01
+    Name: tree_02
+    Position: {x: -52.45, y: -0.57, z: 42.81}
+    Rotation: {x: -0, y: -0.7360971, z: -0, w: 0.676876}
+  Clouds:
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: 188.1, y: 86.99278, z: -166.57849}
+    Rotation: {x: 0.93120795, y: -0, z: -0, w: 0.36448827}
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: -127.7, y: 80, z: 0}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: -122.4, y: 77.1, z: 141.3}
+    Rotation: {x: -0.3685324, y: -0.44998872, z: -0.21110025, w: 0.7855767}
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: -127.7, y: 80, z: 0}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: -125.1, y: 60.1, z: -109}
+    Rotation: {x: -0, y: 0.71000105, z: -0, w: 0.7042006}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: 96.6, y: 43.2, z: -101.3}
+    Rotation: {x: -0.8137783, y: 0.002006622, z: 0.5811703, w: -0.0014330922}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: 139, y: 45.1, z: 55.5}
+    Rotation: {x: -0.95638764, y: -0.21781008, z: -0.043219235, w: -0.18977249}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: 0.1584695, y: 47.3, z: 120.529945}
+    Rotation: {x: -0, y: -0.4799158, z: -0, w: 0.87731457}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: -221.2, y: 76.2, z: -147.2}
+    Rotation: {x: -0, y: -0, z: -0.20600303, w: 0.9785514}
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: 182.04225, y: 84.973785, z: 177.52618}
+    Rotation: {x: 0.0061153444, y: 0.17418909, z: -0.984087, w: -0.03454883}
+  - BundleID: world_01
+    Name: cloud_01
+    Position: {x: -198.3, y: 83.397354, z: 269.76672}
+    Rotation: {x: -0.4071677, y: -0, z: -0, w: 0.9133535}
+  - BundleID: world_01
+    Name: cloud_02
+    Position: {x: -209.7, y: 40.61195, z: 61.64462}
+    Rotation: {x: 0.24951151, y: -0, z: -0, w: 0.96837187}

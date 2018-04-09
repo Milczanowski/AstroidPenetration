@@ -37,6 +37,11 @@ namespace Assets.Editor.Utils
                     foreach(GameObject go in GameObject.FindGameObjectsWithTag("Trees"))
                         loadingSetup.loadingSetup.Trees.Add(new Scripts.Models.Basics.SpawnObjectInfo(go.transform.position, go.transform.rotation, go.name.Replace("(Clone)", ""), "world_01"));
 
+                    loadingSetup.loadingSetup.Clouds.Clear();
+
+                    foreach(GameObject go in GameObject.FindGameObjectsWithTag("Clouds"))
+                        loadingSetup.loadingSetup.Clouds.Add(new Scripts.Models.Basics.SpawnObjectInfo(go.transform.position, go.transform.rotation, go.name.Replace("(Clone)", ""), "world_01"));
+
 
                     EditorUtility.SetDirty(loadingSetup.loadingSetup);
                     AssetDatabase.SaveAssets();

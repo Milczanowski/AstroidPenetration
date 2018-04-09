@@ -29,6 +29,12 @@ namespace Assets.Scripts.Spawners
             foreach(var tree in Setup.Trees)
                 tree.Instantiate<GameObject>(Trees);
 
+            Transform Clouds = new GameObject("Clouds").transform;
+            Clouds.SetParent(World);
+
+            foreach(var cloud in Setup.Clouds)
+                cloud.Instantiate<GameObject>(Clouds);
+
             onLoaded();
             yield return null;
         }

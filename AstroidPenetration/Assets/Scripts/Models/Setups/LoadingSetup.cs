@@ -15,5 +15,8 @@ namespace Assets.Scripts.Models.Setups
         [SerializeField]
         public List<SpawnObjectInfo> Trees = null;
 
+        [SerializeField]
+        public List<SpawnObjectInfo> Clouds = null;
+
     }
 }

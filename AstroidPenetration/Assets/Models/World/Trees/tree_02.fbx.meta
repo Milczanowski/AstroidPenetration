@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 20a2a01d13e1caa43a13a63b65953768
-timeCreated: 1523265819
+guid: 2f863f0b6741e7a4c900172e519ab260
+timeCreated: 1523271738
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
@@ -10,51 +10,58 @@ ModelImporter:
     100004: Group3
     100006: Group4
     100008: Group5
-    100010: Mesh1
-    100012: Mesh2
-    100014: Mesh3
-    100016: Mesh4
-    100018: Mesh5
-    100020: //RootNode
-    100022: Group6
+    100010: Group6
+    100012: Group7
+    100014: Mesh1
+    100016: Mesh2
+    100018: Mesh3
+    100020: Mesh4
+    100022: Mesh5
+    100024: Mesh6
+    100026: //RootNode
     400000: Group1
     400002: Group2
     400004: Group3
     400006: Group4
     400008: Group5
-    400010: Mesh1
-    400012: Mesh2
-    400014: Mesh3
-    400016: Mesh4
-    400018: Mesh5
-    400020: //RootNode
-    400022: Group6
+    400010: Group6
+    400012: Group7
+    400014: Mesh1
+    400016: Mesh2
+    400018: Mesh3
+    400020: Mesh4
+    400022: Mesh5
+    400024: Mesh6
+    400026: //RootNode
     2300000: Mesh1
     2300002: Mesh2
     2300004: Mesh3
     2300006: Mesh4
     2300008: Mesh5
+    2300010: Mesh6
     3300000: Mesh1
     3300002: Mesh2
     3300004: Mesh3
     3300006: Mesh4
     3300008: Mesh5
+    3300010: Mesh6
     4300000: Mesh1
     4300002: Mesh2
     4300004: Mesh3
     4300006: Mesh4
     4300008: Mesh5
+    4300010: Mesh6
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_0035_Tan
-    second: {fileID: 2100000, guid: 4f9d5f5673d9c2a4e83b5fe633277bee, type: 2}
+      name: M_0014_DarkSalmon
+    second: {fileID: 2100000, guid: 8ca37a89bda26c84ebe623f1206ddd5c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_0077_DarkGreen
-    second: {fileID: 2100000, guid: 1ec3ebc389ebd3647aef4088c000a84a, type: 2}
+      name: M_0035_Tan
+    second: {instanceID: 0}
   materials:
     importMaterials: 0
     materialName: 0

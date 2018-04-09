@@ -23,5 +23,10 @@ namespace Assets.Scripts.Models.Basics
         {
             return Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), parent);
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}.{1}", BundleID, Name);
+        }
     }
 }

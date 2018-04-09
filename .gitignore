@@ -8,6 +8,7 @@
 /AstroidPenetration/Temp/
 /AstroidPenetration/UnityPackageManager/
 /AstroidPenetration/.vs/
+/AstroidPenetration/.vs/*
 
 # Visual Studio 2015 cache directory
 /.vs/
