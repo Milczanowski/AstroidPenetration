@@ -20,14 +20,20 @@ namespace Assets.Scripts.Spawners
         {
             Transform World = new GameObject("World").transform;
             onProgress(.01f);
-            Setup.Map.Instantiate<GameObject>(World);
 
+            Setup.Map.Instantiate<GameObject>(World);
             onProgress(.02f);
+
             Setup.Player.Instantiate<GameObject>(World);
+            onProgress(.03f);
 
             yield return Load<GameObject>(Setup.Trees, "Trees", World);
+            onProgress(.13f);
             yield return Load<GameObject>(Setup.Clouds, "Clouds", World);
+            onProgress(.23f);
             yield return Load<GameObject>(Setup.Rocks, "Rocks", World);
+            onProgress(.33f);
+
 
             onLoaded();
             yield return null;
