@@ -11,6 +11,14 @@ namespace Assets.Scripts.Models.Basics
         [SerializeField]
         public Quaternion Rotation = Quaternion.identity;
 
+        public SpawnObjectInfo() { }
+
+        public SpawnObjectInfo(Vector3 position, Quaternion rotation, string name, string bundleID): base(name, bundleID)
+        {
+            Position = position;
+            Rotation = rotation;
+        }
+
         public override T Instantiate<T>(Transform parent)
         {
             return UnityEngine.Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), Position, Rotation, parent);

@@ -25,4 +25,20 @@ MonoBehaviour:
   - BundleID: world_01
     Name: tree_01
     Position: {x: -25, y: 0, z: -20}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - BundleID: world_01
+    Name: tree_01
+    Position: {x: -21.383959, y: 0, z: -3.3812947}
+    Rotation: {x: -0, y: -0.5837885, z: -0, w: 0.81190574}
+  - BundleID: world_01
+    Name: tree_01
+    Position: {x: 9.469556, y: 0.55999994, z: -34.67488}
+    Rotation: {x: -0, y: -0.9018575, z: -0, w: 0.43203363}
+  - BundleID: world_01
+    Name: tree_01
+    Position: {x: -48.573074, y: 0, z: 4.519033}
+    Rotation: {x: -0, y: -0.8729714, z: -0, w: 0.48777133}
+  - BundleID: world_01
+    Name: tree_01
+    Position: {x: -21.00451, y: -0.01999998, z: 29.337057}
+    Rotation: {x: -0, y: -0.9079692, z: -0, w: 0.41903707}
