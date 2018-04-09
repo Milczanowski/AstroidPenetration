@@ -34,8 +34,8 @@ namespace Assets.Scripts.Controllers
             CurrnetAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TartgetAngle, ref angleVelocity, rotationSmoothTime);
             transform.eulerAngles = new Vector3(0, CurrnetAngle, 0);
 
-            if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(TartgetPosition.x, TartgetPosition.z)) > .1f)
-                CharacterController.SimpleMove((TartgetPosition - transform.position).normalized * moveSpeed);
+            CharacterController.SimpleMove((TartgetPosition - transform.position).normalized * moveSpeed);
+            CharacterController.Move(Vector3.down);
         }
 
         public void InitReference()
