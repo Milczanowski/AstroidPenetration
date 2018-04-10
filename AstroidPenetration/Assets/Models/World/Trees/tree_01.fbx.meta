@@ -1,60 +1,41 @@
 fileFormatVersion: 2
-guid: 20a2a01d13e1caa43a13a63b65953768
-timeCreated: 1523265819
+guid: c7f4ee08a2834f142b1243c9c31ee406
+timeCreated: 1523272877
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Group1
-    100002: Group2
-    100004: Group3
-    100006: Group4
-    100008: Group5
-    100010: Mesh1
-    100012: Mesh2
-    100014: Mesh3
-    100016: Mesh4
-    100018: Mesh5
-    100020: //RootNode
-    100022: Group6
-    400000: Group1
-    400002: Group2
-    400004: Group3
-    400006: Group4
-    400008: Group5
-    400010: Mesh1
-    400012: Mesh2
-    400014: Mesh3
-    400016: Mesh4
-    400018: Mesh5
-    400020: //RootNode
-    400022: Group6
-    2300000: Mesh1
-    2300002: Mesh2
-    2300004: Mesh3
-    2300006: Mesh4
-    2300008: Mesh5
-    3300000: Mesh1
-    3300002: Mesh2
-    3300004: Mesh3
-    3300006: Mesh4
-    3300008: Mesh5
-    4300000: Mesh1
-    4300002: Mesh2
-    4300004: Mesh3
-    4300006: Mesh4
-    4300008: Mesh5
+    100000: //RootNode
+    100002: Mesh4
+    100004: Mesh5
+    400000: //RootNode
+    400002: Mesh4
+    400004: Mesh5
+    2300000: //RootNode
+    2300002: Mesh4
+    2300004: Mesh5
+    3300000: //RootNode
+    3300002: Mesh4
+    3300004: Mesh5
+    4300000: Cylinder
+    4300002: Mesh4
+    4300004: Mesh5
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_0035_Tan
-    second: {fileID: 2100000, guid: 4f9d5f5673d9c2a4e83b5fe633277bee, type: 2}
+      name: Wood
+    second: {fileID: 2100000, guid: c493bf25b85eecd438aa6ea0660a75a1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_0077_DarkGreen
-    second: {fileID: 2100000, guid: 1ec3ebc389ebd3647aef4088c000a84a, type: 2}
+      name: leaves
+    second: {fileID: 2100000, guid: 44f19b2771cc55b438973ff55fd788b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snow
+    second: {fileID: 2100000, guid: 2b827c8acca6dea44a252c5a33ffb911, type: 2}
   materials:
     importMaterials: 0
     materialName: 0

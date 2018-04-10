@@ -64,9 +64,7 @@ namespace Assets.Scripts.Controllers
             Vector3 playerPosition = PlayerPosition();
 
             CurrentLookAt = Vector3.SmoothDamp(CurrentLookAt, playerPosition+ PlayerForward(), ref rotationVelocity, rotationSmoothTime);
-            transform.LookAt(CurrentLookAt);
-
-
+            
             float distance = Vector3.Distance(CurrentPosition, playerPosition);
 
             if(distance > maxDistance)
@@ -84,6 +82,7 @@ namespace Assets.Scripts.Controllers
             CurrentOffset = Vector3.SmoothDamp(CurrentOffset, TargetOffset, ref offsetVelocity, offsetSmoothTime);
 
             transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + CurrentOffset, ref positionVelocity, positionSmoothTime);
+            transform.LookAt(CurrentLookAt);
         }
 
         private void FixedUpdate()
