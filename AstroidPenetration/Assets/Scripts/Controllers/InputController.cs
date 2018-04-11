@@ -24,13 +24,13 @@ namespace Assets.Scripts.Controllers
             yield return null;
         }
 
-        private void BasicInput(InputType type, int index)
+        private void BasicInput(InputType type, int index, PointerEventData eventData)
         {
             switch(type)
             {
                 case InputType.MajorAction:
                     {
-                        MajorAction(index);
+                        MajorAction(index, eventData);
                     }break;
                 case InputType.MinorAction:
                     {
@@ -43,13 +43,13 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        private void MajorAction(int index)
+        private void MajorAction(int index, PointerEventData eventData)
         {
             switch(index)
             {
                 case 0:
                     {
-                        OnWorldClick();
+                        OnWorldClick(eventData);
                     }
                     break;
                 default:
@@ -81,9 +81,9 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        private void OnWorldClick()
+        private void OnWorldClick(PointerEventData eventData)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(eventData.position);
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, MoveLayerMask.value))
             {

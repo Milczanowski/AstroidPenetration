@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Inputs;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Utils
 {
@@ -10,6 +11,6 @@ namespace Assets.Scripts.Utils
 
         public delegate void OnProgress(float progress);
         public delegate void OnEnd();
-        public delegate void GUIInput(InputType type, int index);
+        public delegate void GUIInput(InputType type, int index, PointerEventData eventData);
     }
 }

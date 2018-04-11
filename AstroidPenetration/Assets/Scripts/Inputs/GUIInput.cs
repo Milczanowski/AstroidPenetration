@@ -20,7 +20,7 @@ namespace Assets.Scripts.Inputs
         public override void OnPointerDown(PointerEventData eventData)
         {
             if(IsInputEnabled && onClick != null)
-                onClick.Invoke(type, index);
+                onClick.Invoke(type, index, eventData);
         }
     }
 }
