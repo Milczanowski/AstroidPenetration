@@ -14,7 +14,7 @@ namespace Assets.Scripts.Inputs
         [SerializeField]
         private LayerMask LayerMask;
 
-        private void OnMouseDown()
+        public override void Click()
         {
             if(IsInputEnabled)
             {

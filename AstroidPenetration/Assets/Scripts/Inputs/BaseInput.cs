@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Inputs
 {
-    public class BaseInput:MonoBehaviour
+    public abstract class BaseInput:MonoBehaviour
     {
         private static Dictionary<Type, Func<bool>> isEnabled = new Dictionary<Type, Func<bool>>();
 
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Inputs
             Type = GetType();
 
             if(!isEnabled.ContainsKey(Type))
-                isEnabled.Add(Type, () => { return false; });
+                isEnabled.Add(Type, () => { return true; });
         }
 
         public static void SetEnabledCondition<T>(Func<bool> condition) where T : BaseInput
@@ -33,5 +33,7 @@ namespace Assets.Scripts.Inputs
 
             isEnabled.Add(typeof(T), condition);
         }
+
+        public abstract void Click();
     }
 }

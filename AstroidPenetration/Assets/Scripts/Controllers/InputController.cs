@@ -9,11 +9,6 @@ namespace Assets.Scripts.Controllers
     {
         protected override IEnumerator Init()
         {
-            Inputs.BaseInput.SetEnabledCondition<WorldInput>(() =>
-            {
-                return !EventSystem.current.IsPointerOverGameObject();
-            });
-
             GUIInput.onClick += BasicInput;
             yield return null;
         }

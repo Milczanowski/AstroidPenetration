@@ -17,7 +17,7 @@ namespace Assets.Scripts.Inputs
         [SerializeField]
         private int index = 0;
 
-        public void Click()
+        public override void Click()
         {
             if(IsInputEnabled && onClick != null)
                 onClick.Invoke(type, index);
