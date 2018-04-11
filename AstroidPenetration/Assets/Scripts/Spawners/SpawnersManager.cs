@@ -31,11 +31,5 @@ namespace Assets.Scripts.Spawners
                 StartCoroutine(BaseController.InitAll());
             }));
         }
-
-
-        private void OnGUI()
-        {
-            GUI.Label(new Rect(10, 10, 100, 50), BaseSpawner.Progress.ToString());
-        }
     }
 }

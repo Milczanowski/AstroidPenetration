@@ -1,30 +1,31 @@
 ﻿Shader "Custom/Color" {
 	Properties{
-		_Color("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+		_Color("Tint", Color) = (1,1,1,1)
 	}
-		SubShader{
-		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" }
-		Blend SrcAlpha OneMinusSrcAlpha
-		Cull Off
+	SubShader{
+		Tags{ "RenderType" = "Opaque" }
 		LOD 200
 
 		CGPROGRAM
-#pragma surface surf Lambert
+		#pragma surface surf Standard fullforwardshadows vertex:vert
+		#pragma target 3.0
 
+		struct Input {
+			float3 color : COLOR;
+		};
+
+		sampler2D _MainTex;
 		fixed4 _Color;
 
-	// Note: pointless texture coordinate. I couldn't get Unity (or Cg)
-	//       to accept an empty Input structure or omit the inputs.
-	struct Input {
-		float2 uv_MainTex;
-	};
+		void vert(inout appdata_full v) {
+			v.color = tex2Dlod(_MainTex, v.texcoord) * _Color;
+		}
 
-	void surf(Input IN, inout SurfaceOutput o) {
-		o.Albedo = _Color.rgb;
-		o.Emission = _Color.rgb; // * _Color.a;
-		o.Alpha = _Color.a;
-	}
+		void surf(Input In, inout SurfaceOutputStandard o) {
+			o.Albedo = In.color;
+			o.Emission = In.color;
+		}
 	ENDCG
 	}
-		FallBack "Diffuse"
+	FallBack "Diffuse"
 }
