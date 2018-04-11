@@ -12,8 +12,10 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
-            WorldInput.OnClickTarget += onMove;
-            WorldInput.OnClickTargetNormal += onShowMark;
+            InputController inputController = GetController<InputController>();
+
+            inputController.OnClickTarget += onMove;
+            inputController.OnClickTargetNormal += onShowMark;
             yield return null;
         }
 

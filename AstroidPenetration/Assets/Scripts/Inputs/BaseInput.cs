@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Inputs
 {
-    public abstract class BaseInput:MonoBehaviour
+    public abstract class BaseInput:MonoBehaviour, IPointerDownHandler
     {
         private static Dictionary<Type, Func<bool>> isEnabled = new Dictionary<Type, Func<bool>>();
 
@@ -34,6 +35,6 @@ namespace Assets.Scripts.Inputs
             isEnabled.Add(typeof(T), condition);
         }
 
-        public abstract void Click();
+        public abstract void OnPointerDown(PointerEventData eventData);
     }
 }
