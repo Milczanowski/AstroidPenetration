@@ -14,6 +14,10 @@ namespace Assets.Scripts.Spawners
             controllers.AddComponent<GameplayController>();
             controllers.AddComponent<EffectsController>();
 
+#if MMDevelop
+            controllers.AddComponent<DevController>();
+#endif
+
             if(onProgress != null)
                 onProgress.Invoke(1);
 
