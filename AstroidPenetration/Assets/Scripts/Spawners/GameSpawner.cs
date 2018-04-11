@@ -33,7 +33,7 @@ namespace Assets.Scripts.Spawners
             onProgress(.23f);
             yield return Load<GameObject>(Setup.Rocks, "Rocks", World);
             onProgress(.33f);
-
+            yield return Load<GameObject>(Setup.Items, "Items", World);
 
             onLoaded();
             yield return null;
