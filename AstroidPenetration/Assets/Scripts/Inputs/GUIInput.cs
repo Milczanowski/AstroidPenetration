@@ -5,8 +5,10 @@ using UnityEngine.UI;
 namespace Assets.Scripts.Inputs
 {
     [RequireComponent(typeof(Button))]
-    public class GUIInput:MonoBehaviour
+    public class GUIInput:BaseInput
     {
+        public static System.Func<bool> IsEnabled = ()=>{return false; };
+
         public static Delegates.GUIInput onClick;
 
         [SerializeField]
@@ -17,7 +19,7 @@ namespace Assets.Scripts.Inputs
 
         public void Click()
         {
-            if(onClick != null)
+            if(IsInputEnabled && onClick != null)
                 onClick.Invoke(type, index);
         }
     }

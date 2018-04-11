@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Inputs;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers
 {
@@ -8,6 +9,11 @@ namespace Assets.Scripts.Controllers
     {
         protected override IEnumerator Init()
         {
+            Inputs.BaseInput.SetEnabledCondition<WorldInput>(() =>
+            {
+                return !EventSystem.current.IsPointerOverGameObject();
+            });
+
             GUIInput.onClick += BasicInput;
             yield return null;
         }

@@ -5,7 +5,7 @@ using Assets.Scripts.Inputs.Detectors;
 
 namespace Assets.Scripts.Inputs
 {
-    class WorldInput: MonoBehaviour
+    class WorldInput: BaseInput
     {
         public static event Delegates.Vector3Target OnClickTarget;
 
@@ -16,15 +16,18 @@ namespace Assets.Scripts.Inputs
 
         private void OnMouseDown()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit raycastHit;
-            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, LayerMask.value))
+            if(IsInputEnabled)
             {
-                if(OnClickTarget != null)
-                    OnClickTarget.Invoke(raycastHit.point);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit raycastHit;
+                if(Physics.Raycast(ray, out raycastHit, float.MaxValue, LayerMask.value))
+                {
+                    if(OnClickTarget != null)
+                        OnClickTarget.Invoke(raycastHit.point);
 
-                if(OnClickTargetNormal != null)
-                    OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
+                    if(OnClickTargetNormal != null)
+                        OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
+                }
             }
         }
     }
