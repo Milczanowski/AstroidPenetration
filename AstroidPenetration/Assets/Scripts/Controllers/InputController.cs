@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Inputs;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.GUI.Menu;
+using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
@@ -10,6 +12,8 @@ namespace Assets.Scripts.Controllers
     {
         private LayerMask MoveLayerMask { get; set; }
 
+        private GameGUI GameGUI { get; set; }
+        private MenuGUI MenuGUI { get; set; }
         #region Events
         public event Delegates.Vector3Target OnClickTarget;
         public event Delegates.Vector3NormalTarget OnClickTargetNormal;
@@ -18,13 +22,14 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
+            GameGUI = FindObjectOfType<GameGUI>();
+            MenuGUI = FindObjectOfType<MenuGUI>();
             MoveLayerMask = LayerMask.GetMask("World");
-
-            GUIInput.onClick += BasicInput;
+            GUIInput.onClick += GameInput;            
             yield return null;
         }
 
-        private void BasicInput(InputType type, int index, PointerEventData eventData)
+        private void GameInput(InputType type, int index, PointerEventData eventData)
         {
             switch(type)
             {
@@ -74,6 +79,10 @@ namespace Assets.Scripts.Controllers
         {
             switch(index)
             {
+                case 1:
+                    {
+                        ShowMenu();
+                    }break;
                 default:
                     {
                         throw new System.NotImplementedException("OptionAction: " + index);
@@ -93,6 +102,12 @@ namespace Assets.Scripts.Controllers
                 if(OnClickTargetNormal != null)
                     OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
             }
+        }
+
+        private void ShowMenu()
+        {
+            GameGUI.Hide();
+            MenuGUI.Show();
         }
     }
 }
