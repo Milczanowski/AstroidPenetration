@@ -8,6 +8,7 @@ TagManager:
   - Trees
   - Clouds
   - Rocks
+  - Items
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - World
   - Effects
   - Environment
-  - 
+  - Items
   - 
   - 
   - 
