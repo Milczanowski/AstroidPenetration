@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Assets.Scripts.Inputs;
 using UnityEngine;
 
 namespace Assets.Scripts.Utils
@@ -10,5 +10,6 @@ namespace Assets.Scripts.Utils
 
         public delegate void OnProgress(float progress);
         public delegate void OnEnd();
+        public delegate void GUIInput(InputType type, int index);
     }
 }
