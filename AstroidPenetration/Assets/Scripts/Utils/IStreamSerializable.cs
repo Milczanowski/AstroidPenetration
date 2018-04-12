@@ -4,7 +4,7 @@ namespace Assets.Scripts.Utils
 {
     interface IStreamSerializable
     {
-        MemoryStream Serialize();
-        void Deserialzie(MemoryStream streamReader);
+        Stream Serialize();
+        void Deserialzie(Stream streamReader);
     }
 }

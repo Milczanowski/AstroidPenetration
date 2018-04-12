@@ -6,7 +6,7 @@ namespace Assets.Scripts.Utils
 {
     class FieldSerializer<T> where T : ScriptableObject
     {
-        public static MemoryStream Serialize(T obj)
+        public static Stream Serialize(T obj)
         {
             MemoryStream memoryStream = new MemoryStream();
             StreamWriter streamWriter = new StreamWriter(memoryStream);
@@ -21,9 +21,9 @@ namespace Assets.Scripts.Utils
             return memoryStream;
         }
 
-        public static void Deserialzie(T obj, MemoryStream memoryStream)
+        public static void Deserialzie(T obj, Stream stream)
         {
-            StreamReader streamReader = new StreamReader(memoryStream);
+            StreamReader streamReader = new StreamReader(stream);
             while(!streamReader.EndOfStream)
             {
                 string name = streamReader.ReadLine();

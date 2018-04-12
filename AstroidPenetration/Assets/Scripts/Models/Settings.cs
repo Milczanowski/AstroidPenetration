@@ -15,12 +15,12 @@ namespace Assets.Scripts.Models
         [SerializeField]
         public string _LanguageCode = "EN";
 
-        public void Deserialzie(MemoryStream memoryStream)
+        public void Deserialzie(Stream stream)
         {
-            FieldSerializer<Settings>.Deserialzie(this, memoryStream);
+            FieldSerializer<Settings>.Deserialzie(this, stream);
         }
 
-        public MemoryStream Serialize()
+        public Stream Serialize()
         {
             return FieldSerializer<Settings>.Serialize(this);
         }

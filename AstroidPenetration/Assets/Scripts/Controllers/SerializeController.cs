@@ -28,36 +28,43 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        protected IEnumerator Load(Action<T> onLoad, Action onFailure)
+        protected IEnumerator Load(Action onFailure)
         {
             if(FileExists)
             {
                 T instance = default(T);
 
-                using(StreamReader sr = new StreamReader(FilePath))
+                using(FileStream file = File.Open(FilePath, FileMode.Open))
                 {
-                    while(!sr.EndOfStream)
+                    instance.Deserialzie(file);
+                    file.Close();
+                }
+                yield return null;
+                Instance = instance;
+            }
+            else
+                if(onFailure != null)
+                onFailure.Invoke();
+        }
+
+        protected IEnumerator Save()
+        {
+            if(Instance != null)
+            {
+                using(FileStream file = File.Open(FilePath, FileMode.OpenOrCreate))
+                {
+                    Stream stream = Instance.Serialize();
+                    byte[] buffer = new byte[1024];
+                    int readBytes = 0;
+
+                    while((readBytes = stream.Read(buffer,0,buffer.Length))>0)
                     {
-                        string mame = sr.ReadLine();
-
-                        MemberInfo info = typeof(T).GetField(name);
-                        if(info==null)
-                            info = typeof(T).GetProperty(name);
-
-                        info.
-
-                        if(info!=null)
-                        {
-  
-                        }
-
+                        file.Write(buffer, 0, readBytes);
                         yield return null;
                     }
                 }
             }
-            else
-                if(onFailure != null)
-                    onFailure.Invoke();
+            yield return null;
         }
     }
 }

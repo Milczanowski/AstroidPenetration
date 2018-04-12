@@ -4,18 +4,15 @@ using System.Collections;
 
 namespace Assets.Scripts.Controllers
 {
-    class SettingsController:BaseController
+    class SettingsController:SerializeController<Settings>
     {
-        private string settings
-
-        public Settings Settings { get; private set; }
-
-
-
-
         protected override IEnumerator Init()
         {
-            throw new NotImplementedException();
+            yield return Load(() =>
+            {
+                Instance = new Settings();
+                StartCoroutine(Save());
+            });
         }
     }
 }
