@@ -9,9 +9,6 @@ namespace Assets.Scripts.GUI.Menu.Options
 {
     public abstract class BaseOption<T>: MonoBehaviour where T: struct
     {
-        [SerializeField]
-        public string OptionName = null;
-
         public Delegates.MenuOptionInput<T> OnValueChange = (value)=>{ };
 
         protected void Invoke(T value)
@@ -20,6 +17,13 @@ namespace Assets.Scripts.GUI.Menu.Options
                 OnValueChange.Invoke(value);
         }
 
+        protected virtual void Start()
+        {
+            Init();
+        }
+
         public abstract void SetValue(T value);
+
+        public abstract void Init();
     }
 }

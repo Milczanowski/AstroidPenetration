@@ -13,12 +13,9 @@ namespace Assets.Scripts.GUI.Menu.Options
             Slider.value = value;
         }
 
-        private void Start()
+        public override void Init()
         {
-            Slider.onValueChanged.AddListener((value) =>
-            {
-                Invoke(value);
-            });
+            Slider.onValueChanged.AddListener(Invoke);
         }
     }
 }

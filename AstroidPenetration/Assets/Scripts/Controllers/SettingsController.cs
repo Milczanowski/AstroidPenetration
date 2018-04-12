@@ -33,6 +33,8 @@ namespace Assets.Scripts.Controllers
         private void LoadValues(MenuGUI menu)
         {
             menu.SetGUISize(Instance.GUISize);
+            menu.SetMusic(Instance.MusicEnable);
+            menu.SetSound(Instance.SoundEndable);
         }
 
         public void InitSettings(MenuGUI menu)
@@ -43,7 +45,21 @@ namespace Assets.Scripts.Controllers
             menu.onExitButton += Save;
 
             menu.OnGUISize += Menu_OnGUISize;
+            menu.OnMusic += Menu_OnMusic;
+            menu.OnSound += Menu_OnSound;
             ValueChanged = false;
+        }
+
+        private void Menu_OnSound(bool value)
+        {
+            ValueChanged = true;
+            Instance.SoundEndable = value;
+        }
+
+        private void Menu_OnMusic(bool value)
+        {
+            ValueChanged = true;
+            Instance.MusicEnable = value;
         }
 
         private void Menu_OnGUISize(float value)
