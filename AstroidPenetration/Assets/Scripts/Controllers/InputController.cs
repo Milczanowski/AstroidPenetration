@@ -26,7 +26,7 @@ namespace Assets.Scripts.Controllers
             MenuGUI = FindObjectOfType<MenuGUI>();
 
             InitMenu(MenuGUI);
-
+            GetController<SettingsController>().InitSettings(MenuGUI);
 
             MenuGUI.Hide(); // <-- TODO
 
@@ -114,6 +114,7 @@ namespace Assets.Scripts.Controllers
         {
             menu.onBackButton += BackToGame;
             menu.onExitButton += Exit;
+            menu.OnGUISize += GameGUI.Scale;
         }
 
         private void ShowMenu()

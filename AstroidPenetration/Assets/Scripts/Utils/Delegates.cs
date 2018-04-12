@@ -13,5 +13,6 @@ namespace Assets.Scripts.Utils
         public delegate void OnEnd();
         public delegate void GUIInput(InputType type, int index, PointerEventData eventData);
         public delegate void MenuInput();
+        public delegate void MenuOptionInput<T>(T value) where T : struct;
     }
 }

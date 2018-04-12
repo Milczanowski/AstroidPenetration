@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI
 {
@@ -12,6 +10,8 @@ namespace Assets.Scripts.GUI
     {
         [SerializeField]
         private CanvasGroup CanvasGroup = null;
+        [SerializeField]
+        private CanvasScaler CanvasScaler = null;
 
         private float visibleVelocity = 0;
 
@@ -41,6 +41,11 @@ namespace Assets.Scripts.GUI
             }));
         }
 
+        public void Scale(float value)
+        {
+            CanvasScaler.referenceResolution = new Vector2(1920, 1080) * value;
+        }
+
         private IEnumerator SetVisible(float value, float time, Action onEnd)
         {
             CanvasGroup.alpha = value;
@@ -53,5 +58,6 @@ namespace Assets.Scripts.GUI
             if(onEnd != null)
                 onEnd.Invoke();
         }
+
     }
 }

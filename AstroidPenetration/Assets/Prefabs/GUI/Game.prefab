@@ -881,7 +881,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1725.77, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.418
   m_PhysicalUnit: 3
@@ -2067,6 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanvasGroup: {fileID: 225307208431335788}
+  CanvasScaler: {fileID: 114138393499929966}
 --- !u!222 &222002765624639774
 CanvasRenderer:
   m_ObjectHideFlags: 1
