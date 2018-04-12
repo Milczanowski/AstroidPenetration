@@ -7,8 +7,11 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
+        public event Delegates.OnEnd OnStop;
         public event Delegates.Vector3Target OnMove;
         public event Delegates.Vector3NormalTarget OnShowMark;
+        public event Delegates.Vector3Target OnMeleAtack;
+        public event Delegates.Vector3Target OnRangeAttack;
 
         protected override IEnumerator Init()
         {
@@ -16,6 +19,8 @@ namespace Assets.Scripts.Controllers
 
             inputController.OnClickTarget += onMove;
             inputController.OnClickTargetNormal += onShowMark;
+            inputController.OnMajor += OnMajor;
+            inputController.OnMinor += OnMinor;
             yield return null;
         }
 
@@ -29,6 +34,16 @@ namespace Assets.Scripts.Controllers
         {
             if(OnShowMark != null)
                 OnShowMark.Invoke(target, normal);
+        }
+
+        private void OnMajor(int index)
+        {
+
+        }
+
+        private void OnMinor(int index)
+        {
+
         }
     }
 }

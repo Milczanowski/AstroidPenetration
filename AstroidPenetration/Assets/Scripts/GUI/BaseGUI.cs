@@ -27,17 +27,17 @@ namespace Assets.Scripts.GUI
             }
         }
 
-        public void Show()
+        public void Show(float alpha = 1, float time = .05f, bool enable = true)
         {
-            gameObject.SetActive(true);
-            StartCoroutine(SetVisible(1, 0.05f,()=>{ }));
+            gameObject.SetActive(enable);
+            StartCoroutine(SetVisible(alpha, 0.05f,()=>{ }));
         }
 
-        public void Hide()
+        public void Hide(float alpha = 0, float time = .05f, bool enable = false)
         {
-            StartCoroutine(SetVisible(0, 0.05f, ()=>
+            StartCoroutine(SetVisible(alpha, 0.05f, ()=>
             {
-                gameObject.SetActive(false);
+                gameObject.SetActive(enable);
             }));
         }
 

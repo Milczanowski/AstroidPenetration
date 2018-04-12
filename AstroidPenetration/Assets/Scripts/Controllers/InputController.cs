@@ -17,6 +17,8 @@ namespace Assets.Scripts.Controllers
         #region Events
         public event Delegates.Vector3Target OnClickTarget;
         public event Delegates.Vector3NormalTarget OnClickTargetNormal;
+        public event Delegates.InventoryInput OnMinor;
+        public event Delegates.InventoryInput OnMajor;
         #endregion
 
 
@@ -65,20 +67,16 @@ namespace Assets.Scripts.Controllers
                     break;
                 default:
                     {
-                        throw new System.NotImplementedException("MajorAction: " + index);
-                    }
+                        if(OnMajor != null)
+                            OnMajor.Invoke(index);
+                    }break;
             }
         }
 
         private void MinorAction(int index)
         {
-            switch(index)
-            {
-                default:
-                    {
-                        throw new System.NotImplementedException("MinorAction: " + index);
-                    }
-            }
+            if(OnMinor != null)
+                OnMinor.Invoke(index);
         }
 
         private void OptionAction(int index)
@@ -122,6 +120,7 @@ namespace Assets.Scripts.Controllers
             Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return false; });
             GameGUI.Interactable = false;
             MenuGUI.Interactable = true;
+            GameGUI.Hide(alpha: .3f, enable: true);
             MenuGUI.Show();
         }
 
@@ -130,6 +129,7 @@ namespace Assets.Scripts.Controllers
             MenuGUI.Interactable = false;
             GameGUI.Interactable = true;
             MenuGUI.Hide();
+            GameGUI.Show();
             Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return true; });
         }
 
