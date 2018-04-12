@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using UnityEngine;
 
@@ -17,7 +18,8 @@ namespace Assets.Scripts.Utils
                 streamWriter.WriteLine(field.Name);
                 streamWriter.WriteLine(field.GetValue(obj));
             }
-
+            streamWriter.Flush();
+            memoryStream.Position = 0;
             return memoryStream;
         }
 
@@ -27,11 +29,12 @@ namespace Assets.Scripts.Utils
             while(!streamReader.EndOfStream)
             {
                 string name = streamReader.ReadLine();
+                string value = streamReader.ReadLine();
                 FieldInfo info = typeof(T).GetField(name);
 
                 if(info!=null)
                 {
-                    info.SetValue(obj, streamReader.ReadLine());
+                    info.SetValue(obj, TypeDescriptor.GetConverter(info.FieldType).ConvertFrom(value));
                 }
             }
         }

@@ -7,7 +7,7 @@ using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.Controllers
 {
-    abstract class SerializeController<T>:BaseController where T: IStreamSerializable
+    abstract class SerializeController<T>:BaseController where T: IStreamSerializable, new() 
     {
         protected string FileName { get; set; }
         public T Instance { get; protected set; }
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Controllers
         {
             if(FileExists)
             {
-                T instance = default(T);
+                T instance = new T();
 
                 using(FileStream file = File.Open(FilePath, FileMode.Open))
                 {

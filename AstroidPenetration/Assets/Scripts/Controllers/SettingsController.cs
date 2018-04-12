@@ -8,6 +8,8 @@ namespace Assets.Scripts.Controllers
     {
         protected override IEnumerator Init()
         {
+            FileName = "settings.data";
+
             yield return Load(() =>
             {
                 Instance = new Settings();

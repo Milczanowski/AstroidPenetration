@@ -7,13 +7,13 @@ namespace Assets.Scripts.Models
     public class Settings: ScriptableObject, IStreamSerializable
     {
         [SerializeField]
-        public float _GUISize = 1;
+        public float GUISize = 1;
         [SerializeField]
-        public bool _MusicEnable = true;
+        public bool MusicEnable = true;
         [SerializeField]
-        public bool _SoundEndable = true;
+        public bool SoundEndable = true;
         [SerializeField]
-        public string _LanguageCode = "EN";
+        public string LanguageCode = "EN";
 
         public void Deserialzie(Stream stream)
         {
