@@ -3,6 +3,7 @@ using Assets.Scripts.Models.Setups;
 using UnityEngine;
 using System.IO;
 using System;
+using Assets.Scripts.Models;
 
 namespace Assets.Editor
 {
@@ -14,6 +15,12 @@ namespace Assets.Editor
             {
                 return Application.dataPath.Replace("Assets", "");
             }
+        }
+
+        [MenuItem("Tools/Game Settings/Create empty")]
+        private static void CreateEmptyGameSettings()
+        {
+            CreateEmptySetup<Settings>("setup");
         }
 
         [MenuItem("Tools/Loading Setup/Create empty")]
