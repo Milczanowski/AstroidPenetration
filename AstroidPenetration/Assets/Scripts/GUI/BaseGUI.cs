@@ -15,6 +15,18 @@ namespace Assets.Scripts.GUI
 
         private float visibleVelocity = 0;
 
+        public bool Interactable
+        {
+            get
+            {
+                return CanvasGroup.interactable;
+            }
+            set
+            {
+                CanvasGroup.interactable = value;
+            }
+        }
+
         public void Show()
         {
             gameObject.SetActive(true);
@@ -31,11 +43,13 @@ namespace Assets.Scripts.GUI
 
         private IEnumerator SetVisible(float value, float time, Action onEnd)
         {
-            while(CanvasGroup.alpha!=value)
-            {
-                CanvasGroup.alpha = Mathf.SmoothDamp(CanvasGroup.alpha, value, ref visibleVelocity, time);
-                yield return null;
-            }
+            CanvasGroup.alpha = value;
+            yield return null;
+            //while(CanvasGroup.alpha!=value)
+            //{
+            //    CanvasGroup.alpha = Mathf.SmoothDamp(CanvasGroup.alpha, value, ref visibleVelocity, time);
+            //    yield return null;
+            //}
             if(onEnd != null)
                 onEnd.Invoke();
         }

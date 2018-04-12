@@ -24,8 +24,14 @@ namespace Assets.Scripts.Controllers
         {
             GameGUI = FindObjectOfType<GameGUI>();
             MenuGUI = FindObjectOfType<MenuGUI>();
+
+            InitMenu(MenuGUI);
+
+
+            MenuGUI.Hide(); // <-- TODO
+
             MoveLayerMask = LayerMask.GetMask("World");
-            GUIInput.onClick += GameInput;            
+            GUIInput.onClick += GameInput;
             yield return null;
         }
 
@@ -104,10 +110,35 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        private void InitMenu(MenuGUI menu)
+        {
+            menu.onBackButton += BackToGame;
+            menu.onExitButton += Exit;
+        }
+
         private void ShowMenu()
         {
-            GameGUI.Hide();
+            Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return false; });
+            GameGUI.Interactable = false;
+            MenuGUI.Interactable = true;
             MenuGUI.Show();
+        }
+
+        private void BackToGame()
+        {
+            MenuGUI.Interactable = false;
+            GameGUI.Interactable = true;
+            MenuGUI.Hide();
+            Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return true; });
+        }
+
+        private void Exit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }
