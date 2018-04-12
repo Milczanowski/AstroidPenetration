@@ -12,7 +12,7 @@ namespace Assets.Scripts.Inputs
         public static Delegates.GUIInput onClick;
 
         [SerializeField]
-        private InputType type = InputType.MajorAction;
+        private InputType type = InputType.Inventory;
 
         [SerializeField]
         private int index = 0;

@@ -17,8 +17,7 @@ namespace Assets.Scripts.Controllers
         #region Events
         public event Delegates.Vector3Target OnClickTarget;
         public event Delegates.Vector3NormalTarget OnClickTargetNormal;
-        public event Delegates.InventoryInput OnMinor;
-        public event Delegates.InventoryInput OnMajor;
+        public event Delegates.InventoryInput OnInventory;
         #endregion
 
 
@@ -41,42 +40,22 @@ namespace Assets.Scripts.Controllers
         {
             switch(type)
             {
-                case InputType.MajorAction:
+                case InputType.Move:
                     {
-                        MajorAction(index, eventData);
-                    }break;
-                case InputType.MinorAction:
+                        OnWorldClick(eventData);
+                    }
+                    break;
+                case InputType.Inventory:
                     {
-                        MinorAction(index);
-                    }break;
+                        if(OnInventory != null)
+                            OnInventory.Invoke(index);
+                    }
+                    break;
                 case InputType.Options:
                     {
                         OptionAction(index);
                     }break;
             }
-        }
-
-        private void MajorAction(int index, PointerEventData eventData)
-        {
-            switch(index)
-            {
-                case 0:
-                    {
-                        OnWorldClick(eventData);
-                    }
-                    break;
-                default:
-                    {
-                        if(OnMajor != null)
-                            OnMajor.Invoke(index);
-                    }break;
-            }
-        }
-
-        private void MinorAction(int index)
-        {
-            if(OnMinor != null)
-                OnMinor.Invoke(index);
         }
 
         private void OptionAction(int index)

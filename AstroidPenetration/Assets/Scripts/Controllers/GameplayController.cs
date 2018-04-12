@@ -19,8 +19,7 @@ namespace Assets.Scripts.Controllers
 
             inputController.OnClickTarget += onMove;
             inputController.OnClickTargetNormal += onShowMark;
-            inputController.OnMajor += OnMajor;
-            inputController.OnMinor += OnMinor;
+            inputController.OnInventory += OnInventory;
             yield return null;
         }
 
@@ -36,12 +35,7 @@ namespace Assets.Scripts.Controllers
                 OnShowMark.Invoke(target, normal);
         }
 
-        private void OnMajor(int index)
-        {
-
-        }
-
-        private void OnMinor(int index)
+        private void OnInventory(int index)
         {
 
         }

@@ -7,8 +7,8 @@ namespace Assets.Scripts.Inputs
 {
     public enum InputType
     {
-        MajorAction = 0,
-        MinorAction = 1,
-        Options
+        Move,
+        Inventory,
+        Options,
     }
 }
