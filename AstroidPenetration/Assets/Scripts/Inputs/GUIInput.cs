@@ -15,7 +15,7 @@ namespace Assets.Scripts.Inputs
         private InputType type = InputType.Inventory;
 
         [SerializeField]
-        private int index = 0;
+        public int index = 0;
 
         public override void OnPointerDown(PointerEventData eventData)
         {

@@ -1,8 +1,11 @@
 ﻿using Assets.Scripts.Inputs;
+using Assets.Scripts.Models.Basics;
+using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
@@ -10,6 +13,8 @@ namespace Assets.Scripts.GUI.Game
     {
         [SerializeField]
         private List <InventoryButton> InventoryButtons = new List<InventoryButton>();
+
+        private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
         public event Delegates.Vector3Target OnWorldClick;
         public event Delegates.InventoryInput OnInventory;
@@ -24,6 +29,9 @@ namespace Assets.Scripts.GUI.Game
         {
             base.Awake();
             GUIInput.onClick += OnInput;
+
+            foreach(InventoryButton inventoryButton in InventoryButtons)
+                InventoryButtonsDict.Add(inventoryButton.Index, inventoryButton);
         }
 
         private void OnInput(InputType type, int index, PointerEventData eventData)
@@ -67,6 +75,10 @@ namespace Assets.Scripts.GUI.Game
             }
         }
 
-
+        public void SetIcon(int index, PrefabInfo info)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].SetIcon(ObjectManager.Load<Image>(info.Name, info.BundleID));
+        }
     }
 }

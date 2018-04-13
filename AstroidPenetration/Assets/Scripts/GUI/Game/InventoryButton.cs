@@ -1,23 +1,30 @@
-﻿using Assets.Scripts.Utils;
+﻿using Assets.Scripts.Inputs;
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
-    [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(GUIInput))]
     public class InventoryButton:MonoBehaviour, IEditorSerializable
     {
         [SerializeField]
-        Button Button = null;
+        private Image Icon = null;
         [SerializeField]
-        Image Icon = null;
+        private GUIInput GUIInput = null;
 
+        public int Index
+        {
+            get
+            {
+                return GUIInput.index;
+            }
+        }
         public void InitReference()
         {
-            Button = GetComponent<Button>();
             Icon = transform.Find("Icon").GetComponent<Image>();
+            GUIInput = GetComponent<GUIInput>();
         }
-
         public void SetIcon(Image icon)
         {
             if(icon)
@@ -25,7 +32,6 @@ namespace Assets.Scripts.GUI.Game
             else
                 Icon.enabled = false;
         }
-
         
     }
 }

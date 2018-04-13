@@ -519,8 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114778199435210496}
   Icon: {fileID: 114122371161970596}
+  GUIInput: {fileID: 114600210145307984}
 --- !u!114 &114047652305772464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,8 +624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114886718822069310}
   Icon: {fileID: 114594479456520418}
+  GUIInput: {fileID: 114793393878403242}
 --- !u!114 &114081981989354552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570232005187262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1067,8 +1067,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114081981989354552}
   Icon: {fileID: 114437804004720346}
+  GUIInput: {fileID: 114625120006609376}
 --- !u!114 &114307377471585298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1107,8 +1107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114126783183694744}
   Icon: {fileID: 114471844209560608}
+  GUIInput: {fileID: 114774994962636394}
 --- !u!114 &114334770467724014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1464,8 +1464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114676036330660008}
   Icon: {fileID: 114124112630558272}
+  GUIInput: {fileID: 114121465483455142}
 --- !u!114 &114563754655308568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1268387709781550}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1676,8 +1676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114119351775017060}
   Icon: {fileID: 114948466948325670}
+  GUIInput: {fileID: 114358754063834020}
 --- !u!114 &114739469499088862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1689,8 +1689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114470176336568776}
   Icon: {fileID: 114154783761982912}
+  GUIInput: {fileID: 114631862789162246}
 --- !u!114 &114757711823499208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1702,8 +1702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114855329949816042}
   Icon: {fileID: 114307377471585298}
+  GUIInput: {fileID: 114059120618017118}
 --- !u!114 &114766771964486360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2153,8 +2153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114441730202906460}
   Icon: {fileID: 114115736930358928}
+  GUIInput: {fileID: 114766771964486360}
 --- !u!114 &114948466948325670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2193,8 +2193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6188a1b1c38ba45b5ae2c949756f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 114057332699765426}
   Icon: {fileID: 114120529442915292}
+  GUIInput: {fileID: 114276199304905332}
 --- !u!114 &114988426409899606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2208,6 +2208,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasGroup: {fileID: 225307208431335788}
   CanvasScaler: {fileID: 114138393499929966}
+  InventoryButtons:
+  - {fileID: 114018400180369982}
+  - {fileID: 114947207210633322}
+  - {fileID: 114757711823499208}
+  - {fileID: 114692626968084292}
+  - {fileID: 114500405616455176}
+  - {fileID: 114976351617282488}
+  - {fileID: 114739469499088862}
+  - {fileID: 114278173349493912}
+  - {fileID: 114333031042771336}
+  - {fileID: 114064518694742410}
 --- !u!222 &222002765624639774
 CanvasRenderer:
   m_ObjectHideFlags: 1
