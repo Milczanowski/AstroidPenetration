@@ -12,6 +12,6 @@ namespace Assets.Scripts.Models.Basics
         [SerializeField]
         public string ID;
         [SerializeField]
-        private PrefabInfo Prefab;
+        public PrefabInfo Prefab;
     }
 }
