@@ -4,7 +4,6 @@ using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers
 {
@@ -26,56 +25,36 @@ namespace Assets.Scripts.Controllers
             GameGUI = FindObjectOfType<GameGUI>();
             MenuGUI = FindObjectOfType<MenuGUI>();
 
+            InitGame(GameGUI);
             InitMenu(MenuGUI);
+
             GetController<SettingsController>().InitSettings(MenuGUI);
 
             MenuGUI.Hide(); // <-- TODO
 
             MoveLayerMask = LayerMask.GetMask("World");
-            GUIInput.onClick += GameInput;
             yield return null;
         }
 
-        private void GameInput(InputType type, int index, PointerEventData eventData)
+
+        private void InitMenu(MenuGUI menu)
         {
-            switch(type)
-            {
-                case InputType.Move:
-                    {
-                        OnWorldClick(eventData);
-                    }
-                    break;
-                case InputType.Inventory:
-                    {
-                        if(OnInventory != null)
-                            OnInventory.Invoke(index);
-                    }
-                    break;
-                case InputType.Options:
-                    {
-                        OptionAction(index);
-                    }break;
-            }
+            menu.onBackButton += BackToGame;
+            menu.onExitButton += Exit;
+            menu.onExitButton += GetComponent<SaveController>().Save;
+            menu.OnGUISize += GameGUI.Scale;
         }
 
-        private void OptionAction(int index)
+        private void InitGame(GameGUI game)
         {
-            switch(index)
-            {
-                case 1:
-                    {
-                        ShowMenu();
-                    }break;
-                default:
-                    {
-                        throw new System.NotImplementedException("OptionAction: " + index);
-                    }
-            }
+            game.OnWorldClick += OnWorldClick;
+            game.OnShowMenu += ShowMenu;
+            game.OnInventory += Inventory;
         }
 
-        private void OnWorldClick(PointerEventData eventData)
+        private void OnWorldClick(Vector3 position)
         {
-            Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+            Ray ray = Camera.main.ScreenPointToRay(position);
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, MoveLayerMask.value))
             {
@@ -87,12 +66,10 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        private void InitMenu(MenuGUI menu)
+        private void Inventory(int index)
         {
-            menu.onBackButton += BackToGame;
-            menu.onExitButton += Exit;
-            menu.onExitButton += GetComponent<SaveController>().Save;
-            menu.OnGUISize += GameGUI.Scale;
+            if(OnInventory != null)
+                OnInventory.Invoke(index);
         }
 
         private void ShowMenu()

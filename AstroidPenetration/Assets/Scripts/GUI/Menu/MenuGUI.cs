@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Menu
 {
-    class MenuGUI:BaseGUI
+    class MenuGUI:BaseGUI<MenuGUI>
     {
         [SerializeField]
         private Button backButton = null;
@@ -24,9 +24,9 @@ namespace Assets.Scripts.GUI.Menu
         public event Delegates.MenuOptionInput<bool> OnMusic = (value)=>{ };
         public event Delegates.MenuOptionInput<bool> OnSound = (value)=>{ };
 
-
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             backButton.onClick.AddListener(() => { onBackButton.Invoke(); });
             exitButton.onClick.AddListener(() => { onExitButton.Invoke(); });
             GUISize.OnValueChange += (value) => { OnGUISize.Invoke(value); };

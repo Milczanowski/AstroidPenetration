@@ -6,12 +6,22 @@ using UnityEngine.UI;
 namespace Assets.Scripts.GUI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class BaseGUI:MonoBehaviour
+    public abstract class BaseGUI<T>:MonoBehaviour where T:BaseGUI<T>
     {
+        public static T Instance { get; private set; }
+
         [SerializeField]
         private CanvasGroup CanvasGroup = null;
         [SerializeField]
         private CanvasScaler CanvasScaler = null;
+
+        protected virtual void Awake()
+        {
+            if(Instance != null)
+                throw new Exception("Buplicate GUI");
+
+            Instance = (T)this;
+        }
 
         public bool Interactable
         {
