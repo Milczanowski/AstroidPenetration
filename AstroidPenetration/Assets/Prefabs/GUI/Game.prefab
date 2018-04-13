@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 114057332699765426}
   - component: {fileID: 114276199304905332}
   m_Layer: 5
-  m_Name: Inventory_10
+  m_Name: Inventory_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 114855329949816042}
   - component: {fileID: 114059120618017118}
   m_Layer: 5
-  m_Name: Inventory_04
+  m_Name: Inventory_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 114470176336568776}
   - component: {fileID: 114631862789162246}
   m_Layer: 5
-  m_Name: Inventory_09
+  m_Name: Inventory_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 114126783183694744}
   - component: {fileID: 114774994962636394}
   m_Layer: 5
-  m_Name: Inventory_07
+  m_Name: Inventory_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 114676036330660008}
   - component: {fileID: 114121465483455142}
   m_Layer: 5
-  m_Name: Inventory_06
+  m_Name: Inventory_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 114119351775017060}
   - component: {fileID: 114358754063834020}
   m_Layer: 5
-  m_Name: Inventory_05
+  m_Name: Inventory_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 114441730202906460}
   - component: {fileID: 114766771964486360}
   m_Layer: 5
-  m_Name: Inventory_03
+  m_Name: Inventory_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 114778199435210496}
   - component: {fileID: 114600210145307984}
   m_Layer: 5
-  m_Name: MainAtack
+  m_Name: Inventory_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 114886718822069310}
   - component: {fileID: 114793393878403242}
   m_Layer: 5
-  m_Name: RangeAtack
+  m_Name: Inventory_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 4
+  index: 3
 --- !u!114 &114081981989354552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 6
+  index: 5
 --- !u!114 &114122371161970596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 10
+  index: 6
 --- !u!114 &114307377471585298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 5
+  index: 4
 --- !u!114 &114364065436417742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 9
+  index: 7
 --- !u!114 &114676036330660008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 3
+  index: 2
 --- !u!114 &114774994962636394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 7
+  index: 9
 --- !u!114 &114778199435210496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 2
+  index: 10
 --- !u!114 &114825590534091010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2274,7 +2274,7 @@ RectTransform:
   m_Children:
   - {fileID: 224075090857390178}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2311,7 +2311,7 @@ RectTransform:
   m_Children:
   - {fileID: 224451209612719540}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2349,7 +2349,7 @@ RectTransform:
   m_Children:
   - {fileID: 224464214005265546}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2368,7 +2368,7 @@ RectTransform:
   m_Children:
   - {fileID: 224849713672262148}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2441,7 +2441,7 @@ RectTransform:
   m_Children:
   - {fileID: 224581285160570242}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2496,7 +2496,7 @@ RectTransform:
   m_Children:
   - {fileID: 224531706814852394}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2569,7 +2569,7 @@ RectTransform:
   m_Children:
   - {fileID: 224247298423290084}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 1
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2588,7 +2588,7 @@ RectTransform:
   m_Children:
   - {fileID: 224885133443854624}
   m_Father: {fileID: 224842744995584780}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2644,15 +2644,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224708039217180866}
-  - {fileID: 224585646105010782}
   - {fileID: 224156052502618428}
   - {fileID: 224484853408755604}
   - {fileID: 224128316184110612}
   - {fileID: 224072051455702716}
-  - {fileID: 224642669144073352}
-  - {fileID: 224665238088889902}
-  - {fileID: 224390065082133000}
   - {fileID: 224109699451433982}
+  - {fileID: 224390065082133000}
+  - {fileID: 224665238088889902}
+  - {fileID: 224642669144073352}
+  - {fileID: 224585646105010782}
   - {fileID: 224122854717660090}
   - {fileID: 224859812534406472}
   m_Father: {fileID: 224994091220513674}

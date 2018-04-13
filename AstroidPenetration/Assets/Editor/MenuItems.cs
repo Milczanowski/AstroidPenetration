@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using Assets.Scripts.Models;
+using Assets.Scripts.Models.World.Items;
 
 namespace Assets.Editor
 {
@@ -29,10 +30,16 @@ namespace Assets.Editor
             CreateEmptySetup<EffectsSetup>("effects");
         }
 
-        private static void CreateEmptySetup<T>(string filename, string extension = "asset") where T : ScriptableObject
+        [MenuItem("Tools/Items/Create Food")]
+        private static void CreateEmptyFood()
+        {
+            CreateEmptySetup<Food>("food", path: "Assets/Resources/items_01/");
+        }
+
+        private static void CreateEmptySetup<T>(string filename, string extension = "asset", string path = "Assets/Resources/Setups/") where T : ScriptableObject
         {
             T setup = ScriptableObject.CreateInstance<T>();
-            AssetDatabase.CreateAsset(setup, EditorUtility.SaveFilePanel("Choose the file name", "Assets/Resources/Setups/", filename, extension)
+            AssetDatabase.CreateAsset(setup, EditorUtility.SaveFilePanel("Choose the file name", path, filename, extension)
                 .Replace(ProjectPath, ""));
         }
     }

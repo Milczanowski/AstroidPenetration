@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Assets.Scripts.Models.Saves
 {
-    [Serializable]
     public class Player
     {
         public int Level = 1;
         public int Experience = 0;
+        public int Health = 1;
+        public int Mana = 1;
         public List<Item> Inventory = new List<Item>();
     }
 }
