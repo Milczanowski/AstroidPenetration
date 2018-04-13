@@ -1,16 +1,24 @@
 ﻿using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.GUI.Game
 {
-    class GameGUI:BaseGUI<GameGUI>
+    public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable
     {
-
+        [SerializeField]
+        private List <InventoryButton> InventoryButtons = new List<InventoryButton>();
 
         public event Delegates.Vector3Target OnWorldClick;
         public event Delegates.InventoryInput OnInventory;
         public event Delegates.MenuInput OnShowMenu;
+
+        public void InitReference()
+        {
+            InventoryButtons = new List<InventoryButton>(GetComponentsInChildren<InventoryButton>());
+        }
 
         protected override void Awake()
         {

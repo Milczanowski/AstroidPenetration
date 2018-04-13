@@ -2,11 +2,10 @@
 using Assets.Scripts.Utils;
 using UnityEditor;
 
-
 namespace Assets.Editor.GUI.Game
 {
-    [CustomEditor(typeof(InventoryButton))]
-    class InventoryButtonEditor:UnityEditor.Editor
+    [CustomEditor(typeof(GameGUI))]
+    class GameGUIEditor:UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
