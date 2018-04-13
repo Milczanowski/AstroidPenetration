@@ -1,10 +1,6 @@
-﻿using Assets.Scripts.Models.Basics;
-using Assets.Scripts.Utils;
-using System;
+﻿using Assets.Scripts.Utils;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using UnityEngine;
 
 namespace Assets.Scripts.Spawners
 {

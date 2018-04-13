@@ -7,13 +7,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Spawners
 {
-    public class GameSpawner: BaseSpawner
+    public class GameSpawner:SetupSpawner<LoadingSetup>
     {
-        private LoadingSetup Setup { get; set;}
-
-        public GameSpawner(LoadingSetup loadingSetup)
+        public GameSpawner(LoadingSetup setup):base(setup)
         {
-            Setup = loadingSetup;
         }
 
         public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
@@ -36,6 +33,8 @@ namespace Assets.Scripts.Spawners
             yield return Load<GameObject>(Setup.Items, "Items", World);
 
             onLoaded();
+
+            Setup = null;
             yield return null;
         }
 

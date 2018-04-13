@@ -9,15 +9,12 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.Spawners
 {
-    class ItemSpawner:BaseSpawner
+    class ItemSpawner:SetupSpawner<ItemSetups>
     {
-        private ItemSetups ItemSetups { get; set; }
-
         private static Dictionary<string, BaseItem> Items { get; set; }
 
-        public ItemSpawner(ItemSetups itemsSetups)
+        public ItemSpawner(ItemSetups setup):base(setup)
         {
-            ItemSetups = itemsSetups;
             Items = new Dictionary<string, BaseItem>();
         }
 
@@ -26,7 +23,7 @@ namespace Assets.Scripts.Spawners
             if(onProgress != null)
                 onProgress.Invoke(0);
 
-            foreach(var item in ItemSetups.Items)
+            foreach(var item in Setup.Items)
             {
                 BaseItem baseItem = ObjectManager.Load<BaseItem>(item.Prefab.Name, item.Prefab.BundleID);
                 if(baseItem != null)

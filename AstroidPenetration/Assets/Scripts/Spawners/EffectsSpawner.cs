@@ -5,13 +5,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Spawners
 {
-    class EffectsSpawner:BaseSpawner
+    class EffectsSpawner:SetupSpawner<EffectsSetup>
     {
-        private EffectsSetup EffectsSetup { get; set; }
-
-        public EffectsSpawner(EffectsSetup effectsSetup)
+        public EffectsSpawner(EffectsSetup setup) : base(setup)
         {
-            EffectsSetup = effectsSetup;
         }
 
         public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
@@ -22,13 +19,15 @@ namespace Assets.Scripts.Spawners
 
             Transform effects = new GameObject("Effects").transform;
 
-            EffectsSetup.Arrow.Instantiate<GameObject>(effects);
+            Setup.Arrow.Instantiate<GameObject>(effects);
 
             if(onProgress != null)
                 onProgress.Invoke(1);
 
             if(onLoaded != null)
                 onLoaded.Invoke();
+
+            Setup = null;
 
             yield return null;
         }
