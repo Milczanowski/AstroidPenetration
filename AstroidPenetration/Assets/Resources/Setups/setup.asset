@@ -197,7 +197,7 @@ MonoBehaviour:
     Position: {x: -114.2, y: 2.93, z: 20.13}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   Items:
-  - BundleID: items_01
+  - BundleID: item_models_01
     Name: apple_01
     Position: {x: -7.5, y: 0.3, z: -5}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
