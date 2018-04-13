@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 3
+  index: 2
 --- !u!114 &114064518694742410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 5
+  index: 4
 --- !u!114 &114122371161970596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 6
+  index: 5
 --- !u!114 &114278173349493912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 4
+  index: 3
 --- !u!114 &114364065436417742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1532,7 +1532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 1
+  index: 0
 --- !u!114 &114613626818851594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 8
+  index: 7
 --- !u!114 &114631862789162246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1612,7 +1612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 7
+  index: 6
 --- !u!114 &114676036330660008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 2
+  index: 1
 --- !u!114 &114774994962636394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 9
+  index: 8
 --- !u!114 &114778199435210496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  index: 10
+  index: 9
 --- !u!114 &114825590534091010
 MonoBehaviour:
   m_ObjectHideFlags: 1

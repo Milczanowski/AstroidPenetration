@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Assets.Scripts.Models.Saves
 {
@@ -12,5 +9,10 @@ namespace Assets.Scripts.Models.Saves
         public int Health = 1;
         public int Mana = 1;
         public List<Item> Inventory = new List<Item>();
+
+        public Player()
+        {
+            Inventory = new List<Item>() { new Item("apple_01", 1, 0) };
+        }
     }
 }

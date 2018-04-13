@@ -1,16 +1,20 @@
-﻿using Assets.Scripts.Serializers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
 namespace Assets.Scripts.Models.Saves
 {
-    [Serializable]
     public class Item
     {
-        public string ID;
-        public string Count;
-        public string Index;
+        public string ID= string.Empty;
+        public int Count = 0;
+        public int Index = -1;
+
+        public Item(){}
+
+        public Item(string id, int count, int index)
+        {
+            ID = id;
+            Count = count;
+            Index = index;
+        }
     }
 }
