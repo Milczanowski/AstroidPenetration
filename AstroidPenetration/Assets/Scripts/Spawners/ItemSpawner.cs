@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Models.Basics;
-using Assets.Scripts.Models.Setups;
+﻿using Assets.Scripts.Models.Setups;
 using Assets.Scripts.Models.World.Items;
 using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;
