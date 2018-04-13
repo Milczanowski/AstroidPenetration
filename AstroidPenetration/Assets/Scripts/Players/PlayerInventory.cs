@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Utils;
+﻿using Assets.Scripts.Spawners;
+using Assets.Scripts.Utils;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.Players
@@ -11,6 +12,8 @@ namespace Assets.Scripts.Players
         
         public void InitItem(List<Models.Saves.Item> items)
         {
+            foreach(var item in items)
+                OnSet(item.Index, ItemSpawner.GetItem(item.ID).Icon);
         }
     }
 }

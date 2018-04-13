@@ -11,12 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: items
   m_EditorClassIdentifier: Assembly-CSharp:Assets.Scripts.Models.Setups:ItemSetups
-  Items:
-  - ID: apple_01
-    Prefab:
-      BundleID: items_01
-      Name: apple_01
-  - ID: sword_01
-    Prefab:
-      BundleID: items_01
-      Name: sword_01
+  Items: []

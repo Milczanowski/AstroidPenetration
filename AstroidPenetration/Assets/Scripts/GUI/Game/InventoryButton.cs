@@ -29,7 +29,7 @@ namespace Assets.Scripts.GUI.Game
         {
             if(icon)
             {
-                Icon = icon;
+                Icon.sprite = icon.sprite;
                 Icon.enabled = true;
             }
             else

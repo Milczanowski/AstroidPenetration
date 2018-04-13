@@ -79,6 +79,8 @@ namespace Assets.Scripts.GUI.Game
         {
             if(InventoryButtonsDict.ContainsKey(index))
                 InventoryButtonsDict[index].SetIcon(ObjectManager.Load<Image>(info.Name, info.BundleID));
+            else
+                throw new System.NullReferenceException("Inventory button not found: " + index);
         }
     }
 }

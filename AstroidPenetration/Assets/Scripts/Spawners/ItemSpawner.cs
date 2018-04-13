@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Models.Basics;
 using Assets.Scripts.Models.Setups;
+using Assets.Scripts.Models.World.Items;
+using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;
 using System;
 using System.Collections;
@@ -11,12 +13,12 @@ namespace Assets.Scripts.Spawners
     {
         private ItemSetups ItemSetups { get; set; }
 
-        private static Dictionary<string, PrefabInfo> Items { get; set; }
+        private static Dictionary<string, BaseItem> Items { get; set; }
 
         public ItemSpawner(ItemSetups itemsSetups)
         {
             ItemSetups = itemsSetups;
-            Items = new Dictionary<string, PrefabInfo>();
+            Items = new Dictionary<string, BaseItem>();
         }
 
         public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
@@ -25,7 +27,11 @@ namespace Assets.Scripts.Spawners
                 onProgress.Invoke(0);
 
             foreach(var item in ItemSetups.Items)
-                Items.Add(item.ID, item.Prefab);
+            {
+                BaseItem baseItem = ObjectManager.Load<BaseItem>(item.Prefab.Name, item.Prefab.BundleID);
+                if(baseItem != null)
+                    Items.Add(item.ID, baseItem);
+            }
 
             if(onProgress != null)
                 onProgress.Invoke(1);
@@ -36,12 +42,12 @@ namespace Assets.Scripts.Spawners
             yield return null;
         }
 
-        public static PrefabInfo GetItem(string id)
+        public static BaseItem GetItem(string id)
         {
             if(Items.ContainsKey(id))
                 return Items[id];
 
-            return null;
+            throw new NullReferenceException("Item not found: " + id);
         }
 
     }
