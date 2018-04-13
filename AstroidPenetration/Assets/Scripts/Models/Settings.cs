@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Assets.Scripts.Models
 {
-    public class Settings: IStreamSerializable
+    class Settings: BaseSerializeModel<Settings>
     {
         [SerializeField]
         public float GUISize = 1;
@@ -13,15 +13,5 @@ namespace Assets.Scripts.Models
         public bool SoundEndable = true;
         [SerializeField]
         public string LanguageCode = "EN";
-
-        public void Deserialzie(Stream stream)
-        {
-            FieldSerializer<Settings>.Deserialzie(this, stream);
-        }
-
-        public Stream Serialize()
-        {
-            return FieldSerializer<Settings>.Serialize(this);
-        }
     }
 }
