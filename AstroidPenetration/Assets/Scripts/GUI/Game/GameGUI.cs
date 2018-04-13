@@ -6,6 +6,8 @@ namespace Assets.Scripts.GUI.Game
 {
     class GameGUI:BaseGUI<GameGUI>
     {
+
+
         public event Delegates.Vector3Target OnWorldClick;
         public event Delegates.InventoryInput OnInventory;
         public event Delegates.MenuInput OnShowMenu;
@@ -56,5 +58,7 @@ namespace Assets.Scripts.GUI.Game
                     }
             }
         }
+
+
     }
 }
