@@ -13,7 +13,7 @@ namespace Assets.Scripts.Spawners
         {
         }
 
-        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        protected override IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
             Transform World = new GameObject("World").transform;
             onProgress(.01f);
@@ -31,11 +31,6 @@ namespace Assets.Scripts.Spawners
             yield return Load<GameObject>(Setup.Rocks, "Rocks", World);
             onProgress(.33f);
             yield return Load<GameObject>(Setup.Items, "Items", World);
-
-            onLoaded();
-
-            Setup = null;
-            yield return null;
         }
 
         private IEnumerator Load<T>(List<SpawnObjectInfo> objList, string name  ,Transform parent) where T : Object

@@ -11,23 +11,10 @@ namespace Assets.Scripts.Spawners
         {
         }
 
-        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        protected override IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
-            if(onProgress != null)
-                onProgress.Invoke(0);
-
-
             Transform effects = new GameObject("Effects").transform;
-
             Setup.Arrow.Instantiate<GameObject>(effects);
-
-            if(onProgress != null)
-                onProgress.Invoke(1);
-
-            if(onLoaded != null)
-                onLoaded.Invoke();
-
-            Setup = null;
 
             yield return null;
         }

@@ -18,23 +18,14 @@ namespace Assets.Scripts.Spawners
             Items = new Dictionary<string, BaseItem>();
         }
 
-        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        protected override IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
         {
-            if(onProgress != null)
-                onProgress.Invoke(0);
-
             foreach(var item in Setup.Items)
             {
                 BaseItem baseItem = ObjectManager.Load<BaseItem>(item.Prefab.Name, item.Prefab.BundleID);
                 if(baseItem != null)
                     Items.Add(item.ID, baseItem);
             }
-
-            if(onProgress != null)
-                onProgress.Invoke(1);
-
-            if(onLoaded != null)
-                onLoaded.Invoke();
 
             yield return null;
         }
