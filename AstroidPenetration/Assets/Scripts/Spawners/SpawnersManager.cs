@@ -8,6 +8,7 @@ namespace Assets.Scripts.Spawners
     {
         private GameSpawner GameSpawner { get; set; }
         private EffectsSpawner EffectsSpawner { get; set; }
+        private ItemSpawner ItemSpawner { get; set; }
         private ControllerSpawner ControllerSpawner { get; set; }
 
         private void Awake()
@@ -19,6 +20,9 @@ namespace Assets.Scripts.Spawners
 
             EffectsSpawner = new EffectsSpawner(Resources.Load<EffectsSetup>("Setups/effects"));
             EffectsSpawner.AddToQueue();
+
+            ItemSpawner = new ItemSpawner(Resources.Load<ItemSetups>("Setups/items"));
+            ItemSpawner.AddToQueue();
 
             ControllerSpawner = new ControllerSpawner();
             ControllerSpawner.AddToQueue();

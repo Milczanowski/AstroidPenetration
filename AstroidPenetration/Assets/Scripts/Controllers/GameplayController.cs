@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Utils;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Players;
+using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +14,8 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Vector3Target OnMeleAtack;
         public event Delegates.Vector3Target OnRangeAttack;
 
+        private PlayerInventory PlayerInventory { get; set; }
+
         protected override IEnumerator Init()
         {
             InputController inputController = GetController<InputController>();
@@ -19,6 +23,10 @@ namespace Assets.Scripts.Controllers
             inputController.OnClickTarget += onMove;
             inputController.OnClickTargetNormal += onShowMark;
             inputController.OnInventory += OnInventory;
+
+            PlayerInventory = new PlayerInventory();
+            PlayerInventory.OnSet += GameGUI.Instance.SetIcon;
+            PlayerInventory.InitItem(GetComponent<SaveController>().Instance.Player.Inventory);
             yield return null;
         }
 

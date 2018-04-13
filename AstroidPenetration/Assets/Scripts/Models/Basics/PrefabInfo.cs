@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Models.Basics
 {
-    [System.Serializable]
+    [Serializable]
     public class PrefabInfo
     {
         [SerializeField]
@@ -21,7 +22,7 @@ namespace Assets.Scripts.Models.Basics
 
         public virtual T Instantiate<T>(Transform parent) where T : UnityEngine.Object
         {
-            return Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), parent);
+            return UnityEngine.Object.Instantiate<T>(ResourcesManagers.ObjectManager.Load<T>(Name, BundleID), parent);
         }
 
         public override string ToString()

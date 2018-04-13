@@ -18,16 +18,22 @@ namespace Assets.Editor
             }
         }
 
-        [MenuItem("Tools/Loading Setup/Create empty")]
+        [MenuItem("Tools/Loading/Create empty setup")]
         private static void CreateEmptyLoadingSetup()
         {
             CreateEmptySetup<LoadingSetup>("setup");
         }
 
-        [MenuItem("Tools/Effects Setup/Create empty")]
+        [MenuItem("Tools/Effects/Create empty setup")]
         private static void CreateEmptyEffectsSetup()
         {
             CreateEmptySetup<EffectsSetup>("effects");
+        }
+
+        [MenuItem("Tools/Items/Create empty setup")]
+        private static void CreateEmptyItemSetup()
+        {
+            CreateEmptySetup<ItemSetups>("items");
         }
 
         [MenuItem("Tools/Items/Create Food")]

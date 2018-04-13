@@ -28,7 +28,10 @@ namespace Assets.Scripts.GUI.Game
         public void SetIcon(Image icon)
         {
             if(icon)
+            {
                 Icon = icon;
+                Icon.enabled = true;
+            }
             else
                 Icon.enabled = false;
         }

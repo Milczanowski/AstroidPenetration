@@ -16,6 +16,6 @@ MonoBehaviour:
     Name: apple_01
   Icon:
     BundleID: item_icons_01
-    Name: apple_01
+    Name: apple_icon_01
   Health: 1
   Mana: 0

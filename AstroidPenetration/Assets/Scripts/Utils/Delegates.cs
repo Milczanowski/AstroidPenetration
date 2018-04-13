@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Inputs;
+using Assets.Scripts.Models.Basics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,5 +16,7 @@ namespace Assets.Scripts.Utils
         public delegate void MenuInput();
         public delegate void MenuOptionInput<T>(T value) where T : struct;
         public delegate void InventoryInput(int index);
+        public delegate void ItemSet(int index, PrefabInfo info);
+        public delegate void ItemSetCount(int index, int Count);
     }
 }

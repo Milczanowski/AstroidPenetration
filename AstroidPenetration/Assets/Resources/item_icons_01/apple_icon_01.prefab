@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222983008428835570}
   - component: {fileID: 114840164325918850}
   m_Layer: 5
-  m_Name: apple_01
+  m_Name: apple_icon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bae2dde8599cd804a8364d99f37a98c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4c48546d9b11b5e4fbc47666c7aed080, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

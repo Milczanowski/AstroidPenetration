@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Assets.Scripts.Utils;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.Scripts.Players
 {
     class PlayerInventory
     {
+        public event Delegates.InventoryInput OnEmpty;
+        public event Delegates.InventoryInput OnFull;
+        public event Delegates.ItemSet OnSet;
+        
+        public void InitItem(List<Models.Saves.Item> items)
+        {
+        }
     }
 }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222983008428835570}
   - component: {fileID: 114840164325918850}
   m_Layer: 5
-  m_Name: apple_01
+  m_Name: sword_icon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
