@@ -13,6 +13,7 @@ namespace Assets.Scripts.Controllers
 
         private GameGUI GameGUI { get; set; }
         private MenuGUI MenuGUI { get; set; }
+
         #region Events
         public event Delegates.Vector3Target OnClickTarget;
         public event Delegates.Vector3NormalTarget OnClickTargetNormal;
@@ -22,15 +23,12 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
-            GameGUI = FindObjectOfType<GameGUI>();
-            MenuGUI = FindObjectOfType<MenuGUI>();
+            GameGUI = GameGUI.Instance;
+            MenuGUI = MenuGUI.Instance;
 
             InitGame(GameGUI);
             InitMenu(MenuGUI);
-
-            GetController<SettingsController>().InitSettings(MenuGUI);
-
-            MenuGUI.Hide(); // <-- TODO
+            MenuGUI.Instance.Hide(); // <-- TODO
 
             MoveLayerMask = LayerMask.GetMask("World");
             yield return null;

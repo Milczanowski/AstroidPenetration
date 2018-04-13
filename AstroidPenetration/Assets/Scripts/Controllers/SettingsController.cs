@@ -19,6 +19,8 @@ namespace Assets.Scripts.Controllers
                 Instance = new Settings();
                 StartCoroutine(base.Save());
             });
+
+            InitSettings(MenuGUI.Instance);
         }
 
         private new void Save()
