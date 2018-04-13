@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Assets.Scripts.Utils
+namespace Assets.Scripts.Serializers
 {
     interface IStreamSerializable
     {

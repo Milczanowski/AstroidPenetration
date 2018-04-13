@@ -17,12 +17,6 @@ namespace Assets.Editor
             }
         }
 
-        [MenuItem("Tools/Game Settings/Create empty")]
-        private static void CreateEmptyGameSettings()
-        {
-            CreateEmptySetup<Settings>("setup");
-        }
-
         [MenuItem("Tools/Loading Setup/Create empty")]
         private static void CreateEmptyLoadingSetup()
         {

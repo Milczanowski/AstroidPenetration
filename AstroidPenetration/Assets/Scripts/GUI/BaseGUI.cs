@@ -13,8 +13,6 @@ namespace Assets.Scripts.GUI
         [SerializeField]
         private CanvasScaler CanvasScaler = null;
 
-        private float visibleVelocity = 0;
-
         public bool Interactable
         {
             get
@@ -48,13 +46,8 @@ namespace Assets.Scripts.GUI
 
         private IEnumerator SetVisible(float value, float time, Action onEnd)
         {
-            CanvasGroup.alpha = value;
+            CanvasGroup.alpha = value; // <- TODO animation? 
             yield return null;
-            //while(CanvasGroup.alpha!=value)
-            //{
-            //    CanvasGroup.alpha = Mathf.SmoothDamp(CanvasGroup.alpha, value, ref visibleVelocity, time);
-            //    yield return null;
-            //}
             if(onEnd != null)
                 onEnd.Invoke();
         }

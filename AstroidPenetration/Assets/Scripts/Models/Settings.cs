@@ -1,10 +1,9 @@
-﻿using System.IO;
-using Assets.Scripts.Utils;
-using UnityEngine;
+﻿using Assets.Scripts.Serializers;
+using System.IO;
 
 namespace Assets.Scripts.Models
 {
-    public class Settings: ScriptableObject, IStreamSerializable
+    public class Settings: IStreamSerializable
     {
         [SerializeField]
         public float GUISize = 1;
