@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Assets.Scripts.Serializers
 {
-    class FieldSerializer<T> where T : IStreamSerializable
+    class FieldsSerializer<T> where T : IStreamSerializable
     {
         public static Stream Serialize(T obj)
         {

@@ -91,6 +91,7 @@ namespace Assets.Scripts.Controllers
         {
             menu.onBackButton += BackToGame;
             menu.onExitButton += Exit;
+            menu.onExitButton += GetComponent<SaveController>().Save;
             menu.OnGUISize += GameGUI.Scale;
         }
 

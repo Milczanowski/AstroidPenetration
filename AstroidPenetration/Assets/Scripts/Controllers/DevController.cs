@@ -8,7 +8,9 @@ namespace Assets.Scripts.Controllers
     {
         protected override IEnumerator Init()
         {
-            gameObject.AddComponent<FPSCounter>();
+            GameObject dev = new GameObject("DEV");
+
+            dev.AddComponent<FPSCounter>();
             yield return null;
         }
     }

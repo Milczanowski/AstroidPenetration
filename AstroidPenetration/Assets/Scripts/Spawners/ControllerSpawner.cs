@@ -12,6 +12,7 @@ namespace Assets.Scripts.Spawners
             GameObject controllers = new GameObject("Controllers");
 
             controllers.AddComponent<SettingsController>();
+            controllers.AddComponent<SaveController>();
             controllers.AddComponent<GameplayController>();
             controllers.AddComponent<EffectsController>();
             controllers.AddComponent<InputController>();

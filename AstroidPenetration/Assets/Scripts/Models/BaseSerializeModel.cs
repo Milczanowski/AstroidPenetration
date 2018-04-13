@@ -11,12 +11,12 @@ namespace Assets.Scripts.Models
     {
         public void Deserialzie(Stream stream)
         {
-            FieldSerializer<T>.Deserialzie(this as T, stream);
+            FieldsSerializer<T>.Deserialzie(this as T, stream);
         }
 
         public Stream Serialize()
         {
-            return FieldSerializer<T>.Serialize(this as T);
+            return FieldsSerializer<T>.Serialize(this as T);
         }
     }
 }
