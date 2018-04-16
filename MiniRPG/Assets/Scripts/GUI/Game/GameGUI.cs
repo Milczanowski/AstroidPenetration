@@ -99,7 +99,7 @@ namespace Assets.Scripts.GUI.Game
 
         public void SetHealtValue(int value)
         {
-            Health.text = string.Format("Healt: {0}", value);
+            Health.text = string.Format("Health: {0}", value);
         }
 
         public void SetManaValue(int value)
