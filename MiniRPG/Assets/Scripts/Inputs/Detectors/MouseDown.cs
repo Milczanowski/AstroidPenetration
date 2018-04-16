@@ -6,7 +6,7 @@ namespace Assets.Scripts.Inputs.Detectors
     [RequireComponent(typeof(Collider))]
     public class MouseDown:MonoBehaviour
     {
-        public event Delegates.Vector3Target onMouseDown;
+        public event Delegates.Vector3Target onMouseDown = delegate{};
 
         private LayerMask LayerMask { get; set; }
 
@@ -22,10 +22,7 @@ namespace Assets.Scripts.Inputs.Detectors
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, LayerMask.value))
             {
-                if(onMouseDown != null)
-                    onMouseDown.Invoke(raycastHit.point);
-
-    
+                onMouseDown.Invoke(raycastHit.point);
             }
         }
     }

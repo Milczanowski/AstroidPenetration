@@ -16,9 +16,9 @@ namespace Assets.Scripts.GUI.Game
 
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
-        public event Delegates.Vector3Target OnWorldClick;
-        public event Delegates.Index OnInventory;
-        public event Delegates.Action OnShowMenu;
+        public event Delegates.Vector3Target OnWorldClick = delegate{};
+        public event Delegates.Index OnInventory= delegate{};
+        public event Delegates.Action OnShowMenu= delegate{};
 
         public void InitReference()
         {
@@ -40,14 +40,12 @@ namespace Assets.Scripts.GUI.Game
             {
                 case InputType.Move:
                     {
-                        if(OnWorldClick!=null)
-                            OnWorldClick(eventData.position);
+                        OnWorldClick(eventData.position);
                     }
                     break;
                 case InputType.Inventory:
                     {
-                        if(OnInventory != null)
-                            OnInventory.Invoke(index);
+                        OnInventory.Invoke(index);
                     }
                     break;
                 case InputType.Options:
@@ -64,8 +62,7 @@ namespace Assets.Scripts.GUI.Game
             {
                 case 1:
                     {
-                        if(OnShowMenu != null)
-                            OnShowMenu.Invoke();
+                        OnShowMenu.Invoke();
                     }
                     break;
                 default:

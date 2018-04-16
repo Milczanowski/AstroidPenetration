@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Models.Saves;
+using Assets.Scripts.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,10 @@ namespace Assets.Scripts.Players
 {
     public class Player
     {
+        public event Delegates.IntValue OnHealthChange = delegate{};
+        public event Delegates.IntValue OnManaChange = delegate{};
+        public event Delegates.IntValue OnExperienceChange = delegate{};
+
         private SavePlayer SavePlayer { get; set; }
 
         public PlayerInventory Inventory { get; private set; }
@@ -38,11 +43,24 @@ namespace Assets.Scripts.Players
         public void AddHealth(int value)
         {
             SavePlayer.Health += value;
+            InvokeOnHealthChange();
         }
 
         public void AddMana(int value)
         {
             SavePlayer.Mana += value;
+            InvokeOnManaChange();
+        }
+
+
+        private void InvokeOnHealthChange()
+        {
+            OnHealthChange.Invoke(SavePlayer.Health);
+        }
+
+        private void InvokeOnManaChange()
+        {
+            OnManaChange.Invoke(SavePlayer.Mana);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Effects
     {
         private static Dictionary<EffectType, Effect> Effects = new Dictionary<EffectType, Effect>();
 
-        public event Delegates.Action OnEnd;
+        public event Delegates.Action OnEnd = delegate{};
 
         [SerializeField]
         private EffectType Type = EffectType.None;
@@ -28,8 +28,7 @@ namespace Assets.Scripts.Effects
 
         protected void End()
         {
-            if(OnEnd != null)
-                OnEnd.Invoke();
+            OnEnd.Invoke();
         }
 
         protected virtual void OnDestroy()

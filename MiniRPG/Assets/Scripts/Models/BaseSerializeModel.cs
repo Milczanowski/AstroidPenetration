@@ -10,31 +10,19 @@ namespace Assets.Scripts.Models
 {
     class BaseSerializeModel<T>:IStreamSerializable, ISaveable, ILoadable where T : BaseSerializeModel<T>
     {
-        public event Delegates.Action OnSave;
-        public event Delegates.Action OnLoad;
+        public event Delegates.Action OnSave = delegate{};
+        public event Delegates.Action OnLoad = delegate{};
 
         public void Deserialzie(Stream stream)
         {
             FieldsSerializer<T>.Deserialzie(this as T, stream);
-            InvokeOnLoad();
+            OnLoad.Invoke();
         }
 
         public Stream Serialize()
         {
-            InvokeOnSave();
+            OnSave.Invoke();
             return FieldsSerializer<T>.Serialize(this as T);
-        }
-
-        private void InvokeOnSave()
-        {
-            if(OnSave != null)
-                OnSave.Invoke();
-        }
-
-        private void InvokeOnLoad()
-        {
-            if(OnLoad != null)
-                OnLoad.Invoke();
         }
     }
 }

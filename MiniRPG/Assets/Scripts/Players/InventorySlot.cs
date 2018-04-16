@@ -10,10 +10,10 @@ namespace Assets.Scripts.Players
         public int Count { get; private set; }
         public BaseItem Item { get; private set; }
 
-        public Delegates.IndexPrefabInfo OnSet;
-        public Delegates.IndexCount OnSetCount;
-        public Delegates.Index OnEmpty;
-        public Delegates.InventoryItem OnUse;
+        public Delegates.IndexPrefabInfo OnSet = delegate { };
+        public Delegates.IndexCount OnSetCount= delegate { };
+        public Delegates.Index OnEmpty= delegate { };
+        public Delegates.InventoryItem OnUse= delegate { };
 
         public bool IsEmpty
         {
@@ -66,26 +66,22 @@ namespace Assets.Scripts.Players
 
         private void OnSetInvoke()
         {
-            if(OnSet != null)
-                OnSet.Invoke(ID, Item != null ? Item.Icon : null);
+            OnSet.Invoke(ID, Item != null ? Item.Icon : null);
         }
 
         private void OnSetCountInvoke()
         {
-            if(OnSetCount != null)
-                OnSetCount.Invoke(ID, Count);
+            OnSetCount.Invoke(ID, Count);
         }
 
         private void OnEmptyInvoke()
         {
-            if(OnEmpty != null)
-                OnEmpty.Invoke(ID);
+            OnEmpty.Invoke(ID);
         }
 
         private void InvokeOnUse()
         {
-            if(OnUse != null)
-                OnUse.Invoke(Item);
+            OnUse.Invoke(Item);
         }
     }
 }

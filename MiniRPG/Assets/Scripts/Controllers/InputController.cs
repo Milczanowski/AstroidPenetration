@@ -15,9 +15,9 @@ namespace Assets.Scripts.Controllers
         private MenuGUI MenuGUI { get; set; }
 
         #region Events
-        public event Delegates.Vector3Target OnClickTarget;
-        public event Delegates.Vector3NormalTarget OnClickTargetNormal;
-        public event Delegates.Index OnInventory;
+        public event Delegates.Vector3Target OnClickTarget = delegate{};
+        public event Delegates.Vector3NormalTarget OnClickTargetNormal= delegate{};
+        public event Delegates.Index OnInventory= delegate{};
         #endregion
 
 
@@ -56,18 +56,14 @@ namespace Assets.Scripts.Controllers
             RaycastHit raycastHit;
             if(Physics.Raycast(ray, out raycastHit, float.MaxValue, MoveLayerMask.value))
             {
-                if(OnClickTarget != null)
-                    OnClickTarget.Invoke(raycastHit.point);
-
-                if(OnClickTargetNormal != null)
-                    OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
+                OnClickTarget.Invoke(raycastHit.point);
+                OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
             }
         }
 
         private void Inventory(int index)
         {
-            if(OnInventory != null)
-                OnInventory.Invoke(index);
+            OnInventory.Invoke(index);
         }
 
         private void ShowMenu()

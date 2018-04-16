@@ -6,12 +6,11 @@ namespace Assets.Scripts.Models.Saves
     [Serializable]
     public class BaseSave: ISaveable
     {
-        public event Delegates.Action OnSave;
+        public event Delegates.Action OnSave = delegate{};
 
         protected internal void InvokeOnSave()
         {
-            if(OnSave != null)
-                OnSave.Invoke();
+            OnSave.Invoke();
         }
     }
 }

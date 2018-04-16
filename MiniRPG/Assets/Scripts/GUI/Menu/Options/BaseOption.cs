@@ -13,8 +13,7 @@ namespace Assets.Scripts.GUI.Menu.Options
 
         protected void Invoke(T value)
         {
-            if(OnValueChange != null)
-                OnValueChange.Invoke(value);
+            OnValueChange.Invoke(value);
         }
 
         protected virtual void Start()
