@@ -26,6 +26,7 @@ namespace Assets.Scripts.Controllers
 
             PlayerInventory = new PlayerInventory(10, 10);// <- TODO should be set by any setup
             PlayerInventory.OnSet += GameGUI.Instance.SetIcon;
+            PlayerInventory.OnSetCount += GameGUI.Instance.SetCount;
             PlayerInventory.InitItem(GetComponent<SaveController>().Instance.Player.Inventory);
             yield return null;
         }

@@ -38,6 +38,13 @@ namespace Assets.Scripts.GUI.Game
             else
                 Icon.enabled = false;
         }
-        
+
+        public void SetCount(int count)
+        {
+            if(count <= 1)
+                Count.text = string.Empty;
+            else
+                Count.text = count.ToString();
+        }
     }
 }

@@ -82,5 +82,13 @@ namespace Assets.Scripts.GUI.Game
             else
                 throw new System.NullReferenceException("Inventory button not found: " + index);
         }
+
+        public void SetCount(int index, int count)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].SetCount(count);
+            else
+                throw new System.NullReferenceException("Inventory button not found: " + index);
+        }
     }
 }
