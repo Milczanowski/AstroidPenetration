@@ -2,15 +2,16 @@
 
 namespace Assets.Scripts.Models.Saves
 {
-    public class Item
+    [Serializable]
+    public class SaveItem
     {
         public string ID= string.Empty;
         public int Count = 0;
         public int Index = -1;
 
-        public Item(){}
+        public SaveItem(){}
 
-        public Item(string id, int count, int index)
+        public SaveItem(string id, int count, int index)
         {
             ID = id;
             Count = count;

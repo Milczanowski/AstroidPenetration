@@ -5,7 +5,7 @@ namespace Assets.Scripts.Models
 {
     class Save: BaseSerializeModel<Save>
     {
-        [SerializeField(typeof(JsonConverter<Player>))]
-        public Player Player = new Player();
+        [SerializeField(typeof(JsonConverter<SavePlayer>))]
+        public SavePlayer Player = new SavePlayer();
     }
 }

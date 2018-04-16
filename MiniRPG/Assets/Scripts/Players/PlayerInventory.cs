@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.Spawners;
+﻿using Assets.Scripts.Models.Saves;
+using Assets.Scripts.Spawners;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.Players
 {
-    class PlayerInventory
+    public class PlayerInventory
     {
         public event Delegates.InventoryInput OnEmpty;
         public event Delegates.InventoryInput OnFull;
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Players
             }
         }
 
-        public void InitItem(List<Models.Saves.Item> items)
+        public void InitItem(List<SaveItem> items)
         {
             foreach(var item in items)
             {
@@ -36,5 +37,25 @@ namespace Assets.Scripts.Players
             }
         }
 
+        public void OnInventory(int index)
+        {
+            if(Slots.ContainsKey(index))
+                Slots[index].Use();
+            else
+                UnityEngine.Debug.LogError("Inventory not contains slot: " + index);
+        }
+
+        public List<SaveItem> GetSave()
+        {
+            List<SaveItem> saveItems = new List<SaveItem>();
+            foreach(int index in Slots.Keys)
+            {
+                var slot = Slots[index];
+                if(!slot.IsEmpty)
+                    saveItems.Add(new SaveItem(slot.Item.ID, slot.Count, index));
+            }
+
+            return saveItems;
+        }
     }
 }

@@ -14,7 +14,8 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Vector3Target OnMeleAtack;
         public event Delegates.Vector3Target OnRangeAttack;
 
-        private PlayerInventory PlayerInventory { get; set; }
+
+        private Player Player { get; set; }
 
         protected override IEnumerator Init()
         {
@@ -24,10 +25,11 @@ namespace Assets.Scripts.Controllers
             inputController.OnClickTargetNormal += onShowMark;
             inputController.OnInventory += OnInventory;
 
-            PlayerInventory = new PlayerInventory(10, 10);// <- TODO should be set by any setup
-            PlayerInventory.OnSet += GameGUI.Instance.SetIcon;
-            PlayerInventory.OnSetCount += GameGUI.Instance.SetCount;
-            PlayerInventory.InitItem(GetComponent<SaveController>().Instance.Player.Inventory);
+            Player = new Player();
+
+            Player.Inventory.OnSet += GameGUI.Instance.SetIcon;
+            Player.Inventory.OnSetCount += GameGUI.Instance.SetCount;
+            Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
         }
 

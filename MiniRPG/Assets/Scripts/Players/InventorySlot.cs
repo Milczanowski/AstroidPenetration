@@ -12,6 +12,15 @@ namespace Assets.Scripts.Players
 
         public Delegates.ItemSet OnSet;
         public Delegates.ItemSetCount OnSetCount;
+        public Delegates.InventoryInput OnEmpty;
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return Count == 0 || Item == null;
+            }
+        }
 
         public InventorySlot(int id, int maxWeight)
         {
@@ -28,6 +37,16 @@ namespace Assets.Scripts.Players
             OnSetCountInvoke();
         }
 
+        public void Use()
+        {
+            if(Item == null)
+                OnEmptyInvoke();
+            else
+            {
+
+            }
+        }
+
         private void OnSetInvoke()
         {
             if(OnSet != null)
@@ -39,5 +58,13 @@ namespace Assets.Scripts.Players
             if(OnSetCount != null)
                 OnSetCount.Invoke(ID, Count);
         }
+
+        private void OnEmptyInvoke()
+        {
+            if(OnEmpty != null)
+                OnEmpty.Invoke(ID);
+        }
+
+
     }
 }
