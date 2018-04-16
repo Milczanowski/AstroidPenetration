@@ -11,6 +11,8 @@ namespace Assets.Scripts.Models.Saves
         public int Experience = 0;
         public int Health = 1;
         public int Mana = 1;
+        public int MaxHealth = 2;
+        public int MaxMana = 1;
         public List<SaveItem> Inventory = new List<SaveItem>();
     }
 }

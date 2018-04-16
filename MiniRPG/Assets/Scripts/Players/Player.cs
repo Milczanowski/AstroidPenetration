@@ -12,6 +12,8 @@ namespace Assets.Scripts.Players
         public event Delegates.IntValue OnHealthChange = delegate{};
         public event Delegates.IntValue OnManaChange = delegate{};
         public event Delegates.IntValue OnExperienceChange = delegate{};
+        public event Delegates.IntValue OnLevelChange = delegate{};
+
 
         private SavePlayer SavePlayer { get; set; }
 
@@ -33,6 +35,11 @@ namespace Assets.Scripts.Players
             SavePlayer = savePlayer;
             savePlayer.OnSave += SavePlayer_OnSave;
             Inventory.InitItem(savePlayer.Inventory);
+
+            InvokeOnHealthChange();
+            InvokeOnManaChange();
+            InvokeOnExperienceChange();
+            InvokeOnLevelChange();
         }
 
         private void SavePlayer_OnSave()
@@ -42,16 +49,21 @@ namespace Assets.Scripts.Players
 
         public void AddHealth(int value)
         {
-            SavePlayer.Health += value;
-            InvokeOnHealthChange();
+            if(SavePlayer.Health < SavePlayer.MaxHealth)
+            {
+                SavePlayer.Health = Clamp(SavePlayer.Health, 0, SavePlayer.MaxHealth);
+                InvokeOnHealthChange();
+            }
         }
 
         public void AddMana(int value)
         {
-            SavePlayer.Mana += value;
-            InvokeOnManaChange();
+            if(SavePlayer.Mana < SavePlayer.MaxMana)
+            {
+                SavePlayer.Mana = Clamp(SavePlayer.Mana, 0, SavePlayer.MaxMana);
+                InvokeOnManaChange();
+            }
         }
-
 
         private void InvokeOnHealthChange()
         {
@@ -61,6 +73,27 @@ namespace Assets.Scripts.Players
         private void InvokeOnManaChange()
         {
             OnManaChange.Invoke(SavePlayer.Mana);
+        }
+
+        private void InvokeOnExperienceChange()
+        {
+            OnExperienceChange.Invoke(SavePlayer.Experience);
+        }
+
+        private void InvokeOnLevelChange()
+        {
+            OnLevelChange.Invoke(SavePlayer.Level);
+        }
+
+
+        private int Clamp(int currnet, int min, int max)
+        {
+            if(currnet < min)
+                return min;
+            if(currnet > max)
+                return max;
+
+            return currnet;
         }
     }
 }

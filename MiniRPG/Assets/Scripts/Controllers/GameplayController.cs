@@ -27,8 +27,11 @@ namespace Assets.Scripts.Controllers
             Player = new Player();
 
             inputController.OnInventory += Player.Inventory.OnInventory;
-            Player.Inventory.OnSet += GameGUI.Instance.SetIcon;
-            Player.Inventory.OnSetCount += GameGUI.Instance.SetCount;
+            Player.Inventory.OnSet += GameGUI.Instance.SetInventoryIcon;
+            Player.Inventory.OnSetCount += GameGUI.Instance.SetInventoryCount;
+            Player.OnHealthChange += GameGUI.Instance.SetHealtValue;
+            Player.OnManaChange += GameGUI.Instance.SetManaValue;
+            Player.OnExperienceChange += GameGUI.Instance.SetExperienceValue;
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
         }

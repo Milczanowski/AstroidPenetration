@@ -13,6 +13,15 @@ namespace Assets.Scripts.GUI.Game
     {
         [SerializeField]
         private List <InventoryButton> InventoryButtons = new List<InventoryButton>();
+        [SerializeField]
+        private Text Health = null;
+        [SerializeField]
+        private Text Mana = null;
+        [SerializeField]
+        private Text Experience = null;
+        [SerializeField]
+        private Text Level = null;
+
 
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
@@ -72,7 +81,7 @@ namespace Assets.Scripts.GUI.Game
             }
         }
 
-        public void SetIcon(int index, PrefabInfo info)
+        public void SetInventoryIcon(int index, PrefabInfo info)
         {
             if(InventoryButtonsDict.ContainsKey(index))
                 InventoryButtonsDict[index].SetIcon(info != null ? ObjectManager.Load<Image>(info.Name, info.BundleID) : null);
@@ -80,12 +89,32 @@ namespace Assets.Scripts.GUI.Game
                 throw new System.NullReferenceException("Inventory button not found: " + index);
         }
 
-        public void SetCount(int index, int count)
+        public void SetInventoryCount(int index, int count)
         {
             if(InventoryButtonsDict.ContainsKey(index))
                 InventoryButtonsDict[index].SetCount(count);
             else
                 throw new System.NullReferenceException("Inventory button not found: " + index);
+        }
+
+        public void SetHealtValue(int value)
+        {
+            Health.text = string.Format("Healt: {0}", value);
+        }
+
+        public void SetManaValue(int value)
+        {
+            Mana.text = string.Format("Mana: {0}", value);
+        }
+
+        public void SetExperienceValue(int value)
+        {
+            Experience.text = string.Format("Exp: {0}", value);
+        }
+
+        public void SetLevelValue(int value)
+        {
+            Level.text = string.Format("Level: {0}", value);
         }
     }
 }
