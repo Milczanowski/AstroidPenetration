@@ -24,7 +24,7 @@ namespace Assets.Scripts.Controllers
             inputController.OnClickTargetNormal += onShowMark;
             inputController.OnInventory += OnInventory;
 
-            PlayerInventory = new PlayerInventory();
+            PlayerInventory = new PlayerInventory(10, 10);// <- TODO should be set by any setup
             PlayerInventory.OnSet += GameGUI.Instance.SetIcon;
             PlayerInventory.InitItem(GetComponent<SaveController>().Instance.Player.Inventory);
             yield return null;

@@ -9,7 +9,7 @@
 /MiniRPG/UnityPackageManager/
 /MiniRPG/.vs/
 /MiniRPG/.vs/*
-
+/MiniRPG/Library/*
 # Visual Studio 2015 cache directory
 /.vs/
 

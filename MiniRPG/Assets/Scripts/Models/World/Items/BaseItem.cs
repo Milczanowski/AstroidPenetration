@@ -11,5 +11,7 @@ namespace Assets.Scripts.Models.World.Items
         public PrefabInfo Model = null;
         [SerializeField]
         public PrefabInfo Icon = null;
+        [SerializeField]
+        public int MaxInStack = 1;
     }
 }

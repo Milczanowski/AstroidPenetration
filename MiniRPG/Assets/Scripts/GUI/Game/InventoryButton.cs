@@ -9,6 +9,8 @@ namespace Assets.Scripts.GUI.Game
     public class InventoryButton:MonoBehaviour, IEditorSerializable
     {
         [SerializeField]
+        private Text Count = null;
+        [SerializeField]
         private Image Icon = null;
         [SerializeField]
         private GUIInput GUIInput = null;
@@ -23,6 +25,7 @@ namespace Assets.Scripts.GUI.Game
         public void InitReference()
         {
             Icon = transform.Find("Icon").GetComponent<Image>();
+            Count = transform.Find("Count").GetComponent<Text>();
             GUIInput = GetComponent<GUIInput>();
         }
         public void SetIcon(Image icon)
