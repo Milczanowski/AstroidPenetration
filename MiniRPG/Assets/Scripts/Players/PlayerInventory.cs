@@ -11,6 +11,7 @@ namespace Assets.Scripts.Players
         public event Delegates.Index OnFull;
         public event Delegates.IndexPrefabInfo OnSet;
         public event Delegates.IndexCount OnSetCount;
+        public event Delegates.InventoryItem OnItemUse; 
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Players
                 InventorySlot inventorySlot = new InventorySlot(i, maxWeight);
                 inventorySlot.OnSet = (id, item) => { if(OnSet != null) OnSet.Invoke(id, item); };
                 inventorySlot.OnSetCount = (id, count) => { if(OnSetCount != null) OnSetCount.Invoke(id, count); };
+                inventorySlot.OnUse = (item) => { if(OnItemUse != null) OnItemUse.Invoke(item); };
                 Slots.Add(i, inventorySlot);
             }
         }

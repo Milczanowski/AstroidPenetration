@@ -9,11 +9,18 @@ namespace Assets.Scripts.Players
     public class Player
     {
         private SavePlayer SavePlayer { get; set; }
+
         public PlayerInventory Inventory { get; private set; }
 
         public Player()
         {
             Inventory = new PlayerInventory(10, 10);
+            Inventory.OnItemUse += OnItemUse;
+        }
+
+        private void OnItemUse(Models.World.Items.BaseItem baseItem)
+        {
+            baseItem.Use(this);
         }
 
         public void Load(SavePlayer savePlayer)
@@ -26,6 +33,16 @@ namespace Assets.Scripts.Players
         private void SavePlayer_OnSave()
         {
             SavePlayer.Inventory = Inventory.GetSave();
+        }
+
+        public void AddHealth(int value)
+        {
+            SavePlayer.Health += value;
+        }
+
+        public void AddMana(int value)
+        {
+            SavePlayer.Mana += value;
         }
     }
 }

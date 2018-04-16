@@ -12,7 +12,8 @@ namespace Assets.Scripts.Models.World.Items
 
         public override void Use(Player player)
         {
-            throw new System.NotImplementedException();
+            player.AddHealth(Health);
+            player.AddMana(Mana);
         }
     }
 }

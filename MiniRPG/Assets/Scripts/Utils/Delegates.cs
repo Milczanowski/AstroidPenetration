@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Inputs;
 using Assets.Scripts.Models.Basics;
+using Assets.Scripts.Models.World.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,5 +19,6 @@ namespace Assets.Scripts.Utils
         public delegate void IndexPrefabInfo(int index, PrefabInfo info);
         public delegate void IndexCount(int index, int Count);
         public delegate void IntValue(int value);
+        public delegate void InventoryItem(BaseItem baseItem);
     }
 }

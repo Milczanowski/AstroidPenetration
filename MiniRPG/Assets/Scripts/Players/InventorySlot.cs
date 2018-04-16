@@ -13,6 +13,7 @@ namespace Assets.Scripts.Players
         public Delegates.IndexPrefabInfo OnSet;
         public Delegates.IndexCount OnSetCount;
         public Delegates.Index OnEmpty;
+        public Delegates.InventoryItem OnUse;
 
         public bool IsEmpty
         {
@@ -46,6 +47,8 @@ namespace Assets.Scripts.Players
                 OnEmptyInvoke();
             else
             {
+                InvokeOnUse();
+
                 if(Item.RunsOut)
                 {
                     --Count;
@@ -79,6 +82,10 @@ namespace Assets.Scripts.Players
                 OnEmpty.Invoke(ID);
         }
 
-
+        private void InvokeOnUse()
+        {
+            if(OnUse != null)
+                OnUse.Invoke(Item);
+        }
     }
 }
