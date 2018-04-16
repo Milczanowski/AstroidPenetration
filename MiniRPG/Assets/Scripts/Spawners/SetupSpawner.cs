@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
+using System;
 
 namespace Assets.Scripts.Spawners
 {
@@ -10,6 +11,8 @@ namespace Assets.Scripts.Spawners
 
         public SetupSpawner(T setup)
         {
+            if(setup == null)
+                throw new NullReferenceException(string.Format("Null setup: {0} - {1}", typeof(T), GetType()));
             Setup = setup;
         }
 

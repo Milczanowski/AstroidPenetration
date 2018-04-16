@@ -21,9 +21,11 @@ namespace Assets.Scripts.Spawners
         {
             foreach(var item in Setup.Items)
             {
-                BaseItem baseItem = ObjectManager.Load<BaseItem>(item.Prefab.Name, item.Prefab.BundleID);
+                BaseItem baseItem = ObjectManager.Load<BaseItem>(item.Name, item.BundleID);
                 if(baseItem != null)
-                    Items.Add(item.ID, baseItem);
+                    Items.Add(baseItem.ID, baseItem);
+                else
+                    UnityEngine.Debug.LogError(string.Format("Item setup not found: {0}.{1}", item.BundleID, item.Name));
             }
 
             yield return null;

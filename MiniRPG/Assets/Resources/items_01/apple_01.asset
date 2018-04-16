@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb46c77b5819a44f97e30a83d17d6a5, type: 3}
   m_Name: apple_01
   m_EditorClassIdentifier: 
+  ID: apple_01
   Model:
     BundleID: item_model_01
     Name: apple_01

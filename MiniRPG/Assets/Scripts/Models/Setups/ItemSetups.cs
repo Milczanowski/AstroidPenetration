@@ -7,6 +7,6 @@ namespace Assets.Scripts.Models.Setups
     public class ItemSetups:ScriptableObject
     {
         [SerializeField]
-        public List<IdObjectInfo> Items;
+        public List<PrefabInfo> Items = new List<PrefabInfo>();
     }
 }

@@ -8,11 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 26b9397c02adcb142a1078e9d2fe64c4, type: 3}
   m_Name: items
-  m_EditorClassIdentifier: Assembly-CSharp:Assets.Scripts.Models.Setups:ItemSetups
-  Items:
-  - ID: apple_01
-    Prefab:
-      BundleID: items_01
-      Name: apple_01
+  m_EditorClassIdentifier: 
+  Items: []
