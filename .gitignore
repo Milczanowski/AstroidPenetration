@@ -4,11 +4,11 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
-/AstroidPenetration/Library/
-/AstroidPenetration/Temp/
-/AstroidPenetration/UnityPackageManager/
-/AstroidPenetration/.vs/
-/AstroidPenetration/.vs/*
+/MiniRPG/Library/
+/MiniRPG/Temp/
+/MiniRPG/UnityPackageManager/
+/MiniRPG/.vs/
+/MiniRPG/.vs/*
 
 # Visual Studio 2015 cache directory
 /.vs/
