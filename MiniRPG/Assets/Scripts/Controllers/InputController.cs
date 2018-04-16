@@ -47,8 +47,26 @@ namespace Assets.Scripts.Controllers
         private void InitGame(GameGUI game)
         {
             game.OnWorldClick += OnWorldClick;
+            game.OnBeginWorldDrag += OnBeginWorldDrag;
+            game.OnEndWorldDrag += OnEndWorldDrag;
+            game.OnWorldDrag += OnWorldDrag;
             game.OnShowMenu += ShowMenu;
             game.OnInventory += Inventory;
+        }
+
+        private void OnWorldDrag(Vector2 target)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void OnEndWorldDrag(Vector3 target)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void OnBeginWorldDrag(Vector3 target)
+        {
+            throw new System.NotImplementedException();
         }
 
         private void OnWorldClick(Vector3 position)

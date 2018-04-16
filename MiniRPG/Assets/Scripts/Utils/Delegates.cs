@@ -9,6 +9,7 @@ namespace Assets.Scripts.Utils
     public class Delegates
     {
         public delegate void Vector3Target(Vector3 target);
+        public delegate void Vector2Target(Vector2 target);
         public delegate void Vector3NormalTarget(Vector3 target, Vector3 normal);
 
         public delegate void FloatValue(float value);

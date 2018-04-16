@@ -2,6 +2,7 @@
 using Assets.Scripts.Models.Basics;
 using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,6 +27,11 @@ namespace Assets.Scripts.GUI.Game
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
         public event Delegates.Vector3Target OnWorldClick = delegate{};
+
+        public event Delegates.Vector3Target OnBeginWorldDrag = delegate{};
+        public event Delegates.Vector3Target OnEndWorldDrag = delegate{};
+        public event Delegates.Vector2Target OnWorldDrag = delegate{};
+
         public event Delegates.Index OnInventory= delegate{};
         public event Delegates.Action OnShowMenu= delegate{};
 
@@ -37,13 +43,52 @@ namespace Assets.Scripts.GUI.Game
         protected override void Awake()
         {
             base.Awake();
-            ClickInput.onClick += OnInput;
+            ClickInput.onClick += OnClick;
+            DragInput.onBeginDrag += OnBeginDrag;
+            DragInput.onEndDrag += OnEndDrag;
+            DragInput.onDrag += OnDrag;
 
             foreach(InventoryButton inventoryButton in InventoryButtons)
                 InventoryButtonsDict.Add(inventoryButton.Index, inventoryButton);
         }
 
-        private void OnInput(InputType type, int index, PointerEventData eventData)
+        private void OnDrag(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Target:
+                    {
+                        OnWorldDrag.Invoke(eventData.delta);
+                    }
+                    break;
+            }
+        }
+
+        private void OnEndDrag(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Target:
+                    {
+                        OnEndWorldDrag.Invoke(eventData.position);
+                    }
+                    break;
+            }
+        }
+
+        private void OnBeginDrag(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Target:
+                    {
+                        OnBeginWorldDrag.Invoke(eventData.position);
+                    }
+                    break;
+            }
+        }
+
+        private void OnClick(InputType type, int index, PointerEventData eventData)
         {
             switch(type)
             {
