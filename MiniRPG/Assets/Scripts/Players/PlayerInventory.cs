@@ -7,10 +7,10 @@ namespace Assets.Scripts.Players
 {
     public class PlayerInventory
     {
-        public event Delegates.InventoryInput OnEmpty;
-        public event Delegates.InventoryInput OnFull;
-        public event Delegates.ItemSet OnSet;
-        public event Delegates.ItemSetCount OnSetCount;
+        public event Delegates.Index OnEmpty;
+        public event Delegates.Index OnFull;
+        public event Delegates.IndexPrefabInfo OnSet;
+        public event Delegates.IndexCount OnSetCount;
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 

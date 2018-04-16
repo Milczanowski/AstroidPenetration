@@ -16,7 +16,7 @@ namespace Assets.Scripts.Spawners
             Setup = setup;
         }
 
-        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        public override IEnumerator Load(Delegates.FloatValue onProgress, Delegates.Action onLoaded)
         {
             if(onProgress != null)
                 onProgress.Invoke(0);
@@ -31,6 +31,6 @@ namespace Assets.Scripts.Spawners
 
             Setup = null;
         }
-        protected abstract IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded);
+        protected abstract IEnumerator LoadSetup(Delegates.FloatValue onProgress, Delegates.Action onLoaded);
     }
 }

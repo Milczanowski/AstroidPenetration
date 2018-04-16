@@ -17,8 +17,8 @@ namespace Assets.Scripts.GUI.Game
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
         public event Delegates.Vector3Target OnWorldClick;
-        public event Delegates.InventoryInput OnInventory;
-        public event Delegates.MenuInput OnShowMenu;
+        public event Delegates.Index OnInventory;
+        public event Delegates.Action OnShowMenu;
 
         public void InitReference()
         {

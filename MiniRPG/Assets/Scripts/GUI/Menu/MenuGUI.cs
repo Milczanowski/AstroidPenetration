@@ -18,11 +18,11 @@ namespace Assets.Scripts.GUI.Menu
         [SerializeField]
         private BoolOption Sound = null;
 
-        public event Delegates.MenuInput onBackButton = ()=>{ };
-        public event Delegates.MenuInput onExitButton = ()=>{ };
-        public event Delegates.MenuOptionInput<float> OnGUISize = (value)=>{ };
-        public event Delegates.MenuOptionInput<bool> OnMusic = (value)=>{ };
-        public event Delegates.MenuOptionInput<bool> OnSound = (value)=>{ };
+        public event Delegates.Action onBackButton = ()=>{ };
+        public event Delegates.Action onExitButton = ()=>{ };
+        public event Delegates.GenericValue<float> OnGUISize = (value)=>{ };
+        public event Delegates.GenericValue<bool> OnMusic = (value)=>{ };
+        public event Delegates.GenericValue<bool> OnSound = (value)=>{ };
 
         protected override void Awake()
         {

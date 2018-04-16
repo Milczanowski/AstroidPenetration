@@ -17,7 +17,7 @@ namespace Assets.Scripts.Controllers
         #region Events
         public event Delegates.Vector3Target OnClickTarget;
         public event Delegates.Vector3NormalTarget OnClickTargetNormal;
-        public event Delegates.InventoryInput OnInventory;
+        public event Delegates.Index OnInventory;
         #endregion
 
 

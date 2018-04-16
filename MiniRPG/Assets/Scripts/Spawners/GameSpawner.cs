@@ -13,7 +13,7 @@ namespace Assets.Scripts.Spawners
         {
         }
 
-        protected override IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        protected override IEnumerator LoadSetup(Delegates.FloatValue onProgress, Delegates.Action onLoaded)
         {
             Transform World = new GameObject("World").transform;
             onProgress(.01f);

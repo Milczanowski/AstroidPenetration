@@ -20,7 +20,7 @@ namespace Assets.Scripts.Spawners
         }
 
 
-        public abstract IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded);
+        public abstract IEnumerator Load(Delegates.FloatValue onProgress, Delegates.Action onLoaded);
 
         public void AddToQueue()
         {
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Spawners
         }
 
 
-        public static IEnumerator RunQueue(Delegates.OnEnd onLoaded)
+        public static IEnumerator RunQueue(Delegates.Action onLoaded)
         {
             queueCount = Queue.Count;
             while(Queue.Count >0)

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
-        public event Delegates.OnEnd OnStop;
+        public event Delegates.Action OnStop;
         public event Delegates.Vector3Target OnMove;
         public event Delegates.Vector3NormalTarget OnShowMark;
         public event Delegates.Vector3Target OnMeleAtack;

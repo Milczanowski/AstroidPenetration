@@ -17,7 +17,7 @@ namespace Assets.Scripts.Spawners
             Items = new Dictionary<string, BaseItem>();
         }
 
-        protected override IEnumerator LoadSetup(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        protected override IEnumerator LoadSetup(Delegates.FloatValue onProgress, Delegates.Action onLoaded)
         {
             foreach(var item in Setup.Items)
             {

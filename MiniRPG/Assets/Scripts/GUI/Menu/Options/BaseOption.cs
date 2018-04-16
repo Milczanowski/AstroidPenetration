@@ -9,7 +9,7 @@ namespace Assets.Scripts.GUI.Menu.Options
 {
     public abstract class BaseOption<T>: MonoBehaviour where T: struct
     {
-        public Delegates.MenuOptionInput<T> OnValueChange = (value)=>{ };
+        public Delegates.GenericValue<T> OnValueChange = (value)=>{ };
 
         protected void Invoke(T value)
         {

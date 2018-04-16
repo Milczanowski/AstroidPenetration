@@ -10,9 +10,9 @@ namespace Assets.Scripts.Players
         public int Count { get; private set; }
         public BaseItem Item { get; private set; }
 
-        public Delegates.ItemSet OnSet;
-        public Delegates.ItemSetCount OnSetCount;
-        public Delegates.InventoryInput OnEmpty;
+        public Delegates.IndexPrefabInfo OnSet;
+        public Delegates.IndexCount OnSetCount;
+        public Delegates.Index OnEmpty;
 
         public bool IsEmpty
         {

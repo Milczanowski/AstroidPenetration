@@ -7,7 +7,7 @@ namespace Assets.Scripts.Spawners
 {
     public class ControllerSpawner:BaseSpawner
     {
-        public override IEnumerator Load(Delegates.OnProgress onProgress, Delegates.OnEnd onLoaded)
+        public override IEnumerator Load(Delegates.FloatValue onProgress, Delegates.Action onLoaded)
         {
             GameObject controllers = new GameObject("Controllers");
 

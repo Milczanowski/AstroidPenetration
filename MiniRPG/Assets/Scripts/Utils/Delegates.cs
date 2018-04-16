@@ -10,13 +10,13 @@ namespace Assets.Scripts.Utils
         public delegate void Vector3Target(Vector3 target);
         public delegate void Vector3NormalTarget(Vector3 target, Vector3 normal);
 
-        public delegate void OnProgress(float progress);
-        public delegate void OnEnd();
+        public delegate void FloatValue(float value);
+        public delegate void Action();
         public delegate void GUIInput(InputType type, int index, PointerEventData eventData);
-        public delegate void MenuInput();
-        public delegate void MenuOptionInput<T>(T value) where T : struct;
-        public delegate void InventoryInput(int index);
-        public delegate void ItemSet(int index, PrefabInfo info);
-        public delegate void ItemSetCount(int index, int Count);
+        public delegate void GenericValue<T>(T value) where T : struct;
+        public delegate void Index(int index);
+        public delegate void IndexPrefabInfo(int index, PrefabInfo info);
+        public delegate void IndexCount(int index, int Count);
+        public delegate void IntValue(int value);
     }
 }

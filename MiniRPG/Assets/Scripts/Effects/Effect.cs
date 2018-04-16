@@ -8,7 +8,7 @@ namespace Assets.Scripts.Effects
     {
         private static Dictionary<EffectType, Effect> Effects = new Dictionary<EffectType, Effect>();
 
-        public event Delegates.OnEnd OnEnd;
+        public event Delegates.Action OnEnd;
 
         [SerializeField]
         private EffectType Type = EffectType.None;
