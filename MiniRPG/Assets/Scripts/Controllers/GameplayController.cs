@@ -10,6 +10,7 @@ namespace Assets.Scripts.Controllers
     {
         public event Delegates.Action OnStop = delegate{};
         public event Delegates.Vector3Target OnMove= delegate{};
+        public event Delegates.Action OnCameraRotate = delegate{};
         public event Delegates.Vector3NormalTarget OnShowMark= delegate{};
         public event Delegates.Vector3Target OnMeleAtack= delegate{};
         public event Delegates.Vector3Target OnRangeAttack= delegate{};
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Controllers
 
             inputController.OnClickTarget += onMove;
             inputController.OnClickTargetNormal += onShowMark;
+            inputController.OnPlayerClick += OnCameraRotate;
 
             Player = new Player();
 
@@ -44,6 +46,11 @@ namespace Assets.Scripts.Controllers
         private void onShowMark(Vector3 target, Vector3 normal)
         {
             OnShowMark.Invoke(target, normal);
+        }
+
+        private void OnPlayerClick()
+        {
+            OnCameraRotate.Invoke();
         }
     }
 }

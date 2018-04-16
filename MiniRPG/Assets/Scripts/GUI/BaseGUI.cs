@@ -31,7 +31,7 @@ namespace Assets.Scripts.GUI
             }
             set
             {
-                CanvasGroup.interactable = value;
+                CanvasGroup.blocksRaycasts = CanvasGroup.interactable = value;
             }
         }
 

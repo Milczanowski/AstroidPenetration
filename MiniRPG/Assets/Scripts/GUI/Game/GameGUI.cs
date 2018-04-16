@@ -37,7 +37,7 @@ namespace Assets.Scripts.GUI.Game
         protected override void Awake()
         {
             base.Awake();
-            GUIInput.onClick += OnInput;
+            ClickInput.onClick += OnInput;
 
             foreach(InventoryButton inventoryButton in InventoryButtons)
                 InventoryButtonsDict.Add(inventoryButton.Index, inventoryButton);
@@ -47,7 +47,7 @@ namespace Assets.Scripts.GUI.Game
         {
             switch(type)
             {
-                case InputType.Move:
+                case InputType.Target:
                     {
                         OnWorldClick(eventData.position);
                     }

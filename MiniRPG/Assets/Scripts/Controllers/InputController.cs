@@ -9,7 +9,7 @@ namespace Assets.Scripts.Controllers
 {
     public class InputController:BaseController
     {
-        private LayerMask MoveLayerMask { get; set; }
+        private LayerMask TargetLayerMask { get; set; }
 
         private GameGUI GameGUI { get; set; }
         private MenuGUI MenuGUI { get; set; }
@@ -17,6 +17,7 @@ namespace Assets.Scripts.Controllers
         #region Events
         public event Delegates.Vector3Target OnClickTarget = delegate{};
         public event Delegates.Vector3NormalTarget OnClickTargetNormal= delegate{};
+        public event Delegates.Action OnPlayerClick = delegate{};
         public event Delegates.Index OnInventory= delegate{};
         #endregion
 
@@ -30,7 +31,7 @@ namespace Assets.Scripts.Controllers
             InitMenu(MenuGUI);
             MenuGUI.Instance.Hide(); // <-- TODO
 
-            MoveLayerMask = LayerMask.GetMask("World");
+            TargetLayerMask = LayerMask.GetMask("World", "Items", "Player");
             yield return null;
         }
 
@@ -54,10 +55,26 @@ namespace Assets.Scripts.Controllers
         {
             Ray ray = Camera.main.ScreenPointToRay(position);
             RaycastHit raycastHit;
-            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, MoveLayerMask.value))
+            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, TargetLayerMask.value))
             {
-                OnClickTarget.Invoke(raycastHit.point);
-                OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
+                switch(raycastHit.collider.gameObject.layer)
+                {
+                    case 11:
+                        {
+                            OnClickTarget.Invoke(raycastHit.point);
+                        }
+                        break;
+                    case 12:
+                        {
+                            OnPlayerClick.Invoke();
+                        }break;
+                    default:
+                        {
+                            OnClickTarget.Invoke(raycastHit.point);
+                            OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);
+                        }
+                        break;
+                }
             }
         }
 
@@ -68,7 +85,6 @@ namespace Assets.Scripts.Controllers
 
         private void ShowMenu()
         {
-            Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return false; });
             GameGUI.Interactable = false;
             MenuGUI.Interactable = true;
             GameGUI.Hide(alpha: .3f, enable: true);
@@ -81,7 +97,6 @@ namespace Assets.Scripts.Controllers
             GameGUI.Interactable = true;
             MenuGUI.Hide();
             GameGUI.Show();
-            Inputs.BaseInput.SetEnabledCondition<GUIInput>(() => { return true; });
         }
 
         private void Exit()

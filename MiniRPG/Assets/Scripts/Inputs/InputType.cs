@@ -7,8 +7,8 @@ namespace Assets.Scripts.Inputs
 {
     public enum InputType
     {
-        Move,
-        Inventory,
-        Options,
+        Target =0,
+        Inventory =1,
+        Options = 2,
     }
 }

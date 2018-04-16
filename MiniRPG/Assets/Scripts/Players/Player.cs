@@ -85,7 +85,6 @@ namespace Assets.Scripts.Players
             OnLevelChange.Invoke(SavePlayer.Level);
         }
 
-
         private int Clamp(int currnet, int min, int max)
         {
             if(currnet < min)

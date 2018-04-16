@@ -5,36 +5,20 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Inputs
 {
-    public abstract class BaseInput:MonoBehaviour, IPointerDownHandler
+    public abstract class BaseInput:MonoBehaviour
     {
-        private static Dictionary<Type, Func<bool>> isEnabled = new Dictionary<Type, Func<bool>>();
+        [SerializeField]
+        protected InputType type = InputType.Inventory;
 
-        private Type Type { get; set; }
+        [SerializeField]
+        protected int index = 0;
 
-        protected bool IsInputEnabled
+        public int Index
         {
             get
             {
-                return isEnabled[Type]();
+                return index;
             }
         }
-
-        protected virtual void Awake()
-        {
-            Type = GetType();
-
-            if(!isEnabled.ContainsKey(Type))
-                isEnabled.Add(Type, () => { return true; });
-        }
-
-        public static void SetEnabledCondition<T>(Func<bool> condition) where T : BaseInput
-        {
-            if(isEnabled.ContainsKey(typeof(T)))
-                isEnabled.Remove(typeof(T));
-
-            isEnabled.Add(typeof(T), condition);
-        }
-
-        public abstract void OnPointerDown(PointerEventData eventData);
     }
 }

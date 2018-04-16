@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
-    [RequireComponent(typeof(GUIInput))]
+    [RequireComponent(typeof(ClickInput))]
     public class InventoryButton:MonoBehaviour, IEditorSerializable
     {
         [SerializeField]
@@ -13,20 +13,20 @@ namespace Assets.Scripts.GUI.Game
         [SerializeField]
         private Image Icon = null;
         [SerializeField]
-        private GUIInput GUIInput = null;
+        private ClickInput GUIInput = null;
 
         public int Index
         {
             get
             {
-                return GUIInput.index;
+                return GUIInput.Index;
             }
         }
         public void InitReference()
         {
             Icon = transform.Find("Icon").GetComponent<Image>();
             Count = transform.Find("Count").GetComponent<Text>();
-            GUIInput = GetComponent<GUIInput>();
+            GUIInput = GetComponent<ClickInput>();
         }
         public void SetIcon(Image icon)
         {

@@ -37,6 +37,8 @@ namespace Assets.Scripts.Controllers
         private Vector3 CurrentPosition { get; set; }
         private Vector3 CurrentOffset { get; set; }
         private Vector3 TargetOffset;
+        private bool CameraRotation { get; set; }
+
 
         protected override IEnumerator Init()
         {
@@ -51,9 +53,17 @@ namespace Assets.Scripts.Controllers
                 return playerController.transform.forward;
             };
 
+            GetController<GameplayController>().OnCameraRotate += OnCameraRotate;
+
             CurrentLookAt = PlayerPosition();
             CurrentPosition = transform.position;
+            CameraRotation = false;
             yield return null;
+        }
+
+        private void OnCameraRotate()
+        {
+            CameraRotation = true;
         }
 
         private void LateUpdate()
