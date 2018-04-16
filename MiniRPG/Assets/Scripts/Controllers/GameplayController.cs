@@ -27,6 +27,9 @@ namespace Assets.Scripts.Controllers
 
             Player = new Player();
 
+            GameGUI.Instance.OnInventory += Player.Inventory.OnInventory;
+
+
             Player.Inventory.OnSet += GameGUI.Instance.SetIcon;
             Player.Inventory.OnSetCount += GameGUI.Instance.SetCount;
             Player.Load(GetComponent<SaveController>().Instance.Player);

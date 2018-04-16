@@ -46,14 +46,25 @@ namespace Assets.Scripts.Players
                 OnEmptyInvoke();
             else
             {
+                if(Item.RunsOut)
+                {
+                    --Count;
+                    OnSetCountInvoke();
 
+                    if(Count == 0)
+                    {
+                        Item = null;
+                        OnSetInvoke();
+                    }
+                }
+                     
             }
         }
 
         private void OnSetInvoke()
         {
             if(OnSet != null)
-                OnSet.Invoke(ID, Item.Icon);
+                OnSet.Invoke(ID, Item != null ? Item.Icon : null);
         }
 
         private void OnSetCountInvoke()

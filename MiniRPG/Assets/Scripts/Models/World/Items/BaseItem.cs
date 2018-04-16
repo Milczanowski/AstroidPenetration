@@ -16,6 +16,8 @@ namespace Assets.Scripts.Models.World.Items
         public int MaxInStack = 1;
         [SerializeField]
         public float Cooldown = 0.25f;
+        [SerializeField]
+        public bool RunsOut = true;
 
         public abstract void Use(Player player);
     }

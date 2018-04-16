@@ -78,7 +78,12 @@ namespace Assets.Scripts.GUI.Game
         public void SetIcon(int index, PrefabInfo info)
         {
             if(InventoryButtonsDict.ContainsKey(index))
-                InventoryButtonsDict[index].SetIcon(ObjectManager.Load<Image>(info.Name, info.BundleID));
+            {
+                if(info != null)
+                    InventoryButtonsDict[index].SetIcon(ObjectManager.Load<Image>(info.Name, info.BundleID));
+                else
+                    InventoryButtonsDict[index].SetIcon(null);
+            }
             else
                 throw new System.NullReferenceException("Inventory button not found: " + index);
         }
