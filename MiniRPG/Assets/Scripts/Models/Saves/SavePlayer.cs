@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.Models.Saves
 {
     [Serializable]
-    public class SavePlayer
+    public class SavePlayer:BaseSave
     {
         public int Level = 1;
         public int Experience = 0;

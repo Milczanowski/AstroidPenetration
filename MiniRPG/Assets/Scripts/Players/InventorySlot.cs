@@ -30,11 +30,14 @@ namespace Assets.Scripts.Players
 
         public void SetItem(BaseItem item, int count = 1)
         {
-            Item = item;
-            Count = count;
+            if(count > 0)
+            {
+                Item = item;
+                Count = count;
 
-            OnSetInvoke();
-            OnSetCountInvoke();
+                OnSetInvoke();
+                OnSetCountInvoke();
+            }
         }
 
         public void Use()

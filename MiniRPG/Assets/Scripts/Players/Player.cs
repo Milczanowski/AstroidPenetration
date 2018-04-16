@@ -8,7 +8,7 @@ namespace Assets.Scripts.Players
 {
     public class Player
     {
-
+        private SavePlayer SavePlayer { get; set; }
         public PlayerInventory Inventory { get; private set; }
 
         public Player()
@@ -18,8 +18,14 @@ namespace Assets.Scripts.Players
 
         public void Load(SavePlayer savePlayer)
         {
+            SavePlayer = savePlayer;
+            savePlayer.OnSave += SavePlayer_OnSave;
             Inventory.InitItem(savePlayer.Inventory);
         }
 
+        private void SavePlayer_OnSave()
+        {
+            SavePlayer.Inventory = Inventory.GetSave();
+        }
     }
 }
