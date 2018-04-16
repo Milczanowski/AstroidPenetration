@@ -51,7 +51,7 @@ namespace Assets.Scripts.Players
         {
             if(SavePlayer.Health < SavePlayer.MaxHealth)
             {
-                SavePlayer.Health = Clamp(SavePlayer.Health, 0, SavePlayer.MaxHealth);
+                SavePlayer.Health = Clamp(SavePlayer.Health+value, 0, SavePlayer.MaxHealth);
                 InvokeOnHealthChange();
             }
         }
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Players
         {
             if(SavePlayer.Mana < SavePlayer.MaxMana)
             {
-                SavePlayer.Mana = Clamp(SavePlayer.Mana, 0, SavePlayer.MaxMana);
+                SavePlayer.Mana = Clamp(SavePlayer.Mana+value, 0, SavePlayer.MaxMana);
                 InvokeOnManaChange();
             }
         }
