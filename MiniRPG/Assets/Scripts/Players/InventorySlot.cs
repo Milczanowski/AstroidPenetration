@@ -47,19 +47,16 @@ namespace Assets.Scripts.Players
 
         public void SetItem(BaseItem item, int count = 1)
         {
-            if(count > 0)
-            {
-                Item = item;
-                Count = count;
+            Item = item;
+            Count = count;
 
-                OnSetInvoke();
-                OnSetCountInvoke();
-            }
+            OnSetInvoke();
+            OnSetCountInvoke();
         }
 
         public bool AddItem(int count =1)
         {
-            if(Count < MaxWeight)
+            if((Count+count) <= MaxWeight)
             {
                 Count += count;
                 OnSetCount.Invoke(ID, Count);
@@ -102,6 +99,11 @@ namespace Assets.Scripts.Players
                 OnAvailableHighlight.Invoke(ID);
             else
                 OnInaccessibleHighlight.Invoke(ID);
+        }
+
+        public void Highlight()
+        {
+            OnEmptyHighlight.Invoke(ID);
         }
 
         public void OffHighlight(string id)

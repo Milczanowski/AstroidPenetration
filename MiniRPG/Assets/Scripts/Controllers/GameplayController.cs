@@ -13,7 +13,8 @@ namespace Assets.Scripts.Controllers
         {
             None,
             Player,
-            Item
+            Item, 
+            Inventory
         }
 
         public event Delegates.Action OnStop = delegate{};
@@ -62,6 +63,7 @@ namespace Assets.Scripts.Controllers
 
         private void OnInventoryEndDrag(int index)
         {
+            CurrentDrag = Drag.None;
             Player.Inventory.EndDrag(index);
         }
 
@@ -71,6 +73,7 @@ namespace Assets.Scripts.Controllers
 
         private void OnInventoryStartDrag(int index)
         {
+            CurrentDrag = Drag.Inventory;
             Player.Inventory.StartDrag(index);
         }
 
@@ -93,8 +96,12 @@ namespace Assets.Scripts.Controllers
                 case Drag.Item:
                     {
                         CurrentInventoryIndex = index;
-                    }
+                    }                
                     break;
+                case Drag.Inventory:
+                    {
+                        Player.Inventory.SetSelected(index);
+                    }break;
             }
         }
 

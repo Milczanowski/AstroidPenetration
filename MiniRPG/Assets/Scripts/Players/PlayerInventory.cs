@@ -25,8 +25,11 @@ namespace Assets.Scripts.Players
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 
+        private int CurrentSelected { get; set; }
+
         public PlayerInventory(int slotCount, int maxWeight)
         {
+            CurrentSelected = -1;
             Slots = new Dictionary<int, InventorySlot>();
             for(int i = 0; i < slotCount; ++i)
             {
@@ -140,14 +143,51 @@ namespace Assets.Scripts.Players
 
         public void StartDrag(int index)
         {
-
+            if(Slots.ContainsKey(index))
+                Slots[index].Highlight();
         }
 
         public void EndDrag(int index)
         {
+            if(index == CurrentSelected)
+            {
+                if(Slots.ContainsKey(index))
+                    Slots[index].OffHighlight(string.Empty);
+                return;
+            }
 
-        }       
+            if(Slots.ContainsKey(index))
+            {
+                Slots[index].OffHighlight(string.Empty);
 
+                if(Slots.ContainsKey(CurrentSelected))
+                {
+                    Slots[CurrentSelected].OffHighlight(string.Empty);
+
+                    if(Slots[CurrentSelected].IsEmpty)
+                    {
+                        Slots[CurrentSelected].SetItem(Slots[index].Item, Slots[index].Count);
+                        Slots[index].SetItem(null, 0);
+                    }else
+                    {
+                        if(Slots[index].ItemID == Slots[CurrentSelected].ItemID)
+                        {
+                            if(Slots[CurrentSelected].AddItem(Slots[index].Count))
+                            {
+                                Slots[index].SetItem(null, 0);
+                            }
+                        }
+                    }
+                }
+            }
+            else if(Slots.ContainsKey(CurrentSelected))
+                Slots[CurrentSelected].OffHighlight(string.Empty);
+        }
+
+        public void SetSelected(int index)
+        {
+            CurrentSelected = index;
+        }
 
     }
 }
