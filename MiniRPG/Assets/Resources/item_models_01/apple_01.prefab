@@ -36,6 +36,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4579722250939690}
+  - component: {fileID: 114347827014294432}
+  - component: {fileID: 65906754591420474}
   m_Layer: 11
   m_Name: apple_01
   m_TagString: Items
@@ -113,3 +115,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1443228907471928}
   m_Mesh: {fileID: 4300000, guid: c4c6e29c3f6816b47a418d1b2e64e95c, type: 3}
+--- !u!65 &65906754591420474
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446813632208792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &114347827014294432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446813632208792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bed5505fc53f042bb73575ed08a33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: apple_01

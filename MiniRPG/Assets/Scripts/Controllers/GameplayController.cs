@@ -29,17 +29,37 @@ namespace Assets.Scripts.Controllers
             inputController.OnClickTargetNormal += onShowMark;
             inputController.OnPlayerStartDrag += OnPlayerStartDrag;
             inputController.OnEndDrag += OnEndDrag;
+            inputController.OnDropItemClick += OnDropItemClick;
+            inputController.OnDropItemStartDrag += OnDropItemStartDrag;
 
             Player = new Player();
 
             inputController.OnInventory += Player.Inventory.OnInventory;
             Player.Inventory.OnSet += GameGUI.Instance.SetInventoryIcon;
             Player.Inventory.OnSetCount += GameGUI.Instance.SetInventoryCount;
+            Player.Inventory.OnInaccessibleHighlight += GameGUI.Instance.SetInaccessibleHighlight;
+            Player.Inventory.OnEmptyHighlight += GameGUI.Instance.SetEmptyHighlight;
+            Player.Inventory.OnAvailableHighlight += GameGUI.Instance.SetAvailableHighlight;
+            Player.Inventory.OnOffHighlight += GameGUI.Instance.OffHighlight;
+
             Player.OnHealthChange += GameGUI.Instance.SetHealtValue;
             Player.OnManaChange += GameGUI.Instance.SetManaValue;
             Player.OnExperienceChange += GameGUI.Instance.SetExperienceValue;
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
+        }
+
+        private void OnDropItemStartDrag(Worlds.Items.DropItem dropItem)
+        {
+            Player.Inventory.Highlight(dropItem.ID);
+        }
+
+        private void OnDropItemClick(Worlds.Items.DropItem dropItem)
+        {
+            if(Player.Inventory.AddItems(dropItem.ID))
+            {
+                Destroy(dropItem.gameObject);
+            }
         }
 
         private void OnEndDrag(Vector3 target)

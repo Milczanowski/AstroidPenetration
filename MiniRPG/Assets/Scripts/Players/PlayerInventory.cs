@@ -12,6 +12,12 @@ namespace Assets.Scripts.Players
         public event Delegates.IndexPrefabInfo OnSet= delegate{};
         public event Delegates.IndexCount OnSetCount = delegate{};
         public event Delegates.InventoryItem OnItemUse = delegate{};
+        public event Delegates.Index OnEmptyHighlight= delegate { };
+        public event Delegates.Index OnAvailableHighlight= delegate { };
+        public event Delegates.Index OnInaccessibleHighlight= delegate { };
+        public event Delegates.Index OnOffHighlight= delegate { };
+
+        private event Delegates.ID HighlightSlot = delegate{};
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 
@@ -24,6 +30,13 @@ namespace Assets.Scripts.Players
                 inventorySlot.OnSet = (id, item) => { OnSet.Invoke(id, item); };
                 inventorySlot.OnSetCount = (id, count) => { OnSetCount.Invoke(id, count); };
                 inventorySlot.OnUse = (item) => { OnItemUse.Invoke(item); };
+                inventorySlot.OnEmptyHighlight += (id) => { OnEmptyHighlight.Invoke(id); };
+                inventorySlot.OnAvailableHighlight += (id) => { OnAvailableHighlight.Invoke(id); };
+                inventorySlot.OnInaccessibleHighlight += (id) => { OnInaccessibleHighlight.Invoke(id); };
+                inventorySlot.OnOffHighlight += (id) => { OnOffHighlight.Invoke(id); };
+
+                HighlightSlot += inventorySlot.Highlight;
+
                 Slots.Add(i, inventorySlot);
             }
         }
@@ -32,8 +45,8 @@ namespace Assets.Scripts.Players
         {
             foreach(var item in items)
             {
-                if(Slots.ContainsKey(item.Index))
-                    Slots[item.Index].SetItem(ItemSpawner.GetItem(item.ID), item.Count);
+                if(Slots.ContainsKey(item.Index))                
+                    Slots[item.Index].SetItem(ItemSpawner.GetItem(item.ID), item.Count);                
                 else
                     UnityEngine.Debug.LogError("Inventory not contains slot: " + item.Index);
             }
@@ -45,6 +58,34 @@ namespace Assets.Scripts.Players
                 Slots[index].Use();
             else
                 UnityEngine.Debug.LogError("Inventory not contains slot: " + index);
+        }
+
+        public bool AddItems(string id, int count = 1)
+        {       
+            foreach(var slot in Slots.Values)
+            {
+                if(slot.ItemID == id)
+                {
+                    if(slot.AddItem(count))
+                        return true;
+                }
+            }
+
+            foreach(var slot in Slots.Values)
+            {
+                if(slot.IsEmpty)
+                {
+                    slot.SetItem(ItemSpawner.GetItem(id), count);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void Highlight(string id)
+        {
+            HighlightSlot.Invoke(id);
         }
 
         public List<SaveItem> GetSave()
@@ -59,5 +100,8 @@ namespace Assets.Scripts.Players
 
             return saveItems;
         }
+
+
+
     }
 }

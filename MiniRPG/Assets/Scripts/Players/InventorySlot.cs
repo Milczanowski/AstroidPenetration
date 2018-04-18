@@ -15,6 +15,22 @@ namespace Assets.Scripts.Players
         public Delegates.Index OnEmpty= delegate { };
         public Delegates.InventoryItem OnUse= delegate { };
 
+        public Delegates.Index OnEmptyHighlight= delegate { };
+        public Delegates.Index OnAvailableHighlight= delegate { };
+        public Delegates.Index OnInaccessibleHighlight= delegate { };
+        public Delegates.Index OnOffHighlight= delegate { };
+
+
+        public string ItemID
+        {
+            get
+            {
+                if(Item != null)
+                    return Item.ID;
+                return string.Empty;
+            }
+        }
+
         public bool IsEmpty
         {
             get
@@ -41,6 +57,17 @@ namespace Assets.Scripts.Players
             }
         }
 
+        public bool AddItem(int count =1)
+        {
+            if(Count < MaxWeight)
+            {
+                Count += count;
+                OnSetCount.Invoke(ID, Count);
+                return true;
+            }
+            return false;
+        }
+
         public void Use()
         {
             if(Item == null)
@@ -62,6 +89,19 @@ namespace Assets.Scripts.Players
                 }
                      
             }
+        }
+
+        public void Highlight(string id)
+        {
+            if(IsEmpty)
+            {
+                OnEmptyHighlight.Invoke(ID);
+                return;
+            }
+            if(id == ItemID)
+                OnAvailableHighlight.Invoke(ID);
+            else
+                OnInaccessibleHighlight.Invoke(ID);
         }
 
         private void OnSetInvoke()

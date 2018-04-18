@@ -9,6 +9,8 @@ namespace Assets.Scripts.GUI.Game
     public class InventoryButton:MonoBehaviour, IEditorSerializable
     {
         [SerializeField]
+        private Image Highlight = null;
+        [SerializeField]
         private Text Count = null;
         [SerializeField]
         private Image Icon = null;
@@ -24,6 +26,7 @@ namespace Assets.Scripts.GUI.Game
         }
         public void InitReference()
         {
+            Highlight = transform.Find("Highlight").GetComponent<Image>();
             Icon = transform.Find("Icon").GetComponent<Image>();
             Count = transform.Find("Count").GetComponent<Text>();
             GUIInput = GetComponent<ClickInput>();
@@ -46,5 +49,17 @@ namespace Assets.Scripts.GUI.Game
             else
                 Count.text = count.ToString();
         }
+
+        public void SetHighlight(Color color)
+        {
+            Highlight.color = color;
+            Highlight.enabled = true;
+        }
+
+        public void OffHighlight()
+        {
+            Highlight.enabled = false;
+        }
+
     }
 }

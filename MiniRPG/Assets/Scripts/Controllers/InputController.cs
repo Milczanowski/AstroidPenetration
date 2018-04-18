@@ -2,6 +2,7 @@
 using Assets.Scripts.GUI.Menu;
 using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
+using Assets.Scripts.Worlds.Items;
 using System.Collections;
 using UnityEngine;
 
@@ -21,11 +22,13 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Action OnPlayerClick = delegate{};
         public event Delegates.Vector3Target  OnPlayerStartDrag = delegate{};
 
-
         public event Delegates.Vector3Target OnEndDrag = delegate{};
         public event Delegates.Vector2Target OnDrag = delegate{};
 
         public event Delegates.Index OnInventory= delegate{};
+        public event Delegates.OnDropItem OnDropItemClick = delegate{};
+        public event Delegates.OnDropItem OnDropItemStartDrag = delegate{};
+
         #endregion
 
 
@@ -54,12 +57,15 @@ namespace Assets.Scripts.Controllers
         private void InitGame(GameGUI game)
         {
             game.OnWorldClick += OnWorldClick;
+            game.OnWorldPointerDown += OnWorldPointerDown;
             game.OnBeginWorldDrag += OnBeginWorldDrag;
             game.OnEndWorldDrag += OnEndWorldDrag;
             game.OnWorldDrag += OnWorldDrag;
             game.OnShowMenu += ShowMenu;
             game.OnInventory += Inventory;
         }
+
+
 
         private void OnWorldDrag(Vector2 target)
         {
@@ -79,6 +85,11 @@ namespace Assets.Scripts.Controllers
             {
                 switch(raycastHit.collider.gameObject.layer)
                 {
+                    case 11:
+                        {
+                            OnDropItemStartDrag.Invoke(raycastHit.collider.gameObject.GetComponent<DropItem>());
+                        }
+                        break;
                     case 12:
                         {
                             OnPlayerStartDrag.Invoke(target);
@@ -98,14 +109,26 @@ namespace Assets.Scripts.Controllers
                 {
                     case 11:
                         {
-                            OnClickTarget.Invoke(raycastHit.point);
+                            OnDropItemClick.Invoke(raycastHit.collider.gameObject.GetComponent<DropItem>());
                         }
                         break;
                     case 12:
                         {
                             OnPlayerClick.Invoke();
                         }break;
-                    default:
+                }
+            }
+        }
+
+        private void OnWorldPointerDown(Vector3 target)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(target);
+            RaycastHit raycastHit;
+            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, TargetLayerMask.value))
+            {
+                switch(raycastHit.collider.gameObject.layer)
+                {
+                    case 8:
                         {
                             OnClickTarget.Invoke(raycastHit.point);
                             OnClickTargetNormal.Invoke(raycastHit.point, raycastHit.normal);

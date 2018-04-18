@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Inputs;
 using Assets.Scripts.Models.Basics;
 using Assets.Scripts.Models.World.Items;
+using Assets.Scripts.Worlds.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,5 +22,7 @@ namespace Assets.Scripts.Utils
         public delegate void IndexCount(int index, int Count);
         public delegate void IntValue(int value);
         public delegate void InventoryItem(BaseItem baseItem);
+        public delegate void OnDropItem(DropItem dropItem);
+        public delegate void ID(string id);
     }
 }

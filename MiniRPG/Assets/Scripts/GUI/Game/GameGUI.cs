@@ -23,10 +23,17 @@ namespace Assets.Scripts.GUI.Game
         [SerializeField]
         private Text Level = null;
 
+        [SerializeField]
+        private Color EmptyColor;
+        [SerializeField]
+        private Color AvailableColor;
+        [SerializeField]
+        private Color InaccessibleColor;
 
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
         public event Delegates.Vector3Target OnWorldClick = delegate{};
+        public event Delegates.Vector3Target OnWorldPointerDown = delegate{};
 
         public event Delegates.Vector3Target OnBeginWorldDrag = delegate{};
         public event Delegates.Vector3Target OnEndWorldDrag = delegate{};
@@ -44,6 +51,7 @@ namespace Assets.Scripts.GUI.Game
         {
             base.Awake();
             ClickInput.onClick += OnClick;
+            ClickInput.onPointerDown += OnPointerDown;
             DragInput.onBeginDrag += OnBeginDrag;
             DragInput.onEndDrag += OnEndDrag;
             DragInput.onDrag += OnDrag;
@@ -110,6 +118,18 @@ namespace Assets.Scripts.GUI.Game
             }
         }
 
+        private void OnPointerDown(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Target:
+                    {
+                        OnWorldPointerDown(eventData.position);
+                    }
+                    break;
+            }
+        }
+
         private void OptionAction(int index)
         {
             switch(index)
@@ -160,6 +180,31 @@ namespace Assets.Scripts.GUI.Game
         public void SetLevelValue(int value)
         {
             Level.text = string.Format("Level: {0}", value);
+        }
+
+        public void SetEmptyHighlight(int index)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].SetHighlight(EmptyColor);
+
+        }
+
+        public void SetAvailableHighlight(int index)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].SetHighlight(AvailableColor);
+        }
+
+        public void SetInaccessibleHighlight(int index)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].SetHighlight(InaccessibleColor);
+        }
+
+        public void OffHighlight(int index)
+        {
+            if(InventoryButtonsDict.ContainsKey(index))
+                InventoryButtonsDict[index].OffHighlight();
         }
     }
 }
