@@ -17,7 +17,14 @@ namespace Assets.Scripts.Controllers
         #region Events
         public event Delegates.Vector3Target OnClickTarget = delegate{};
         public event Delegates.Vector3NormalTarget OnClickTargetNormal= delegate{};
+
         public event Delegates.Action OnPlayerClick = delegate{};
+        public event Delegates.Vector3Target  OnPlayerStartDrag = delegate{};
+
+
+        public event Delegates.Vector3Target OnEndDrag = delegate{};
+        public event Delegates.Vector2Target OnDrag = delegate{};
+
         public event Delegates.Index OnInventory= delegate{};
         #endregion
 
@@ -56,17 +63,29 @@ namespace Assets.Scripts.Controllers
 
         private void OnWorldDrag(Vector2 target)
         {
-            throw new System.NotImplementedException();
+            OnDrag.Invoke(target);
         }
 
         private void OnEndWorldDrag(Vector3 target)
         {
-            throw new System.NotImplementedException();
+            OnEndDrag.Invoke(target);
         }
 
         private void OnBeginWorldDrag(Vector3 target)
         {
-            throw new System.NotImplementedException();
+            Ray ray = Camera.main.ScreenPointToRay(target);
+            RaycastHit raycastHit;
+            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, TargetLayerMask.value))
+            {
+                switch(raycastHit.collider.gameObject.layer)
+                {
+                    case 12:
+                        {
+                            OnPlayerStartDrag.Invoke(target);
+                        }
+                        break;
+                }
+            }
         }
 
         private void OnWorldClick(Vector3 position)
@@ -116,6 +135,14 @@ namespace Assets.Scripts.Controllers
             MenuGUI.Hide();
             GameGUI.Show();
         }
+
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            OnDrag(new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")));
+        }
+#endif
 
         private void Exit()
         {

@@ -408,7 +408,7 @@ Prefab:
     - target: {fileID: 224120531693328902, guid: 2f2b2594391756646b04c346e0600cd8,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00009030104
+      value: 0.4397954
       objectReference: {fileID: 0}
     - target: {fileID: 224461551886007752, guid: 2f2b2594391756646b04c346e0600cd8,
         type: 2}
@@ -529,9 +529,9 @@ MonoBehaviour:
   maxDistance: 9
   minDistance: 4
   distanceSmoothTime: 0.5
-  rotationSmoothTime: 0.3
+  lookAtSmoothTime: 0.15
   positionSmoothTime: 0.02
-  offsetSmoothTime: 0.1
+  rotationSmoothTime: 0.3
   groudLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -639,24 +639,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd5c0e8ee9a90a649b8222bb937d324b, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1982260163 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1352805149966290, guid: 3ba06f1f060cd2d44b6739ab4f0b0d3c,
-    type: 2}
-  m_PrefabInternal: {fileID: 271670017}
---- !u!114 &1982260164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1982260163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355c52022b52d124bba9042f211a9fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  index: 0
 --- !u!1 &2126727986
 GameObject:
   m_ObjectHideFlags: 0

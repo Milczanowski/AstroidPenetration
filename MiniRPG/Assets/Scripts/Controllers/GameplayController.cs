@@ -10,21 +10,25 @@ namespace Assets.Scripts.Controllers
     {
         public event Delegates.Action OnStop = delegate{};
         public event Delegates.Vector3Target OnMove= delegate{};
-        public event Delegates.Action OnCameraRotate = delegate{};
         public event Delegates.Vector3NormalTarget OnShowMark= delegate{};
         public event Delegates.Vector3Target OnMeleAtack= delegate{};
         public event Delegates.Vector3Target OnRangeAttack= delegate{};
+
+        private bool PlayerDrag { get; set; }
 
 
         private Player Player { get; set; }
 
         protected override IEnumerator Init()
         {
+            PlayerDrag = false;
+
             InputController inputController = GetController<InputController>();
 
             inputController.OnClickTarget += onMove;
             inputController.OnClickTargetNormal += onShowMark;
-            inputController.OnPlayerClick += OnCameraRotate;
+            inputController.OnPlayerStartDrag += OnPlayerStartDrag;
+            inputController.OnEndDrag += OnEndDrag;
 
             Player = new Player();
 
@@ -38,19 +42,26 @@ namespace Assets.Scripts.Controllers
             yield return null;
         }
 
+        private void OnEndDrag(Vector3 target)
+        {
+            PlayerDrag = false;
+        }
+
+        private void OnPlayerStartDrag(Vector3 target)
+        {
+            PlayerDrag = true;
+        }
+
         private void onMove(Vector3 target)
         {
-            OnMove.Invoke(target);
+            if(!PlayerDrag)
+                OnMove.Invoke(target);
         }
 
         private void onShowMark(Vector3 target, Vector3 normal)
         {
-            OnShowMark.Invoke(target, normal);
-        }
-
-        private void OnPlayerClick()
-        {
-            OnCameraRotate.Invoke();
+            if(!PlayerDrag)
+                OnShowMark.Invoke(target, normal);
         }
     }
 }

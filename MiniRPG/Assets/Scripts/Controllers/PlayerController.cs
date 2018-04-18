@@ -21,6 +21,7 @@ namespace Assets.Scripts.Controllers
         private float CurrnetAngle { get; set; }
 
         private float TartgetAngle { get; set; }
+        public bool IsMoving { get; private set; }
              
 
         private void Move(Vector3 position)
@@ -35,6 +36,7 @@ namespace Assets.Scripts.Controllers
             transform.eulerAngles = new Vector3(0, CurrnetAngle, 0);
 
             CharacterController.SimpleMove((TartgetPosition - transform.position).normalized * moveSpeed);
+            IsMoving = CharacterController.velocity.magnitude > 1;
             CharacterController.Move(Vector3.down);
         }
 

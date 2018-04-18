@@ -9,12 +9,13 @@ namespace Assets.Scripts.Controllers
     {
         private Func<Vector3> PlayerPosition;
         private Func<Vector3> PlayerForward;
+        private Func<bool> PlayerIsMoving;
+
 
         private Vector3 distanceVelocity;
         private Vector3 positionVelocity;
-        private Vector3 rotationVelocity;
-        private Vector3 offsetVelocity;
-
+        private Vector3 lookAtVelocity;
+ 
         [SerializeField]
         private Vector3 offSet = Vector3.up;
         [SerializeField]
@@ -24,18 +25,15 @@ namespace Assets.Scripts.Controllers
         [SerializeField]
         private float distanceSmoothTime = .5f;
         [SerializeField]
-        private float rotationSmoothTime = .5f;
+        private float lookAtSmoothTime = .5f;
         [SerializeField]
         private float positionSmoothTime = .5f;
-        [SerializeField]
-        private float offsetSmoothTime = .1f;
         [SerializeField]
         private LayerMask groudLayerMask;
 
 
         private Vector3 CurrentLookAt { get; set; }
         private Vector3 CurrentPosition { get; set; }
-        private Vector3 CurrentOffset { get; set; }
         private Vector3 TargetOffset;
         private bool CameraRotation { get; set; }
 
@@ -53,7 +51,15 @@ namespace Assets.Scripts.Controllers
                 return playerController.transform.forward;
             };
 
-            GetController<GameplayController>().OnCameraRotate += OnCameraRotate;
+            PlayerIsMoving = () =>
+            {
+                return playerController.IsMoving;
+            };
+
+            InputController inputController = GetController<InputController>();
+            inputController.OnDrag += InputController_OnDrag;
+            inputController.OnPlayerStartDrag += InputController_OnPlayerStartDrag;
+            inputController.OnEndDrag += InputController_OnEndDrag;
 
             CurrentLookAt = PlayerPosition();
             CurrentPosition = transform.position;
@@ -61,34 +67,53 @@ namespace Assets.Scripts.Controllers
             yield return null;
         }
 
-        private void OnCameraRotate()
+        private void InputController_OnEndDrag(Vector3 target)
         {
-            CameraRotation = true;
+            CameraRotation = false;
+        }
+
+        private void InputController_OnPlayerStartDrag(Vector3 target)
+        {
+            CameraRotation = !PlayerIsMoving();
+        }
+
+        private void InputController_OnDrag(Vector2 target)
+        {
+            if(CameraRotation)
+            {
+                Vector3 playerPosition = PlayerPosition();
+
+                transform.RotateAround(playerPosition, Vector3.up, target.x);
+                transform.RotateAround(playerPosition, transform.right, target.y);
+            }
         }
 
         private void LateUpdate()
         {
             Vector3 playerPosition = PlayerPosition();
 
-            CurrentLookAt = Vector3.SmoothDamp(CurrentLookAt, playerPosition+ PlayerForward(), ref rotationVelocity, rotationSmoothTime);
-            
-            float distance = Vector3.Distance(CurrentPosition, playerPosition);
+            CurrentLookAt = Vector3.SmoothDamp(CurrentLookAt, playerPosition + PlayerForward(), ref lookAtVelocity, lookAtSmoothTime);
 
-            if(distance > maxDistance)
+            if(!CameraRotation)
             {
-                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance),
-                    ref distanceVelocity, distanceSmoothTime);
+                float distance = Vector3.Distance(CurrentPosition, playerPosition);
+                if(distance > maxDistance)
+                {
+                    CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * maxDistance),
+                        ref distanceVelocity, distanceSmoothTime);
+                }
+                else if(distance < minDistance)
+                {
+                    CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance),
+                        ref distanceVelocity, distanceSmoothTime);
+                }
+                transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + TargetOffset, ref positionVelocity, positionSmoothTime);
             }
-            else if(distance < minDistance)
+            else
             {
-                CurrentPosition = Vector3.SmoothDamp(CurrentPosition, playerPosition - (new Vector3(transform.forward.x, 0, transform.forward.z) * minDistance),
-                    ref distanceVelocity, distanceSmoothTime);
+                CurrentPosition = transform.position - TargetOffset;
             }
 
-
-            CurrentOffset = Vector3.SmoothDamp(CurrentOffset, TargetOffset, ref offsetVelocity, offsetSmoothTime);
-
-            transform.position = Vector3.SmoothDamp(transform.position, CurrentPosition + CurrentOffset, ref positionVelocity, positionSmoothTime);
             transform.LookAt(CurrentLookAt);
         }
 
