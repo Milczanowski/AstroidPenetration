@@ -93,7 +93,11 @@ namespace Assets.Scripts.Controllers
                 Vector3 playerPosition = PlayerPosition();
                 target *= RotationSensitive();
                 transform.RotateAround(playerPosition, Vector3.up, target.x);
-                transform.RotateAround(playerPosition, transform.right, target.y);
+
+                Debug.Log(target.y + " " + transform.eulerAngles.x);
+
+                if((target.y>0 && transform.eulerAngles.x < 80) || (target.y < 0 && transform.eulerAngles.x >10))
+                    transform.RotateAround(playerPosition, transform.right, target.y);
             }
         }
 
