@@ -10,6 +10,7 @@ namespace Assets.Scripts.Controllers
         private Func<Vector3> PlayerPosition;
         private Func<Vector3> PlayerForward;
         private Func<bool> PlayerIsMoving;
+        private Func<float> RotationSensitive;
 
 
         private Vector3 distanceVelocity;
@@ -56,6 +57,14 @@ namespace Assets.Scripts.Controllers
                 return playerController.IsMoving;
             };
 
+            SettingsController settingsController = GetController<SettingsController>();
+
+            RotationSensitive = () =>
+            {
+                return settingsController.Instance.CameraRotationSensitive;
+            };
+
+
             InputController inputController = GetController<InputController>();
             inputController.OnDrag += InputController_OnDrag;
             inputController.OnPlayerStartDrag += InputController_OnPlayerStartDrag;
@@ -82,7 +91,7 @@ namespace Assets.Scripts.Controllers
             if(CameraRotation)
             {
                 Vector3 playerPosition = PlayerPosition();
-
+                target *= RotationSensitive();
                 transform.RotateAround(playerPosition, Vector3.up, target.x);
                 transform.RotateAround(playerPosition, transform.right, target.y);
             }

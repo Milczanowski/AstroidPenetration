@@ -37,6 +37,7 @@ namespace Assets.Scripts.Controllers
             menu.SetGUISize(Instance.GUISize);
             menu.SetMusic(Instance.MusicEnable);
             menu.SetSound(Instance.SoundEndable);
+            menu.SetRotationSensitive(Instance.CameraRotationSensitive);
         }
 
         public void InitSettings(MenuGUI menu)
@@ -49,7 +50,14 @@ namespace Assets.Scripts.Controllers
             menu.OnGUISize += Menu_OnGUISize;
             menu.OnMusic += Menu_OnMusic;
             menu.OnSound += Menu_OnSound;
+            menu.OnRotationSensitive += Menu_OnRotationSensitive;
             ValueChanged = false;
+        }
+
+        private void Menu_OnRotationSensitive(float value)
+        {
+            ValueChanged = true;
+            Instance.CameraRotationSensitive = value;
         }
 
         private void Menu_OnSound(bool value)

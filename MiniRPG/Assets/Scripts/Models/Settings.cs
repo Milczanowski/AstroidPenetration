@@ -13,5 +13,7 @@ namespace Assets.Scripts.Models
         public bool SoundEndable = true;
         [SerializeField]
         public string LanguageCode = "EN";
+        [SerializeField]
+        public float CameraRotationSensitive = 1;
     }
 }

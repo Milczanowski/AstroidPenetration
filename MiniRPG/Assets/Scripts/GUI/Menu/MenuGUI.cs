@@ -17,12 +17,16 @@ namespace Assets.Scripts.GUI.Menu
         private BoolOption Music = null;
         [SerializeField]
         private BoolOption Sound = null;
+        [SerializeField]
+        private FloatOption RotationSensitive = null;
 
         public event Delegates.Action onBackButton = delegate{};
         public event Delegates.Action onExitButton = ()=>{ };
         public event Delegates.GenericValue<float> OnGUISize = delegate{};
         public event Delegates.GenericValue<bool> OnMusic = delegate{};
         public event Delegates.GenericValue<bool> OnSound = delegate{};
+        public event Delegates.GenericValue<float> OnRotationSensitive = delegate{};
+
 
         protected override void Awake()
         {
@@ -32,6 +36,7 @@ namespace Assets.Scripts.GUI.Menu
             GUISize.OnValueChange += (value) => { OnGUISize.Invoke(value); };
             Music.OnValueChange += (value) => { OnMusic.Invoke(value); };
             Sound.OnValueChange += (value) => { OnSound.Invoke(value); };
+            RotationSensitive.OnValueChange += (value) => { OnRotationSensitive.Invoke(value); };
         }
 
         public void SetGUISize(float value)
@@ -48,5 +53,11 @@ namespace Assets.Scripts.GUI.Menu
         {
             Sound.SetValue(value);
         }
+
+        public void SetRotationSensitive(float value)
+        {
+            RotationSensitive.SetValue(value);
+        }
+
     }
 }
