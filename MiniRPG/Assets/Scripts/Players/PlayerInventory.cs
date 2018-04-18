@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models.Saves;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Models.Saves;
 using Assets.Scripts.Spawners;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
@@ -7,17 +8,20 @@ namespace Assets.Scripts.Players
 {
     public class PlayerInventory
     {
-        public event Delegates.Index OnEmpty = delegate{};
-        public event Delegates.Index OnFull= delegate{};
-        public event Delegates.IndexPrefabInfo OnSet= delegate{};
-        public event Delegates.IndexCount OnSetCount = delegate{};
         public event Delegates.InventoryItem OnItemUse = delegate{};
-        public event Delegates.Index OnEmptyHighlight= delegate { };
-        public event Delegates.Index OnAvailableHighlight= delegate { };
-        public event Delegates.Index OnInaccessibleHighlight= delegate { };
-        public event Delegates.Index OnOffHighlight= delegate { };
+
+        private event Delegates.Index OnEmpty = delegate{};
+        private event Delegates.Index OnFull= delegate{};
+        private event Delegates.IndexPrefabInfo OnSet= delegate{};
+        private event Delegates.IndexCount OnSetCount = delegate{};
+        private event Delegates.Index OnEmptyHighlight= delegate { };
+        private event Delegates.Index OnAvailableHighlight= delegate { };
+        private event Delegates.Index OnInaccessibleHighlight= delegate { };
+        private event Delegates.Index OnOffHighlight= delegate { };
 
         private event Delegates.ID HighlightSlot = delegate{};
+        private event Delegates.ID OffHighlightSlot = delegate{};
+
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 
@@ -36,9 +40,20 @@ namespace Assets.Scripts.Players
                 inventorySlot.OnOffHighlight += (id) => { OnOffHighlight.Invoke(id); };
 
                 HighlightSlot += inventorySlot.Highlight;
+                OffHighlightSlot += inventorySlot.OffHighlight;
 
                 Slots.Add(i, inventorySlot);
             }
+        }
+        
+        public void AddEvents(IInventory inventory)
+        {
+            OnSet += inventory.SetInventoryIcon;
+            OnSetCount += inventory.SetInventoryCount;
+            OnInaccessibleHighlight += inventory.SetInaccessibleHighlight;
+            OnEmptyHighlight += inventory.SetEmptyHighlight;
+            OnAvailableHighlight += inventory.SetAvailableHighlight;
+            OnOffHighlight += inventory.OffHighlight;
         }
 
         public void InitItem(List<SaveItem> items)
@@ -86,6 +101,11 @@ namespace Assets.Scripts.Players
         public void Highlight(string id)
         {
             HighlightSlot.Invoke(id);
+        }
+
+        public void OffHighlight(string id)
+        {
+            OffHighlightSlot.Invoke(id);
         }
 
         public List<SaveItem> GetSave()

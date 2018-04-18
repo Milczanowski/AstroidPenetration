@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
-    public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable
+    public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable, IInventory, IGUI
     {
         [SerializeField]
         private List <InventoryButton> InventoryButtons = new List<InventoryButton>();

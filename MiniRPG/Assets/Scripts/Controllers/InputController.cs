@@ -28,7 +28,6 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Index OnInventory= delegate{};
         public event Delegates.OnDropItem OnDropItemClick = delegate{};
         public event Delegates.OnDropItem OnDropItemStartDrag = delegate{};
-
         #endregion
 
 

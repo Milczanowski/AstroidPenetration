@@ -104,6 +104,11 @@ namespace Assets.Scripts.Players
                 OnInaccessibleHighlight.Invoke(ID);
         }
 
+        public void OffHighlight(string id)
+        {
+            OnOffHighlight.Invoke(ID);
+        }
+
         private void OnSetInvoke()
         {
             OnSet.Invoke(ID, Item != null ? Item.Icon : null);

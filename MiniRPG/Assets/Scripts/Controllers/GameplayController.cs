@@ -8,20 +8,26 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
+        enum Drag
+        {
+            None,
+            Player,
+            Item
+        }
+
         public event Delegates.Action OnStop = delegate{};
         public event Delegates.Vector3Target OnMove= delegate{};
         public event Delegates.Vector3NormalTarget OnShowMark= delegate{};
         public event Delegates.Vector3Target OnMeleAtack= delegate{};
         public event Delegates.Vector3Target OnRangeAttack= delegate{};
 
-        private bool PlayerDrag { get; set; }
-
-
         private Player Player { get; set; }
+
+        private Drag CurrentDrag { get; set; }
 
         protected override IEnumerator Init()
         {
-            PlayerDrag = false;
+            CurrentDrag = Drag.None;
 
             InputController inputController = GetController<InputController>();
 
@@ -35,22 +41,16 @@ namespace Assets.Scripts.Controllers
             Player = new Player();
 
             inputController.OnInventory += Player.Inventory.OnInventory;
-            Player.Inventory.OnSet += GameGUI.Instance.SetInventoryIcon;
-            Player.Inventory.OnSetCount += GameGUI.Instance.SetInventoryCount;
-            Player.Inventory.OnInaccessibleHighlight += GameGUI.Instance.SetInaccessibleHighlight;
-            Player.Inventory.OnEmptyHighlight += GameGUI.Instance.SetEmptyHighlight;
-            Player.Inventory.OnAvailableHighlight += GameGUI.Instance.SetAvailableHighlight;
-            Player.Inventory.OnOffHighlight += GameGUI.Instance.OffHighlight;
 
-            Player.OnHealthChange += GameGUI.Instance.SetHealtValue;
-            Player.OnManaChange += GameGUI.Instance.SetManaValue;
-            Player.OnExperienceChange += GameGUI.Instance.SetExperienceValue;
+            Player.Inventory.AddEvents(GameGUI.Instance);
+            Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
         }
 
         private void OnDropItemStartDrag(Worlds.Items.DropItem dropItem)
         {
+            CurrentDrag = Drag.Item;
             Player.Inventory.Highlight(dropItem.ID);
         }
 
@@ -64,23 +64,31 @@ namespace Assets.Scripts.Controllers
 
         private void OnEndDrag(Vector3 target)
         {
-            PlayerDrag = false;
+            switch(CurrentDrag)
+            {
+                case Drag.Item:
+                    {
+                        Player.Inventory.OffHighlight(string.Empty);
+                    }
+                    break;
+            }
+            CurrentDrag = Drag.None;
         }
 
         private void OnPlayerStartDrag(Vector3 target)
         {
-            PlayerDrag = true;
+            CurrentDrag = Drag.Player;
         }
 
         private void onMove(Vector3 target)
         {
-            if(!PlayerDrag)
+            if(CurrentDrag == Drag.None)
                 OnMove.Invoke(target);
         }
 
         private void onShowMark(Vector3 target, Vector3 normal)
         {
-            if(!PlayerDrag)
+            if(CurrentDrag == Drag.None)
                 OnShowMark.Invoke(target, normal);
         }
     }

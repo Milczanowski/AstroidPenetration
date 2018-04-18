@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models.Saves;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Models.Saves;
 using Assets.Scripts.Utils;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,14 @@ namespace Assets.Scripts.Players
         {
             Inventory = new PlayerInventory(10, 10);
             Inventory.OnItemUse += OnItemUse;
+        }
+
+        public void AddEvents(IGUI gui)
+        {
+            OnHealthChange += gui.SetHealtValue;
+            OnManaChange += gui.SetManaValue;
+            OnExperienceChange += gui.SetExperienceValue;
+            OnLevelChange += gui.SetLevelValue;
         }
 
         private void OnItemUse(Models.World.Items.BaseItem baseItem)
