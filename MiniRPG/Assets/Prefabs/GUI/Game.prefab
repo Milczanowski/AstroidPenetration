@@ -3520,7 +3520,7 @@ MonoBehaviour:
   Mana: {fileID: 114550782437420346}
   Experience: {fileID: 114341675452360838}
   Level: {fileID: 114598723581222728}
-  EmptyColor: {r: 0, g: 0.39215687, b: 0, a: 0.39215687}
+  EmptyColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 0.39215687}
   AvailableColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   InaccessibleColor: {r: 1, g: 0, b: 0, a: 0.39215687}
 --- !u!114 &114994818986562948
