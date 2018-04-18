@@ -138,6 +138,16 @@ namespace Assets.Scripts.Players
         }
 
 
+        public void StartDrag(int index)
+        {
+
+        }
+
+        public void EndDrag(int index)
+        {
+
+        }       
+
 
     }
 }

@@ -27,6 +27,9 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Vector2Target OnDrag = delegate{};
 
         public event Delegates.Index OnInventory= delegate{};
+        public event Delegates.Index OnInventoryStartDrag= delegate{};
+        public event Delegates.Index OnInventoryEndDrag= delegate{};
+        public event Delegates.Vector2Target OnInventoryDrag= delegate{};
         public event Delegates.Index OnInventoryEnter= delegate{};
         public event Delegates.Index OnInventoryExit= delegate{};
         public event Delegates.OnDropItem OnDropItemClick = delegate{};
@@ -61,33 +64,17 @@ namespace Assets.Scripts.Controllers
             game.OnWorldClick += OnWorldClick;
             game.OnWorldPointerDown += OnWorldPointerDown;
             game.OnBeginWorldDrag += OnBeginWorldDrag;
-            game.OnEndWorldDrag += OnEndWorldDrag;
-            game.OnWorldDrag += OnWorldDrag;
+            game.OnEndWorldDrag += OnEndDrag.Invoke;
+            game.OnWorldDrag += OnDrag.Invoke;
             game.OnShowMenu += ShowMenu;
-            game.OnInventory += Inventory;
-            game.OnInventoryEnter += InvokeOnInventoryEnter;
-            game.OnInventoryExit += InvokeOnInventoryExit;
+            game.OnInventory += OnInventory.Invoke;
+            game.OnInventoryEnter += OnInventoryEnter.Invoke;
+            game.OnInventoryExit += OnInventoryExit.Invoke;
+            game.OnInventoryStartDrag += OnInventoryStartDrag.Invoke;
+            game.OnInventoryEndDrag += OnInventoryEndDrag.Invoke;
+            game.OnInventoryDrag += OnInventoryDrag.Invoke;
         }
 
-        private void InvokeOnInventoryExit(int index)
-        {
-            OnInventoryExit.Invoke(index);
-        }
-
-        private void InvokeOnInventoryEnter(int index)
-        {
-            OnInventoryEnter.Invoke(index);
-        }
-
-        private void OnWorldDrag(Vector2 target)
-        {
-            OnDrag.Invoke(target);
-        }
-
-        private void OnEndWorldDrag(Vector3 target)
-        {
-            OnEndDrag.Invoke(target);
-        }
 
         private void OnBeginWorldDrag(Vector3 target)
         {
@@ -150,10 +137,6 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        private void Inventory(int index)
-        {
-            OnInventory.Invoke(index);
-        }
 
         private void ShowMenu()
         {

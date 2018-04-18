@@ -46,6 +46,9 @@ namespace Assets.Scripts.Controllers
             inputController.OnDropItemStartDrag += OnDropItemStartDrag;
             inputController.OnInventoryEnter += OnInventoryEnter;
             inputController.OnInventoryExit += OnInventoryExit;
+            inputController.OnInventoryStartDrag += OnInventoryStartDrag;
+            inputController.OnInventoryDrag += OnInventoryDrag;
+            inputController.OnInventoryEndDrag += OnInventoryEndDrag;
 
             Player = new Player();
 
@@ -55,6 +58,20 @@ namespace Assets.Scripts.Controllers
             Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
+        }
+
+        private void OnInventoryEndDrag(int index)
+        {
+            Player.Inventory.EndDrag(index);
+        }
+
+        private void OnInventoryDrag(Vector2 target)
+        {
+        }
+
+        private void OnInventoryStartDrag(int index)
+        {
+            Player.Inventory.StartDrag(index);
         }
 
         private void OnInventoryExit(int index)

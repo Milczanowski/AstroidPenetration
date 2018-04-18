@@ -34,10 +34,10 @@ namespace Assets.Scripts.GUI.Game
 
             var ci = GetComponent<ClickInput>();
             var ei = GetComponent<EnterInput>();
+            var di = GetComponent<DragInput>();
 
-            ci.index = ei.index = index;
-            ci.type = ei.type = InputType.Inventory;
-
+            di.index = ci.index = ei.index = index;
+            di.type = ci.type = ei.type = InputType.Inventory;
         }
         public void SetIcon(Image icon)
         {

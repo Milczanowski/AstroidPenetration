@@ -42,6 +42,10 @@ namespace Assets.Scripts.GUI.Game
         public event Delegates.Index OnInventory= delegate{};
         public event Delegates.Index OnInventoryEnter= delegate{};
         public event Delegates.Index OnInventoryExit= delegate{};
+        public event Delegates.Index OnInventoryStartDrag= delegate{};
+        public event Delegates.Index OnInventoryEndDrag= delegate{};
+        public event Delegates.Vector2Target OnInventoryDrag= delegate{};
+
 
         public event Delegates.Action OnShowMenu= delegate{};
 
@@ -96,6 +100,10 @@ namespace Assets.Scripts.GUI.Game
                 case InputType.Target:
                     {
                         OnWorldDrag.Invoke(eventData.delta);
+                    }break;
+                case InputType.Inventory:
+                    {
+                        OnInventoryDrag.Invoke(eventData.position);
                     }
                     break;
             }
@@ -110,6 +118,10 @@ namespace Assets.Scripts.GUI.Game
                         OnEndWorldDrag.Invoke(eventData.position);
                     }
                     break;
+                case InputType.Inventory:
+                    {
+                        OnInventoryEndDrag.Invoke(index);
+                    }break;
             }
         }
 
@@ -120,6 +132,10 @@ namespace Assets.Scripts.GUI.Game
                 case InputType.Target:
                     {
                         OnBeginWorldDrag.Invoke(eventData.position);
+                    }break;
+                case InputType.Inventory:
+                    {
+                        OnInventoryStartDrag.Invoke(index);
                     }
                     break;
             }
