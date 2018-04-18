@@ -3,6 +3,7 @@ using Assets.Scripts.GUI.Menu;
 using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Vector2Target OnDrag = delegate{};
 
         public event Delegates.Index OnInventory= delegate{};
+        public event Delegates.Index OnInventoryEnter= delegate{};
+        public event Delegates.Index OnInventoryExit= delegate{};
         public event Delegates.OnDropItem OnDropItemClick = delegate{};
         public event Delegates.OnDropItem OnDropItemStartDrag = delegate{};
         #endregion
@@ -62,9 +65,19 @@ namespace Assets.Scripts.Controllers
             game.OnWorldDrag += OnWorldDrag;
             game.OnShowMenu += ShowMenu;
             game.OnInventory += Inventory;
+            game.OnInventoryEnter += InvokeOnInventoryEnter;
+            game.OnInventoryExit += InvokeOnInventoryExit;
         }
 
+        private void InvokeOnInventoryExit(int index)
+        {
+            OnInventoryExit.Invoke(index);
+        }
 
+        private void InvokeOnInventoryEnter(int index)
+        {
+            OnInventoryEnter.Invoke(index);
+        }
 
         private void OnWorldDrag(Vector2 target)
         {

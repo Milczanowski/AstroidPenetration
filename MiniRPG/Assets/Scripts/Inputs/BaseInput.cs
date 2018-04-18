@@ -8,17 +8,9 @@ namespace Assets.Scripts.Inputs
     public abstract class BaseInput:MonoBehaviour
     {
         [SerializeField]
-        protected InputType type = InputType.Inventory;
+        public InputType type = InputType.Inventory;
 
         [SerializeField]
-        protected int index = 0;
-
-        public int Index
-        {
-            get
-            {
-                return index;
-            }
-        }
+        public int index = 0;
     }
 }

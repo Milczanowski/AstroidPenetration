@@ -40,6 +40,9 @@ namespace Assets.Scripts.GUI.Game
         public event Delegates.Vector2Target OnWorldDrag = delegate{};
 
         public event Delegates.Index OnInventory= delegate{};
+        public event Delegates.Index OnInventoryEnter= delegate{};
+        public event Delegates.Index OnInventoryExit= delegate{};
+
         public event Delegates.Action OnShowMenu= delegate{};
 
         public void InitReference()
@@ -52,12 +55,38 @@ namespace Assets.Scripts.GUI.Game
             base.Awake();
             ClickInput.onClick += OnClick;
             ClickInput.onPointerDown += OnPointerDown;
+            EnterInput.onPointerEnter += OnPointerEnter;
+            EnterInput.onPointerExit += OnPointerExit;
             DragInput.onBeginDrag += OnBeginDrag;
             DragInput.onEndDrag += OnEndDrag;
             DragInput.onDrag += OnDrag;
 
             foreach(InventoryButton inventoryButton in InventoryButtons)
                 InventoryButtonsDict.Add(inventoryButton.Index, inventoryButton);
+        }
+
+        private void OnPointerExit(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Inventory:
+                    {
+                        OnInventoryExit.Invoke(index);
+                    }
+                    break;
+            }
+        }
+
+        private void OnPointerEnter(InputType type, int index, PointerEventData eventData)
+        {
+            switch(type)
+            {
+                case InputType.Inventory:
+                    {
+                        OnInventoryEnter.Invoke(index);
+                    }
+                    break;
+            }
         }
 
         private void OnDrag(InputType type, int index, PointerEventData eventData)

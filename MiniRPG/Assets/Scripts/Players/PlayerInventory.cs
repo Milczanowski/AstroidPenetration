@@ -75,7 +75,7 @@ namespace Assets.Scripts.Players
                 UnityEngine.Debug.LogError("Inventory not contains slot: " + index);
         }
 
-        public bool AddItems(string id, int count = 1)
+        public bool AddItem(string id, int count = 1)
         {       
             foreach(var slot in Slots.Values)
             {
@@ -97,6 +97,22 @@ namespace Assets.Scripts.Players
 
             return false;
         }
+
+        public bool AddItem(string id, int index, int count = 1)
+        {
+            if(Slots.ContainsKey(index))
+            {
+                if(Slots[index].IsEmpty)
+                {
+                    Slots[index].SetItem(ItemSpawner.GetItem(id), count);
+                    return true;
+                }
+                else if(Slots[index].ItemID == id)
+                    return Slots[index].AddItem(count);
+            }
+            return false;
+        }
+
 
         public void Highlight(string id)
         {
