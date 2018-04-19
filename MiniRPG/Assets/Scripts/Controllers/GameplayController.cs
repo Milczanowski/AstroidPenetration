@@ -9,8 +9,6 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
-
-
         enum Drag
         {
             None,
@@ -33,14 +31,11 @@ namespace Assets.Scripts.Controllers
 
         private DropItem CurrentDropItem { get; set; }
 
-        private float MaxDropItemRange { get; set; }
-
         protected override IEnumerator Init()
         {
             CurrentDrag = Drag.None;
             CurrentInventoryIndex = -1;
             CurrentDropItem = null;
-            MaxDropItemRange = 5;
 
             InputController inputController = GetController<InputController>();
 

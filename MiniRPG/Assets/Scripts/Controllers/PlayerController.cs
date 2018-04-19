@@ -14,6 +14,8 @@ namespace Assets.Scripts.Controllers
         private float moveSpeed = .5f;
         [SerializeField]
         private float rotationSmoothTime = .5f;
+        [SerializeField]
+        private float pushForce = 0.1f;
 
         private float angleVelocity = 0;
 
@@ -39,6 +41,16 @@ namespace Assets.Scripts.Controllers
             IsMoving = CharacterController.velocity.magnitude > 1;
             CharacterController.Move(Vector3.down);
         }
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody rigidbody = hit.collider.attachedRigidbody;
+
+            if(rigidbody && !rigidbody.isKinematic)
+            {
+                rigidbody.AddForceAtPosition(hit.moveDirection * pushForce, hit.point, ForceMode.Impulse);
+            }
+        }
+
 
         public void InitReference()
         {

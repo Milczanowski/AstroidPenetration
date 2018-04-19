@@ -201,3 +201,7 @@ MonoBehaviour:
     Name: apple_01
     Position: {x: -7.5, y: 0.3, z: -5}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - BundleID: item_models_01
+    Name: sword_01
+    Position: {x: 7.5, y: 5.5, z: -5}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}

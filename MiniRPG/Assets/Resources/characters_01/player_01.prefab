@@ -38,9 +38,8 @@ GameObject:
   - component: {fileID: 4755261512242132}
   - component: {fileID: 33232430653303528}
   - component: {fileID: 23019129576476958}
-  - component: {fileID: 136345614385916790}
-  - component: {fileID: 143851119982630136}
-  - component: {fileID: 114552413261704706}
+  - component: {fileID: 143564363110104858}
+  - component: {fileID: 114493638732818876}
   m_Layer: 12
   m_Name: player_01
   m_TagString: Player
@@ -157,7 +156,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033226957119458}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114552413261704706
+--- !u!114 &114493638732818876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -168,23 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4e291b4081154439bbb0bf4f9233de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterController: {fileID: 143851119982630136}
+  CharacterController: {fileID: 143564363110104858}
   moveSpeed: 15
   rotationSmoothTime: 0.1
---- !u!136 &136345614385916790
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1392229470645804}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &143851119982630136
+--- !u!143 &143564363110104858
 CharacterController:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

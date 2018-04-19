@@ -8,11 +8,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b9397c02adcb142a1078e9d2fe64c4, type: 3}
-  m_Name: items
+  m_Script: {fileID: 11500000, guid: bfb46c77b5819a44f97e30a83d17d6a5, type: 3}
+  m_Name: sword_01
   m_EditorClassIdentifier: 
-  Items:
-  - BundleID: items_01
-    Name: apple_01
-  - BundleID: items_01
+  ID: sword_01
+  Model:
+    BundleID: item_models_1
     Name: sword_01
+  Icon:
+    BundleID: item_icons_01
+    Name: sword_icon_01
+  MaxInStack: 1
+  Cooldown: 0.25
+  RunsOut: 1
+  Health: 0
+  Mana: 0
