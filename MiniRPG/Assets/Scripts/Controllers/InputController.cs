@@ -11,13 +11,15 @@ namespace Assets.Scripts.Controllers
 {
     public class InputController:BaseController
     {
+        private Func<Vector3> PlayerPosition { get; set; }
+
         private LayerMask TargetLayerMask { get; set; }
 
         private GameGUI GameGUI { get; set; }
         private MenuGUI MenuGUI { get; set; }
 
-        private  float MaxInputRange { get; set; }
-
+        private float MaxInputRange { get; set; }
+        private float MaxDropItemRange { get; set; }
         #region Events
         public event Delegates.Vector3Target OnClickTarget = delegate{};
         public event Delegates.Vector3NormalTarget OnClickTargetNormal= delegate{};
@@ -43,10 +45,17 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
+            PlayerController playerController = GetController<PlayerController>();
+            PlayerPosition = () =>
+            {
+                return playerController.transform.position;
+            };
+
             GameGUI = GameGUI.Instance;
             MenuGUI = MenuGUI.Instance;
 
-            MaxInputRange = 50;
+            MaxInputRange = 70;
+            MaxDropItemRange = 5;
 
             InitGame(GameGUI);
             InitMenu(MenuGUI);
@@ -116,7 +125,13 @@ namespace Assets.Scripts.Controllers
                 {
                     case 11:
                         {
-                            OnDropItemClick.Invoke(raycastHit.collider.gameObject.GetComponent<DropItem>());
+                            if(Vector3.Distance(raycastHit.point, PlayerPosition()) < MaxDropItemRange)
+                                OnDropItemClick.Invoke(raycastHit.collider.gameObject.GetComponent<DropItem>());
+                            else
+                            {
+                                OnClickTarget.Invoke(raycastHit.point);
+                                OnClickTargetNormal.Invoke(raycastHit.point, Vector3.up);
+                            }
                         }
                         break;
                     case 12:

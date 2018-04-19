@@ -2,7 +2,6 @@
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
-        private Func<Vector3> PlayerPosition { get; set; }
+
 
         enum Drag
         {
@@ -42,13 +41,6 @@ namespace Assets.Scripts.Controllers
             CurrentInventoryIndex = -1;
             CurrentDropItem = null;
             MaxDropItemRange = 5;
-
-            PlayerController playerController = GetController<PlayerController>();
-            PlayerPosition = () =>
-            {
-                return playerController.transform.position;
-            };
-
 
             InputController inputController = GetController<InputController>();
 
@@ -170,12 +162,10 @@ namespace Assets.Scripts.Controllers
 
         private void OnDropItemClick(Worlds.Items.DropItem dropItem)
         {
-            if(Vector3.Distance(dropItem.transform.position, PlayerPosition()) < MaxDropItemRange)
+
+            if(Player.Inventory.AddItem(dropItem.ID))
             {
-                if(Player.Inventory.AddItem(dropItem.ID))
-                {
-                    Destroy(dropItem.gameObject);
-                }
+                Destroy(dropItem.gameObject);
             }
         }
 
