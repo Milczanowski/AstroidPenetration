@@ -110,7 +110,14 @@ namespace Assets.Scripts.Controllers
 
         private void OnTartgetEnter(int index)
         {
-
+            switch(CurrentDrag)
+            {
+                case Drag.Inventory:
+                    {
+                        Player.Inventory.SetSelected(-1);
+                    }
+                    break;
+            }
         }
 
         private void OnInventoryExit(int index)

@@ -74,10 +74,13 @@ namespace Assets.Scripts.Players
 
         public void OnInventory(int index)
         {
-            if(Slots.ContainsKey(index))
-                Slots[index].Use();
-            else
-                UnityEngine.Debug.LogError("Inventory not contains slot: " + index);
+            if(index != CurrentSelected)
+            {
+                if(Slots.ContainsKey(index))
+                    Slots[index].Use();
+                else
+                    UnityEngine.Debug.LogError("Inventory not contains slot: " + index);
+            }
         }
 
         public bool AddItem(string id, int count = 1)
@@ -153,6 +156,7 @@ namespace Assets.Scripts.Players
             {
                 if(Slots.ContainsKey(index))
                     Slots[index].OffHighlight(string.Empty);
+                CurrentSelected = -1;
                 return;
             }
 
