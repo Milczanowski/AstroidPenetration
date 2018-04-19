@@ -23,6 +23,8 @@ namespace Assets.Scripts.Controllers
         public event Delegates.Action OnPlayerClick = delegate{};
         public event Delegates.Vector3Target  OnPlayerStartDrag = delegate{};
 
+        public event Delegates.Vector3Target OnWorldEnter= delegate{};
+        public event Delegates.Vector3Target OnWorldExit= delegate{};
         public event Delegates.Vector3Target OnEndDrag = delegate{};
         public event Delegates.Vector2Target OnDrag = delegate{};
 
@@ -73,6 +75,8 @@ namespace Assets.Scripts.Controllers
             game.OnInventoryStartDrag += OnInventoryStartDrag.Invoke;
             game.OnInventoryEndDrag += OnInventoryEndDrag.Invoke;
             game.OnInventoryDrag += OnInventoryDrag.Invoke;
+            game.OnWorldEnter += OnWorldEnter.Invoke;
+            game.OnWorldExit += OnWorldExit.Invoke;           
         }
 
 

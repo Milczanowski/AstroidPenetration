@@ -18,6 +18,8 @@ namespace Assets.Scripts.Players
         private event Delegates.Index OnAvailableHighlight= delegate { };
         private event Delegates.Index OnInaccessibleHighlight= delegate { };
         private event Delegates.Index OnOffHighlight= delegate { };
+        private event Delegates.IndexPrefabInfo OnRemove= delegate{};
+
 
         private event Delegates.ID HighlightSlot = delegate{};
         private event Delegates.ID OffHighlightSlot = delegate{};
@@ -116,7 +118,6 @@ namespace Assets.Scripts.Players
             return false;
         }
 
-
         public void Highlight(string id)
         {
             HighlightSlot.Invoke(id);
@@ -139,7 +140,6 @@ namespace Assets.Scripts.Players
 
             return saveItems;
         }
-
 
         public void StartDrag(int index)
         {
@@ -174,14 +174,21 @@ namespace Assets.Scripts.Players
                         {
                             if(Slots[CurrentSelected].AddItem(Slots[index].Count))
                             {
+                                OnRemove.Invoke(index, Slots[index].Item.Model);
                                 Slots[index].SetItem(null, 0);
                             }
                         }
                     }
+                }else if(CurrentSelected== -1)
+                {
+                    Slots[index].SetItem(null, 0);
+
                 }
             }
             else if(Slots.ContainsKey(CurrentSelected))
                 Slots[CurrentSelected].OffHighlight(string.Empty);
+
+            CurrentSelected = -1;
         }
 
         public void SetSelected(int index)

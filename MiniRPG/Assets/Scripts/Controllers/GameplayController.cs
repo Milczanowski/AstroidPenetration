@@ -50,6 +50,8 @@ namespace Assets.Scripts.Controllers
             inputController.OnInventoryStartDrag += OnInventoryStartDrag;
             inputController.OnInventoryDrag += OnInventoryDrag;
             inputController.OnInventoryEndDrag += OnInventoryEndDrag;
+            inputController.OnWorldEnter += OnWorldEnter;
+            inputController.OnWorldExit += OnWorldExit;
 
             Player = new Player();
 
@@ -59,6 +61,30 @@ namespace Assets.Scripts.Controllers
             Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
+        }
+
+        private void OnWorldExit(Vector3 target)
+        {
+            switch(CurrentDrag)
+            {
+                case Drag.Inventory:
+                    {
+
+                    }
+                    break;
+            }
+        }
+
+        private void OnWorldEnter(Vector3 target)
+        {
+            switch(CurrentDrag)
+            {
+                case Drag.Inventory:
+                    {
+                        Player.Inventory.SetSelected(-1);
+                    }
+                    break;
+            }
         }
 
         private void OnInventoryEndDrag(int index)
@@ -75,6 +101,16 @@ namespace Assets.Scripts.Controllers
         {
             CurrentDrag = Drag.Inventory;
             Player.Inventory.StartDrag(index);
+        }
+
+        private void OnTartgetExit(int index)
+        {
+
+        }
+
+        private void OnTartgetEnter(int index)
+        {
+
         }
 
         private void OnInventoryExit(int index)

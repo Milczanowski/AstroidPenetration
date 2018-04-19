@@ -38,6 +38,8 @@ namespace Assets.Scripts.GUI.Game
         public event Delegates.Vector3Target OnBeginWorldDrag = delegate{};
         public event Delegates.Vector3Target OnEndWorldDrag = delegate{};
         public event Delegates.Vector2Target OnWorldDrag = delegate{};
+        public event Delegates.Vector3Target OnWorldEnter= delegate{};
+        public event Delegates.Vector3Target OnWorldExit= delegate{};
 
         public event Delegates.Index OnInventory= delegate{};
         public event Delegates.Index OnInventoryEnter= delegate{};
@@ -78,6 +80,10 @@ namespace Assets.Scripts.GUI.Game
                         OnInventoryExit.Invoke(index);
                     }
                     break;
+                case InputType.Target:
+                    {
+                        OnWorldExit.Invoke(eventData.position);
+                    }break;
             }
         }
 
@@ -90,6 +96,10 @@ namespace Assets.Scripts.GUI.Game
                         OnInventoryEnter.Invoke(index);
                     }
                     break;
+                case InputType.Target:
+                    {
+                        OnWorldEnter.Invoke(eventData.position);
+                    }break;
             }
         }
 
