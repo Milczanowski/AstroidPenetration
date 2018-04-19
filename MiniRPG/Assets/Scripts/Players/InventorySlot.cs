@@ -39,6 +39,14 @@ namespace Assets.Scripts.Players
             }
         }
 
+        public bool IsFull
+        {
+            get
+            {
+                return Count == MaxWeight;
+            }
+        }
+
         public InventorySlot(int id, int maxWeight)
         {
             ID = id;
@@ -95,7 +103,7 @@ namespace Assets.Scripts.Players
                 OnEmptyHighlight.Invoke(ID);
                 return;
             }
-            if(id == ItemID)
+            if(id == ItemID && !IsFull)
                 OnAvailableHighlight.Invoke(ID);
             else
                 OnInaccessibleHighlight.Invoke(ID);
