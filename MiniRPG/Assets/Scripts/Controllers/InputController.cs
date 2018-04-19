@@ -16,6 +16,8 @@ namespace Assets.Scripts.Controllers
         private GameGUI GameGUI { get; set; }
         private MenuGUI MenuGUI { get; set; }
 
+        private  float MaxInputRange { get; set; }
+
         #region Events
         public event Delegates.Vector3Target OnClickTarget = delegate{};
         public event Delegates.Vector3NormalTarget OnClickTargetNormal= delegate{};
@@ -43,6 +45,8 @@ namespace Assets.Scripts.Controllers
         {
             GameGUI = GameGUI.Instance;
             MenuGUI = MenuGUI.Instance;
+
+            MaxInputRange = 50;
 
             InitGame(GameGUI);
             InitMenu(MenuGUI);
@@ -106,7 +110,7 @@ namespace Assets.Scripts.Controllers
         {
             Ray ray = Camera.main.ScreenPointToRay(position);
             RaycastHit raycastHit;
-            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, TargetLayerMask.value))
+            if(Physics.Raycast(ray, out raycastHit, MaxInputRange, TargetLayerMask.value))
             {
                 switch(raycastHit.collider.gameObject.layer)
                 {
@@ -127,7 +131,7 @@ namespace Assets.Scripts.Controllers
         {
             Ray ray = Camera.main.ScreenPointToRay(target);
             RaycastHit raycastHit;
-            if(Physics.Raycast(ray, out raycastHit, float.MaxValue, TargetLayerMask.value))
+            if(Physics.Raycast(ray, out raycastHit, MaxInputRange, TargetLayerMask.value))
             {
                 switch(raycastHit.collider.gameObject.layer)
                 {

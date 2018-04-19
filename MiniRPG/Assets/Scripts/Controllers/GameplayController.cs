@@ -2,6 +2,7 @@
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
+        private Func<Vector3> PlayerPosition { get; set; }
+
         enum Drag
         {
             None,
@@ -29,13 +32,23 @@ namespace Assets.Scripts.Controllers
 
         private int CurrentInventoryIndex { get; set; }
 
-        public DropItem CurrentDropItem { get; set; }
+        private DropItem CurrentDropItem { get; set; }
+
+        private float MaxDropItemRange { get; set; }
 
         protected override IEnumerator Init()
         {
             CurrentDrag = Drag.None;
             CurrentInventoryIndex = -1;
             CurrentDropItem = null;
+            MaxDropItemRange = 5;
+
+            PlayerController playerController = GetController<PlayerController>();
+            PlayerPosition = () =>
+            {
+                return playerController.transform.position;
+            };
+
 
             InputController inputController = GetController<InputController>();
 
@@ -157,9 +170,12 @@ namespace Assets.Scripts.Controllers
 
         private void OnDropItemClick(Worlds.Items.DropItem dropItem)
         {
-            if(Player.Inventory.AddItem(dropItem.ID))
+            if(Vector3.Distance(dropItem.transform.position, PlayerPosition()) < MaxDropItemRange)
             {
-                Destroy(dropItem.gameObject);
+                if(Player.Inventory.AddItem(dropItem.ID))
+                {
+                    Destroy(dropItem.gameObject);
+                }
             }
         }
 
