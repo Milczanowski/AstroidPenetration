@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Assets.Scripts.Obserwers
 {
-    public interface IObserver
+    public interface IObserable
     {
+        void AddObserver(IObserver tartget);
     }
 }

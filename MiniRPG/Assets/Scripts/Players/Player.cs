@@ -1,14 +1,12 @@
-﻿using Assets.Scripts.GUI.Game;
+﻿using System.Collections;
+using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Models.Saves;
+using Assets.Scripts.Obserwers;
 using Assets.Scripts.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.Scripts.Players
 {
-    public class Player
+    public class Player: IBindable
     {
         public event Delegates.IntValue OnHealthChange = delegate{};
         public event Delegates.IntValue OnManaChange = delegate{};
@@ -23,7 +21,7 @@ namespace Assets.Scripts.Players
         public Player()
         {
             Inventory = new PlayerInventory(10, 10);
-            Inventory.OnItemUse += OnItemUse;
+           // Inventory.OnUseItem += OnItemUse;
         }
 
         public void AddEvents(IGUI gui)
@@ -102,6 +100,11 @@ namespace Assets.Scripts.Players
                 return max;
 
             return currnet;
+        }
+
+        public IEnumerator Bind()
+        {
+            yield return Inventory.Bind();
         }
     }
 }

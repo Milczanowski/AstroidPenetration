@@ -1,14 +1,17 @@
 ﻿using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Models.Basics;
 using Assets.Scripts.Obserwers;
+using Assets.Scripts.Players;
+using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    class InventoryController:BaseController, IInventory
+    class InventoryController:BaseController, IObserver, PlayerInventory.ISlotOffHighlight, PlayerInventory.ISlotAvailableHighlight, PlayerInventory.ISlotEmptyHighlight, PlayerInventory.ISlotInaccessibleHighlight, PlayerInventory.ISlotSetCount, PlayerInventory.ISlotSet
     {
         private Dictionary<int, InventoryButton>  Inventory { get; set; }
 
@@ -32,35 +35,6 @@ namespace Assets.Scripts.Controllers
         [Obserable(typeof(IInventoryDrag))]
         private event Delegates.Vector2Target OnInventoryDrag= delegate{};
 
-        public void OffHighlight(int index)
-        {
-            //Inventory[index].OffHighlight();
-        }
-
-        public void SetAvailableHighlight(int index)
-        {
-           // Inventory[index].SetHighlight(Color.green);//<-TODO
-        }
-
-        public void SetEmptyHighlight(int index)
-        {
-           // Inventory[index].SetHighlight(Color.gray);//<-TODO
-        }
-
-        public void SetInaccessibleHighlight(int index)
-        {
-           // Inventory[index].SetHighlight(Color.green);//<-TODO
-        }
-
-        public void SetInventoryCount(int index, int count)
-        {
-            //Inventory[index].SetCount(count);
-        }
-
-        public void SetInventoryIcon(int index, PrefabInfo info)
-        {
-          //  Inventory[index].SetIcon(info != null ? ObjectManager.Load<Image>(info.Name, info.BundleID) : null);
-        }
 
         protected override IEnumerator Init()
         {
@@ -80,6 +54,34 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        public void OnSlotSet(int index, PrefabInfo info)
+        {
+            Inventory[index].SetIcon(info != null ? ObjectManager.Load<Image>(info.Name, info.BundleID) : null);
+        }
 
+        public void OnSlotSetCount(int index, int count)
+        {
+            Inventory[index].SetCount(count);
+        }
+
+        public void OnSlotAvailableHighlight(int index)
+        {
+            Inventory[index].SetHighlight(Color.green);//<-TODO
+        }
+
+        public void OnSlotEmptyHighlight(int index)
+        {
+            Inventory[index].SetHighlight(Color.gray);//<-TODO
+        }
+
+        public void OnSlotInaccessibleHighlight(int index)
+        {
+            Inventory[index].SetHighlight(Color.green);//<-TODO
+        }
+
+        public void OnSlotOffHighlight(int index)
+        {
+            Inventory[index].OffHighlight();
+        }
     }
 }

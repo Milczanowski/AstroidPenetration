@@ -23,7 +23,7 @@ namespace Assets.Scripts.Controllers
         }
 
         [Obserable(typeof(IStopMove))]
-        private event Delegates.Action OnStop = delegate{};
+        private event Delegates.Action OnStopMove = delegate{};
         [Obserable(typeof(IMove))]
         private event Delegates.Vector3Target OnMove= delegate{};
         [Obserable(typeof(IShowMark))]
@@ -32,6 +32,7 @@ namespace Assets.Scripts.Controllers
         private event Delegates.Vector3Target OnRangeAttack= delegate{};
 
         private Player Player { get; set; }
+
         private Drag CurrentDrag { get; set; }
         private int CurrentInventoryIndex { get; set; }
         private DropItem CurrentDropItem { get; set; }
@@ -43,12 +44,14 @@ namespace Assets.Scripts.Controllers
 
             Player = new Player();
 
+
             GetComponent<WorldInputController>().AddObserver(this);
 
             InventoryController inventoryController = GetComponent<InventoryController>();
             inventoryController.AddObserver(this);
+            Player.Inventory.AddObserver(inventoryController);
 
-            Player.Inventory.AddEvents(inventoryController);
+            yield return  Player.Bind();
 
 
            // Player.AddEvents(GameGUI.Instance);

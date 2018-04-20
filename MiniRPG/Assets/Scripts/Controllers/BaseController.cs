@@ -6,7 +6,7 @@ using Assets.Scripts.Obserwers;
 
 namespace Assets.Scripts.Controllers
 {
-    public abstract class BaseController: MonoBehaviour
+    public abstract class BaseController: MonoBehaviour, IObserable
     {
         private static Dictionary<Type, BaseController> Controllers = new Dictionary<Type, BaseController>();
 

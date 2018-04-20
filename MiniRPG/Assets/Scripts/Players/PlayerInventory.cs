@@ -1,65 +1,94 @@
 ﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Models.Basics;
 using Assets.Scripts.Models.Saves;
+using Assets.Scripts.Models.World.Items;
+using Assets.Scripts.Obserwers;
 using Assets.Scripts.Spawners;
 using Assets.Scripts.Utils;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.Players
 {
-    public class PlayerInventory
+    public class PlayerInventory: IBindable, IObserable
     {
-        public event Delegates.InventoryItem OnItemUse = delegate{};
+        public interface IUserItem:IObserver { void OnUseItem(BaseItem baseItem); }
 
-        private event Delegates.Index OnEmpty = delegate{};
-        private event Delegates.Index OnFull= delegate{};
-        private event Delegates.IndexPrefabInfo OnSet= delegate{};
-        private event Delegates.IndexCount OnSetCount = delegate{};
-        private event Delegates.Index OnEmptyHighlight= delegate { };
-        private event Delegates.Index OnAvailableHighlight= delegate { };
-        private event Delegates.Index OnInaccessibleHighlight= delegate { };
-        private event Delegates.Index OnOffHighlight= delegate { };
-        private event Delegates.IndexPrefabInfo OnRemove= delegate{};
+        [Obserable(typeof(IUserItem))]
+        private event Delegates.InventoryItem OnUseItem = delegate{};
 
+        public interface ISlotEmpty:IObserver { void OnSlotEmpty(int index); }
+        public interface ISlotFull:IObserver { void OnSlotFull(int index); }
+        public interface ISlotEmptyHighlight:IObserver { void OnSlotEmptyHighlight(int index); }
+        public interface ISlotAvailableHighlight:IObserver { void OnSlotAvailableHighlight(int index); }
+        public interface ISlotInaccessibleHighlight:IObserver { void OnSlotInaccessibleHighlight(int index); }
+        public interface ISlotOffHighlight:IObserver { void OnSlotOffHighlight(int index); }
 
-        private event Delegates.ID HighlightSlot = delegate{};
-        private event Delegates.ID OffHighlightSlot = delegate{};
+        [Obserable(typeof(ISlotEmpty))]
+        private event Delegates.Index OnSlotEmpty = delegate{};
+        [Obserable(typeof(ISlotFull))]
+        private event Delegates.Index OnSlotFull= delegate{};
+        [Obserable(typeof(ISlotEmptyHighlight))]
+        private event Delegates.Index OnSlotEmptyHighlight= delegate { };
+        [Obserable(typeof(ISlotAvailableHighlight))]
+        private event Delegates.Index OnSlotAvailableHighlight= delegate { };
+        [Obserable(typeof(ISlotInaccessibleHighlight))]
+        private event Delegates.Index OnSlotInaccessibleHighlight= delegate { };
+        [Obserable(typeof(ISlotOffHighlight))]
+        private event Delegates.Index OnSlotOffHighlight= delegate { };
 
+        public interface ISlotSetCount:IObserver { void OnSlotSetCount(int index, int count); }
+        public interface ISlotSet:IObserver { void OnSlotSet(int index, PrefabInfo info); }
+        public interface ISlotRemove:IObserver { void OnSlotremove(int index, PrefabInfo info); }
+
+        [Obserable(typeof(ISlotSetCount))]
+        private event Delegates.IndexCount OnSlotSetCount = delegate{};
+        [Obserable(typeof(ISlotSet))]
+        private event Delegates.IndexPrefabInfo OnSlotSet= delegate{};
+        [Obserable(typeof(ISlotRemove))]
+        private event Delegates.IndexPrefabInfo OnSlotRemove= delegate{};
+
+        public interface IHighlightSlot { void OnHighlightSlot(string id); }
+        public interface IOffHighlightSlot { void OnOffHighlightSlot(string id); }
+
+        [Obserable(typeof(IHighlightSlot))]
+        private event Delegates.ID OnHighlightSlot = delegate{};
+        [Obserable(typeof(IOffHighlightSlot))]
+        private event Delegates.ID OnOffHighlightSlot = delegate{};
 
         private Dictionary<int, InventorySlot> Slots { get; set; }
 
         private int CurrentSelected { get; set; }
 
+        public ObserverController Observer { get; private set; }
+
+
         public PlayerInventory(int slotCount, int maxWeight)
         {
+
             CurrentSelected = -1;
             Slots = new Dictionary<int, InventorySlot>();
             for(int i = 0; i < slotCount; ++i)
             {
                 InventorySlot inventorySlot = new InventorySlot(i, maxWeight);
-                inventorySlot.OnSet = (id, item) => { OnSet.Invoke(id, item); };
-                inventorySlot.OnSetCount = (id, count) => { OnSetCount.Invoke(id, count); };
-                inventorySlot.OnUse = (item) => { OnItemUse.Invoke(item); };
-                inventorySlot.OnEmptyHighlight += (id) => { OnEmptyHighlight.Invoke(id); };
-                inventorySlot.OnAvailableHighlight += (id) => { OnAvailableHighlight.Invoke(id); };
-                inventorySlot.OnInaccessibleHighlight += (id) => { OnInaccessibleHighlight.Invoke(id); };
-                inventorySlot.OnOffHighlight += (id) => { OnOffHighlight.Invoke(id); };
+                inventorySlot.OnSet = (id, item) => { OnSlotSet.Invoke(id, item); };
+                inventorySlot.OnSetCount = (id, count) => { OnSlotSetCount.Invoke(id, count); };
+                inventorySlot.OnUse = (item) => { OnUseItem.Invoke(item); };
+                inventorySlot.OnEmptyHighlight += (id) => { OnSlotEmptyHighlight.Invoke(id); };
+                inventorySlot.OnAvailableHighlight += (id) => { OnSlotAvailableHighlight.Invoke(id); };
+                inventorySlot.OnInaccessibleHighlight += (id) => { OnSlotInaccessibleHighlight.Invoke(id); };
+                inventorySlot.OnOffHighlight += (id) => { OnSlotOffHighlight.Invoke(id); };
 
-                HighlightSlot += inventorySlot.Highlight;
-                OffHighlightSlot += inventorySlot.OffHighlight;
+                OnHighlightSlot += inventorySlot.Highlight;
+                OnOffHighlightSlot += inventorySlot.OffHighlight;
 
                 Slots.Add(i, inventorySlot);
             }
-        }
-        
-        public void AddEvents(IInventory inventory)
-        {
-            OnSet += inventory.SetInventoryIcon;
-            OnSetCount += inventory.SetInventoryCount;
-            OnInaccessibleHighlight += inventory.SetInaccessibleHighlight;
-            OnEmptyHighlight += inventory.SetEmptyHighlight;
-            OnAvailableHighlight += inventory.SetAvailableHighlight;
-            OnOffHighlight += inventory.OffHighlight;
-        }
+
+            Observer = new ObserverController(this);
+        }          
+
+
 
         public void InitItem(List<SaveItem> items)
         {
@@ -123,12 +152,12 @@ namespace Assets.Scripts.Players
 
         public void Highlight(string id)
         {
-            HighlightSlot.Invoke(id);
+            OnHighlightSlot.Invoke(id);
         }
 
         public void OffHighlight(string id)
         {
-            OffHighlightSlot.Invoke(id);
+            OnOffHighlightSlot.Invoke(id);
         }
 
         public List<SaveItem> GetSave()
@@ -178,7 +207,7 @@ namespace Assets.Scripts.Players
                         {
                             if(Slots[CurrentSelected].AddItem(Slots[index].Count))
                             {
-                                OnRemove.Invoke(index, Slots[index].Item.Model);
+                                OnSlotRemove.Invoke(index, Slots[index].Item.Model);
                                 Slots[index].SetItem(null, 0);
                             }
                         }
@@ -200,5 +229,14 @@ namespace Assets.Scripts.Players
             CurrentSelected = index;
         }
 
+        public IEnumerator Bind()
+        {
+            yield return Observer.Bind();
+        }
+
+        public void AddObserver(IObserver tartget)
+        {
+            Observer.AddObserver(tartget);
+        }
     }
 }
