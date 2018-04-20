@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Assets.Scripts.Obserwers
 {
-    public class Observer: IBindable
+    public class Observer: IBindable, IObserable
     {
         private List<IObserver> Observers { get; set; }
         private object Target { get; set; }
@@ -41,6 +41,7 @@ namespace Assets.Scripts.Obserwers
                     }
                 }
             }
+            Observers.Clear();
             yield return null;
         }
     }

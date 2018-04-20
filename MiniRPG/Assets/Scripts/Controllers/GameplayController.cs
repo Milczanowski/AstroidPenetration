@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Obserwers;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Obserwers;
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
@@ -50,11 +51,10 @@ namespace Assets.Scripts.Controllers
             InventoryController inventoryController = GetComponent<InventoryController>();
             inventoryController.AddObserver(this);
             Player.Inventory.AddObserver(inventoryController);
-
+            Player.AddObserver(GameGUI.Instance);
             yield return  Player.Bind();
 
 
-           // Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
         }

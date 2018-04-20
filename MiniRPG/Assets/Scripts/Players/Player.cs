@@ -1,27 +1,37 @@
 ﻿using System.Collections;
 using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Models.Saves;
+using Assets.Scripts.Models.World.Items;
 using Assets.Scripts.Obserwers;
 using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.Players
 {
-    public class Player: IBindable
+    public class Player: IBindable,IObserable, PlayerInventory.IUserItem
     {
-        public event Delegates.IntValue OnHealthChange = delegate{};
-        public event Delegates.IntValue OnManaChange = delegate{};
-        public event Delegates.IntValue OnExperienceChange = delegate{};
-        public event Delegates.IntValue OnLevelChange = delegate{};
+        public interface IHealthChange:IObserver { void OnHealthChange(int value); }
+        public interface IManaChange:IObserver { void OnManaChange(int value); }
+        public interface IExperienceChange:IObserver { void OnExperienceChange(int value); }
+        public interface ILevelChange:IObserver { void OnLevelChange(int value); }
 
+        [Obserable(typeof(IHealthChange))]
+        private event Delegates.IntValue OnHealthChange = delegate{};
+        [Obserable(typeof(IManaChange))]
+        private event Delegates.IntValue OnManaChange = delegate{};
+        [Obserable(typeof(IExperienceChange))]
+        private event Delegates.IntValue OnExperienceChange = delegate{};
+        [Obserable(typeof(ILevelChange))]
+        private event Delegates.IntValue OnLevelChange = delegate{};
 
+        private Observer Observer { get; set; }
         private SavePlayer SavePlayer { get; set; }
-
         public PlayerInventory Inventory { get; private set; }
 
         public Player()
         {
+            Observer = new Observer(this);
             Inventory = new PlayerInventory(10, 10);
-           // Inventory.OnUseItem += OnItemUse;
+            Inventory.AddObserver(this);
         }
 
         public void AddEvents(IGUI gui)
@@ -32,10 +42,7 @@ namespace Assets.Scripts.Players
             OnLevelChange += gui.SetLevelValue;
         }
 
-        private void OnItemUse(Models.World.Items.BaseItem baseItem)
-        {
-            baseItem.Use(this);
-        }
+
 
         public void Load(SavePlayer savePlayer)
         {
@@ -105,6 +112,17 @@ namespace Assets.Scripts.Players
         public IEnumerator Bind()
         {
             yield return Inventory.Bind();
+            yield return Observer.Bind();
+        }
+
+        public void OnUseItem(BaseItem baseItem)
+        {
+            baseItem.Use(this);
+        }
+
+        public void AddObserver(IObserver tartget)
+        {
+            Observer.AddObserver(tartget);
         }
     }
 }
