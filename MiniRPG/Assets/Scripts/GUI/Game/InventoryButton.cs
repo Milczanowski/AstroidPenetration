@@ -90,17 +90,17 @@ namespace Assets.Scripts.GUI.Game
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            onEndDrag.Invoke(onEndDrag);
+            onEndDrag.Invoke(index, eventData);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            onPointerEnter.Invoke(index, eventData);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            onPointerExit.Invoke(index, eventData);
         }
     }
 }
