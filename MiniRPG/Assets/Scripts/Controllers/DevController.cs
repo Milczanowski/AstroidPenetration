@@ -13,5 +13,10 @@ namespace Assets.Scripts.Controllers
             dev.AddComponent<FPSCounter>();
             yield return null;
         }
+
+        protected override IEnumerable InitObservers()
+        {
+            yield return null;
+        }
     }
 }

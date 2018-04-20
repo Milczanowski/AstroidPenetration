@@ -170,6 +170,7 @@ MonoBehaviour:
   CharacterController: {fileID: 143564363110104858}
   moveSpeed: 15
   rotationSmoothTime: 0.1
+  pushForce: 0.1
 --- !u!143 &143564363110104858
 CharacterController:
   m_ObjectHideFlags: 1

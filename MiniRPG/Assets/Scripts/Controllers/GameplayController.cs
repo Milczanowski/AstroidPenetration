@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.GUI.Game;
+﻿using Assets.Scripts.Controllers.Observers;
+using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
@@ -9,6 +10,10 @@ namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController
     {
+        public interface IStopMove:IObserver { void OnStopMove(); }
+        public interface IMove    :IObserver { void OnMove(Vector3 position); }
+        public interface IShowMark:IObserver { void OnShowMark(Vector3 position, Vector3 normal); }
+
         enum Drag
         {
             None,
@@ -17,11 +22,11 @@ namespace Assets.Scripts.Controllers
             Inventory
         }
 
-        public event Delegates.Action OnStop = delegate{};
-        public event Delegates.Vector3Target OnMove= delegate{};
-        public event Delegates.Vector3NormalTarget OnShowMark= delegate{};
-        public event Delegates.Vector3Target OnMeleAtack= delegate{};
-        public event Delegates.Vector3Target OnRangeAttack= delegate{};
+        private event Delegates.Action OnStop = delegate{};
+        private event Delegates.Vector3Target OnMove= delegate{};
+        private event Delegates.Vector3NormalTarget OnShowMark= delegate{};
+        private event Delegates.Vector3Target OnMeleAtack= delegate{};
+        private event Delegates.Vector3Target OnRangeAttack= delegate{};
 
         private Player Player { get; set; }
 
@@ -60,6 +65,24 @@ namespace Assets.Scripts.Controllers
             Player.Inventory.AddEvents(GameGUI.Instance);
             Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
+            yield return null;
+        }
+
+        protected override IEnumerable InitObservers()
+        {
+            foreach(var observer in Observers)
+            {
+                if(observer is IStopMove)
+                    OnStop += (observer as IStopMove).OnStopMove;
+
+                if(observer is IMove)
+                    OnMove += (observer as IMove).OnMove;
+
+                if(observer is IShowMark)
+                    OnShowMark += (observer as IShowMark).OnShowMark;
+            }
+
+            Observers.Clear();
             yield return null;
         }
 
@@ -200,5 +223,7 @@ namespace Assets.Scripts.Controllers
             if(CurrentDrag == Drag.None)
                 OnShowMark.Invoke(target, normal);
         }
+
+
     }
 }

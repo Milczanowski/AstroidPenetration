@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using Assets.Scripts.Controllers.Observers;
 
 namespace Assets.Scripts.Controllers
 {
     public abstract class BaseController: MonoBehaviour
     {
         private static Dictionary<Type, BaseController> Controllers = new Dictionary<Type, BaseController>();
+
+        protected List<IObserver> Observers = new List<IObserver>();
 
         protected virtual void Awake()
         {
@@ -19,6 +22,8 @@ namespace Assets.Scripts.Controllers
         }
 
         protected abstract IEnumerator Init();
+
+        protected abstract IEnumerable InitObservers();
 
         protected virtual void Start()
         {
@@ -43,6 +48,9 @@ namespace Assets.Scripts.Controllers
                 yield return Controllers[key].Init();
 
             foreach(Type key in Controllers.Keys)
+                yield return Controllers[key].InitObservers();
+
+            foreach(Type key in Controllers.Keys)
                 Controllers[key].enabled = true;
         }
 
@@ -50,5 +58,11 @@ namespace Assets.Scripts.Controllers
         {
             Controllers.Clear();
         }       
-    }
+
+        public void AddObserver(IObserver observer)
+        {
+            if(!Observers.Contains(observer))
+                Observers.Add(observer);
+        }
+    } 
 }

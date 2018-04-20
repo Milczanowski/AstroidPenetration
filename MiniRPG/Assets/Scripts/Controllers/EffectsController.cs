@@ -4,21 +4,26 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    class EffectsController:BaseController
+    class EffectsController:BaseController, GameplayController.IShowMark
     {
         private Effect Arrows { get; set; }
+
+        public void OnShowMark(Vector3 position, Vector3 normal)
+        {
+            Arrows.Show(position, normal);
+        }
 
         protected override IEnumerator Init()
         {
             Arrows = Effect.GetEffect(EffectType.Arrows);
 
-            GetController<GameplayController>().OnShowMark += ShowMark;
+            GetController<GameplayController>().AddObserver(this);
             yield return null;
         }
 
-        private void ShowMark(Vector3 position, Vector3 normal)
+        protected override IEnumerable InitObservers()
         {
-            Arrows.Show(position, normal);
+            yield return null;
         }
     }
 }

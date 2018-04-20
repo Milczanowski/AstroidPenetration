@@ -142,5 +142,10 @@ namespace Assets.Scripts.Controllers
             if(Physics.Raycast(ray, out raycastHit, offSet.y, groudLayerMask.value))
                 TargetOffset.y += offSet.y -(transform.position.y - raycastHit.point.y);
         }
+
+        protected override IEnumerable InitObservers()
+        {
+            yield return null;
+        }
     }
 }
