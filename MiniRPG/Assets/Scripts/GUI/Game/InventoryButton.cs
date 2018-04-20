@@ -1,15 +1,21 @@
 ﻿using Assets.Scripts.Inputs;
 using Assets.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
-    [RequireComponent(typeof(ClickInput))]
-    [RequireComponent(typeof(EnterInput))]
-
-    public class InventoryButton:MonoBehaviour, IEditorSerializable
+    public class InventoryButton:MonoBehaviour, IEditorSerializable, IPointerClickHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public Delegates.GUIInput onPointerEnter= delegate{ };
+        public Delegates.GUIInput onPointerExit = delegate{ };
+        public Delegates.GUIInput onBeginDrag = delegate{};
+        public Delegates.GUIInput onEndDrag = delegate{};
+        public Delegates.GUIInput onDrag = delegate{};
+        public Delegates.GUIInput onPointerClick = delegate{ };
+        public Delegates.GUIInput onPointerDown = delegate{ };
+
         [SerializeField]
         private Image Highlight = null;
         [SerializeField]
@@ -31,13 +37,6 @@ namespace Assets.Scripts.GUI.Game
             Highlight = transform.Find("Highlight").GetComponent<Image>();
             Icon = transform.Find("Icon").GetComponent<Image>();
             Count = transform.Find("Count").GetComponent<Text>();
-
-            var ci = GetComponent<ClickInput>();
-            var ei = GetComponent<EnterInput>();
-            var di = GetComponent<DragInput>();
-
-            di.index = ci.index = ei.index = index;
-            di.type = ci.type = ei.type = InputType.Inventory;
         }
         public void SetIcon(Image icon)
         {
@@ -69,5 +68,39 @@ namespace Assets.Scripts.GUI.Game
             Highlight.enabled = false;
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            onPointerClick.Invoke(index, eventData);
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            onPointerDown.Invoke(index, eventData);
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            onBeginDrag.Invoke(index, eventData);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            onDrag.Invoke(index, eventData);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            onEndDrag.Invoke(onEndDrag);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

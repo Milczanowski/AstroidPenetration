@@ -15,7 +15,7 @@ namespace Assets.Scripts.Utils
 
         public delegate void FloatValue(float value);
         public delegate void Action();
-        public delegate void GUIInput(InputType type, int index, PointerEventData eventData);
+        public delegate void GUIInput(int index, PointerEventData eventData);
         public delegate void GenericValue<T>(T value) where T : struct;
         public delegate void Index(int index);
         public delegate void IndexPrefabInfo(int index, PrefabInfo info);
