@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Controllers.Observers;
-using Assets.Scripts.GUI.Game;
+﻿using Assets.Scripts.Obserwers;
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
@@ -9,8 +8,7 @@ using UnityEngine;
 namespace Assets.Scripts.Controllers
 {
     class GameplayController:BaseController, WorldInputController.IWorldClick, WorldInputController.IBeginPlayerDrag, WorldInputController.IEndWorldDrag, WorldInputController.IItemClick,
-        WorldInputController.IBeginItemDrag, InventoryController.IInventoryEnter, InventoryController.IInventoryExit, InventoryController.IInventoryBeginDrag, InventoryController.IInventoryEndDrag,
-        WorldInputController.IWorldEnter, InventoryController.IInventory
+        WorldInputController.IBeginItemDrag, InventoryController.IInventoryEnter, InventoryController.IInventoryExit, InventoryController.IInventoryBeginDrag, InventoryController.IInventoryEndDrag, WorldInputController.IWorldEnter, InventoryController.IInventory
     {
         public interface IStopMove:IObserver { void OnStopMove(); }
         public interface IMove    :IObserver { void OnMove(Vector3 position); }
@@ -24,20 +22,19 @@ namespace Assets.Scripts.Controllers
             Inventory
         }
 
+        [Obserable(typeof(IStopMove))]
         private event Delegates.Action OnStop = delegate{};
+        [Obserable(typeof(IMove))]
         private event Delegates.Vector3Target OnMove= delegate{};
+        [Obserable(typeof(IShowMark))]
         private event Delegates.Vector3NormalTarget OnShowMark= delegate{};
         private event Delegates.Vector3Target OnMeleAtack= delegate{};
         private event Delegates.Vector3Target OnRangeAttack= delegate{};
 
         private Player Player { get; set; }
-
         private Drag CurrentDrag { get; set; }
-
         private int CurrentInventoryIndex { get; set; }
-
         private DropItem CurrentDropItem { get; set; }
-
         protected override IEnumerator Init()
         {
             CurrentDrag = Drag.None;
@@ -47,35 +44,18 @@ namespace Assets.Scripts.Controllers
             Player = new Player();
 
             GetComponent<WorldInputController>().AddObserver(this);
-            GetComponent<InventoryController>().AddObserver(this);
+
+            InventoryController inventoryController = GetComponent<InventoryController>();
+            inventoryController.AddObserver(this);
+
+            Player.Inventory.AddEvents(inventoryController);
 
 
-            Player.Inventory.AddEvents(GameGUI.Instance);
-            Player.AddEvents(GameGUI.Instance);
+           // Player.AddEvents(GameGUI.Instance);
             Player.Load(GetComponent<SaveController>().Instance.Player);
             yield return null;
         }
-
-        protected override IEnumerable InitObservers()
-        {
-            foreach(var observer in Observers)
-            {
-                if(observer is IStopMove)
-                    OnStop += (observer as IStopMove).OnStopMove;
-
-                if(observer is IMove)
-                    OnMove += (observer as IMove).OnMove;
-
-                if(observer is IShowMark)
-                    OnShowMark += (observer as IShowMark).OnShowMark;
-            }
-
-            Observers.Clear();
-            yield return null;
-        }       
-
-
-
+     
         public void OnWorldClick(Vector3 position, Vector3 normal)
         {
             if(CurrentDrag == Drag.None)
@@ -84,12 +64,10 @@ namespace Assets.Scripts.Controllers
                 OnShowMark.Invoke(position, normal);
             }
         }
-
         public void OnBeginPlayerDrag(Vector3 position)
         {
             CurrentDrag = Drag.Player;
         }
-
         public void OnEndWorldDrag(Vector2 position)
         {
             switch(CurrentDrag)
@@ -109,7 +87,6 @@ namespace Assets.Scripts.Controllers
             }
             CurrentDrag = Drag.None;
         }
-
         public void OnItemClick(DropItem item)
         {
             if(Player.Inventory.AddItem(item.ID))
@@ -117,14 +94,12 @@ namespace Assets.Scripts.Controllers
                 Destroy(item.gameObject);
             }
         }
-
         public void OnBeginItemDrag(DropItem item)
         {
             CurrentDrag = Drag.Item;
             CurrentDropItem = item;
             Player.Inventory.Highlight(item.ID);
         }
-
         public void OnInventoryEnter(int index)
         {
             switch(CurrentDrag)
@@ -141,7 +116,6 @@ namespace Assets.Scripts.Controllers
                     break;
             }
         }
-
         public void OnInventoryExit(int index)
         {
             switch(CurrentDrag)
@@ -153,19 +127,16 @@ namespace Assets.Scripts.Controllers
                     break;
             }
         }
-
         public void OnInventoryBeginDrag(int index)
         {
             CurrentDrag = Drag.Inventory;
             Player.Inventory.StartDrag(index);
         }
-
         public void OnInventoryEndDrag(int index)
         {
             CurrentDrag = Drag.None;
             Player.Inventory.EndDrag(index);
         }
-
         public void OnWorldEnter(Vector2 position)
         {
             switch(CurrentDrag)
@@ -177,7 +148,6 @@ namespace Assets.Scripts.Controllers
                     break;
             }
         }
-
         public void OnInventory(int index)
         {
             Player.Inventory.OnInventory(index);

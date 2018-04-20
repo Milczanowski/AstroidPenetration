@@ -23,7 +23,7 @@ namespace Assets.Scripts.Controllers
             StartCoroutine(base.Save());
         }
 
-        protected override IEnumerable InitObservers()
+        protected override IEnumerator InitObservers()
         {
             yield return null;
         }

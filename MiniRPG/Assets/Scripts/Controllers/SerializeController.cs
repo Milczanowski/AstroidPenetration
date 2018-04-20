@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.IO;
-using System.Collections;
+﻿using Assets.Scripts.Serializers;
 using System;
-using System.Reflection;
-using Assets.Scripts.Serializers;
+using System.Collections;
+using System.IO;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {

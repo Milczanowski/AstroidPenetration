@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using Assets.Scripts.Controllers.Observers;
+using Assets.Scripts.Obserwers;
 
 namespace Assets.Scripts.Controllers
 {
@@ -10,20 +10,24 @@ namespace Assets.Scripts.Controllers
     {
         private static Dictionary<Type, BaseController> Controllers = new Dictionary<Type, BaseController>();
 
-        protected List<IObserver> Observers = new List<IObserver>();
+        private ObserverController Observer { get; set; }
 
         protected virtual void Awake()
         {
             if(Controllers.ContainsKey(GetType()))
                 throw new Exception("Doubled controller: " + GetType());
 
+            Observer = new ObserverController(this);
             Controllers.Add(GetType(), this);
             enabled = false;
         }
 
         protected abstract IEnumerator Init();
 
-        protected abstract IEnumerable InitObservers();
+        protected virtual IEnumerator InitObservers()
+        {
+            yield return Observer.Bind();
+        }
 
         protected virtual void Start()
         {
@@ -61,8 +65,7 @@ namespace Assets.Scripts.Controllers
 
         public void AddObserver(IObserver observer)
         {
-            if(!Observers.Contains(observer))
-                Observers.Add(observer);
+            Observer.AddObserver(observer);
         }
     } 
 }

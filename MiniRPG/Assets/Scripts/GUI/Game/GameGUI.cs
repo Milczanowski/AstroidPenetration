@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.GUI.Game
 {
-    public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable, IInventory, IGUI
+    public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable, IGUI
     {
         [SerializeField]
         private Text Health = null;

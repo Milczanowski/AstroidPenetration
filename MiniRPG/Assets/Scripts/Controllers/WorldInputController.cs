@@ -1,8 +1,9 @@
-﻿using Assets.Scripts.Controllers.Observers;
-using Assets.Scripts.GUI.Game;
+﻿using Assets.Scripts.GUI.Game;
+using Assets.Scripts.Obserwers;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -13,8 +14,11 @@ namespace Assets.Scripts.Controllers
         public interface IPlayerPointerDown:IObserver { void OnPlayerPointerDown(Vector3 position); }
         public interface IBeginPlayerDrag:IObserver { void OnBeginPlayerDrag(Vector3 position); }
 
+        [Obserable(typeof(IPlayerClick))]
         private event Delegates.Vector3Target OnPlayerClick = delegate{};
+        [Obserable(typeof(IPlayerPointerDown))]
         private event Delegates.Vector3Target OnPlayerPointerDown = delegate{};
+        [Obserable(typeof(IBeginPlayerDrag))]
         private event Delegates.Vector3Target OnBeginPlayerDrag = delegate{};
 
         public interface IWorldClick:IObserver { void OnWorldClick(Vector3 position, Vector3 normal); }
@@ -25,39 +29,51 @@ namespace Assets.Scripts.Controllers
         public interface IWorldDrag:IObserver { void OnWorldDrag(Vector2 position); }
         public interface IWorldExit:IObserver { void OnWorldExit(Vector2 position); }
 
+        [Obserable(typeof(IWorldClick))]
         private event Delegates.Vector3NormalTarget OnWorldClick = delegate{};
+        [Obserable(typeof(IWorldPointerDown))]
         private event Delegates.Vector3NormalTarget OnWorldPointerDown = delegate{};
+        [Obserable(typeof(IBeginWorldDrag))]
         private event Delegates.Vector2Target OnBeginWorldDrag = delegate{};
+        [Obserable(typeof(IEndWorldDrag))]
         private event Delegates.Vector2Target OnEndWorldDrag = delegate{};
+        [Obserable(typeof(IWorldDrag))]
         private event Delegates.Vector2Target OnWorldDrag = delegate{};
+        [Obserable(typeof(IWorldEnter))]
         private event Delegates.Vector2Target OnWorldEnter= delegate{};
+        [Obserable(typeof(IWorldExit))]
         private event Delegates.Vector2Target OnWorldExit= delegate{};
 
         public interface IItemClick:IObserver { void OnItemClick(DropItem item); }
         public interface IItemPointerDown:IObserver { void OnItemPointerDown(DropItem item); }
         public interface IBeginItemDrag:IObserver { void OnBeginItemDrag(DropItem item); }
 
-        public event Delegates.OnDropItem OnItemClick = delegate{};
-        public event Delegates.OnDropItem OnItemPointerDown = delegate{};
-        public event Delegates.OnDropItem OnBeginItemDrag = delegate{};
+        [Obserable(typeof(IItemClick))]
+        private event Delegates.OnDropItem OnItemClick = delegate{};
+        [Obserable(typeof(IItemPointerDown))]
+        private event Delegates.OnDropItem OnItemPointerDown = delegate{};
+        [Obserable(typeof(IBeginItemDrag))]
+        private event Delegates.OnDropItem OnBeginItemDrag = delegate{};
 
-        [SerializeField]
-        private WorldInput worldInput = null;
-        [SerializeField]
-        private LayerMask TargetLayerMask = 0;
-        [SerializeField]
-        private float MaxInputRange = 70;
+
+        private WorldInput WorldInput { get; set; }
+        private LayerMask TargetLayerMask { get; set; }
+        private float MaxInputRange { get; set; }
 
         protected override IEnumerator Init()
         {
-            worldInput = GetComponentInChildren<WorldInput>();
-            worldInput.onPointerEnter += OnPointerEnter;
-            worldInput.onPointerExit += OnPointerExit;
-            worldInput.onBeginDrag += OnBeginDrag;
-            worldInput.onEndDrag += OnEndDrag;
-            worldInput.onDrag += OnDrag;
-            worldInput.onPointerClick += OnPointerClick;
-            worldInput.onPointerDown += OnPointerDown;
+            MaxInputRange = 70;
+            TargetLayerMask = LayerMask.GetMask("World", "Items", "Player");
+
+            WorldInput = FindObjectOfType<WorldInput>();
+
+            WorldInput.onPointerEnter += OnPointerEnter;
+            WorldInput.onPointerExit += OnPointerExit;
+            WorldInput.onBeginDrag += OnBeginDrag;
+            WorldInput.onEndDrag += OnEndDrag;
+            WorldInput.onDrag += OnDrag;
+            WorldInput.onPointerClick += OnPointerClick;
+            WorldInput.onPointerDown += OnPointerDown;
 
             yield return null;
         }
@@ -126,7 +142,7 @@ namespace Assets.Scripts.Controllers
                         break;
                     case 12:
                         {
-                            OnPlayerClick.Invoke(raycastHit.point);
+                            OnBeginPlayerDrag.Invoke(raycastHit.point);
                         }
                         break;
                 }
@@ -163,53 +179,6 @@ namespace Assets.Scripts.Controllers
                         break;
                 }
             }
-        }
-
-        protected override IEnumerable InitObservers()
-        {
-            foreach(var observer in Observers)
-            {
-                if(observer is IPlayerClick)
-                    OnPlayerClick += (observer as IPlayerClick).OnPlayerClick;
-
-                if(observer is IPlayerPointerDown)
-                    OnPlayerPointerDown += (observer as IPlayerPointerDown).OnPlayerPointerDown;
-
-                if(observer is IBeginPlayerDrag)
-                    OnBeginPlayerDrag += (observer as IBeginPlayerDrag).OnBeginPlayerDrag;
-
-                if(observer is IWorldClick)
-                    OnWorldClick += (observer as IWorldClick).OnWorldClick;
-
-                if(observer is IWorldPointerDown)
-                    OnWorldPointerDown += (observer as IWorldPointerDown).OnWorldPointerDown;
-
-                if(observer is IBeginWorldDrag)
-                    OnBeginWorldDrag += (observer as IBeginWorldDrag).OnBeginWorldDrag;
-
-                if(observer is IEndWorldDrag)
-                    OnEndWorldDrag += (observer as IEndWorldDrag).OnEndWorldDrag;
-
-                if(observer is IWorldDrag)
-                    OnWorldDrag += (observer as IWorldDrag).OnWorldDrag;
-
-                if(observer is IWorldExit)
-                    OnWorldExit += (observer as IWorldExit).OnWorldExit;
-
-                if(observer is IItemClick)
-                    OnItemClick += (observer as IItemClick).OnItemClick;
-
-                if(observer is IItemPointerDown)
-                    OnItemPointerDown += (observer as IItemPointerDown).OnItemPointerDown;
-
-                if(observer is IBeginItemDrag)
-                    OnBeginItemDrag += (observer as IBeginItemDrag).OnBeginItemDrag;
-
-
-                yield return null;
-            }
-
-            Observers.Clear();
         }
     }
 }

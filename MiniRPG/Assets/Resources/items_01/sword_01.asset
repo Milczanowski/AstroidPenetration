@@ -20,6 +20,6 @@ MonoBehaviour:
     Name: sword_icon_01
   MaxInStack: 1
   Cooldown: 0.25
-  RunsOut: 1
+  RunsOut: 0
   Health: 0
   Mana: 0

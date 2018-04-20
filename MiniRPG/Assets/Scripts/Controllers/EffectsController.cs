@@ -21,7 +21,7 @@ namespace Assets.Scripts.Controllers
             yield return null;
         }
 
-        protected override IEnumerable InitObservers()
+        protected override IEnumerator InitObservers()
         {
             yield return null;
         }

@@ -114,7 +114,7 @@ namespace Assets.Scripts.Controllers
                 TargetOffset.y += offSet.y -(transform.position.y - raycastHit.point.y);
         }
 
-        protected override IEnumerable InitObservers()
+        protected override IEnumerator InitObservers()
         {
             yield return null;
         }
