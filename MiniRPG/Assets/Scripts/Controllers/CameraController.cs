@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.Controllers
 {
     [RequireComponent(typeof(Camera))]
-    public class CameraController: BaseController
+    public class CameraController: BaseController, WorldInputController.IWorldDrag, WorldInputController.IBeginPlayerDrag, WorldInputController.IEndWorldDrag
     {
         private Func<Vector3> PlayerPosition;
         private Func<Vector3> PlayerForward;
@@ -35,7 +35,6 @@ namespace Assets.Scripts.Controllers
         private float positionSmoothTime = .5f;
         [SerializeField]
         private LayerMask groudLayerMask;
-
 
         private Vector3 CurrentLookAt { get; set; }
         private Vector3 CurrentPosition { get; set; }
@@ -68,40 +67,12 @@ namespace Assets.Scripts.Controllers
                 return settingsController.Instance.CameraRotationSensitive;
             };
 
-
-            InputController inputController = GetController<InputController>();
-            inputController.OnDrag += InputController_OnDrag;
-            inputController.OnPlayerStartDrag += InputController_OnPlayerStartDrag;
-            inputController.OnEndDrag += InputController_OnEndDrag;
+            GetController<WorldInputController>().AddObserver(this);
 
             CurrentLookAt = PlayerPosition();
             CurrentPosition = transform.position;
             CameraRotation = false;
             yield return null;
-        }
-
-        private void InputController_OnEndDrag(Vector3 target)
-        {
-            CameraRotation = false;
-        }
-
-        private void InputController_OnPlayerStartDrag(Vector3 target)
-        {
-            CameraRotation = !PlayerIsMoving();
-        }
-
-        private void InputController_OnDrag(Vector2 target)
-        {
-            if(CameraRotation)
-            {
-                Vector3 playerPosition = PlayerPosition();
-                target *= RotationSensitive();
-                transform.RotateAround(playerPosition, Vector3.up, target.x);
-                transform.RotateAround(playerPosition, transform.right, target.y);
-
-                if(transform.eulerAngles.x > maxRotationX || transform.eulerAngles.x < minRotationX)
-                    transform.RotateAround(playerPosition, transform.right, -target.y);
-            }
         }
 
         private void LateUpdate()
@@ -146,6 +117,30 @@ namespace Assets.Scripts.Controllers
         protected override IEnumerable InitObservers()
         {
             yield return null;
+        }
+
+        public void OnWorldDrag(Vector2 position)
+        {
+            if(CameraRotation)
+            {
+                Vector3 playerPosition = PlayerPosition();
+                position *= RotationSensitive();
+                transform.RotateAround(playerPosition, Vector3.up, position.x);
+                transform.RotateAround(playerPosition, transform.right, position.y);
+
+                if(transform.eulerAngles.x > maxRotationX || transform.eulerAngles.x < minRotationX)
+                    transform.RotateAround(playerPosition, transform.right, -position.y);
+            }
+        }
+
+        public void OnBeginPlayerDrag(Vector3 position)
+        {
+            CameraRotation = !PlayerIsMoving();
+        }
+
+        public void OnEndWorldDrag(Vector2 position)
+        {
+            CameraRotation = false;
         }
     }
 }

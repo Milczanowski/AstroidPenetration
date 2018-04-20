@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    class GUIWorldInputController:BaseController
+    class WorldInputController:BaseController
     {
         public interface IPlayerClick:IObserver { void OnPlayerClick(Vector3 position); }
         public interface IPlayerPointerDown:IObserver { void OnPlayerPointerDown(Vector3 position); }

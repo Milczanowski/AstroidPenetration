@@ -13,8 +13,6 @@ namespace Assets.Scripts.GUI.Game
     public class GameGUI:BaseGUI<GameGUI>, IEditorSerializable, IInventory, IGUI
     {
         [SerializeField]
-        private List <InventoryButton> InventoryButtons = new List<InventoryButton>();
-        [SerializeField]
         private Text Health = null;
         [SerializeField]
         private Text Mana = null;
@@ -32,158 +30,20 @@ namespace Assets.Scripts.GUI.Game
 
         private Dictionary<int, InventoryButton> InventoryButtonsDict = new Dictionary<int, InventoryButton>();
 
-        public event Delegates.Vector3Target OnWorldClick = delegate{};
-        public event Delegates.Vector3Target OnWorldPointerDown = delegate{};
-
-        public event Delegates.Vector3Target OnBeginWorldDrag = delegate{};
-        public event Delegates.Vector3Target OnEndWorldDrag = delegate{};
-        public event Delegates.Vector2Target OnWorldDrag = delegate{};
-        public event Delegates.Vector3Target OnWorldEnter= delegate{};
-        public event Delegates.Vector3Target OnWorldExit= delegate{};
-
-        public event Delegates.Index OnInventory= delegate{};
-        public event Delegates.Index OnInventoryEnter= delegate{};
-        public event Delegates.Index OnInventoryExit= delegate{};
-        public event Delegates.Index OnInventoryStartDrag= delegate{};
-        public event Delegates.Index OnInventoryEndDrag= delegate{};
-        public event Delegates.Vector2Target OnInventoryDrag= delegate{};
-
 
         public event Delegates.Action OnShowMenu= delegate{};
 
         public void InitReference()
         {
-            InventoryButtons = new List<InventoryButton>(GetComponentsInChildren<InventoryButton>());
+
         }
 
         protected override void Awake()
         {
             base.Awake();
-            ClickInput.onClick += OnClick;
-            ClickInput.onPointerDown += OnPointerDown;
-            EnterInput.onPointerEnter += OnPointerEnter;
-            EnterInput.onPointerExit += OnPointerExit;
-            DragInput.onBeginDrag += OnBeginDrag;
-            DragInput.onEndDrag += OnEndDrag;
-            DragInput.onDrag += OnDrag;
-
-            foreach(InventoryButton inventoryButton in InventoryButtons)
-                InventoryButtonsDict.Add(inventoryButton.Index, inventoryButton);
         }
 
-        private void OnPointerExit(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Inventory:
-                    {
-                        OnInventoryExit.Invoke(index);
-                    }
-                    break;
-                case InputType.Target:
-                    {
-                        OnWorldExit.Invoke(eventData.position);
-                    }break;
-            }
-        }
-
-        private void OnPointerEnter(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Inventory:
-                    {
-                        OnInventoryEnter.Invoke(index);
-                    }
-                    break;
-                case InputType.Target:
-                    {
-                        OnWorldEnter.Invoke(eventData.position);
-                    }break;
-            }
-        }
-
-        private void OnDrag(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Target:
-                    {
-                        OnWorldDrag.Invoke(eventData.delta);
-                    }break;
-                case InputType.Inventory:
-                    {
-                        OnInventoryDrag.Invoke(eventData.position);
-                    }
-                    break;
-            }
-        }
-
-        private void OnEndDrag(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Target:
-                    {
-                        OnEndWorldDrag.Invoke(eventData.position);
-                    }
-                    break;
-                case InputType.Inventory:
-                    {
-                        OnInventoryEndDrag.Invoke(index);
-                    }break;
-            }
-        }
-
-        private void OnBeginDrag(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Target:
-                    {
-                        OnBeginWorldDrag.Invoke(eventData.position);
-                    }break;
-                case InputType.Inventory:
-                    {
-                        OnInventoryStartDrag.Invoke(index);
-                    }
-                    break;
-            }
-        }
-
-        private void OnClick(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Target:
-                    {
-                        OnWorldClick(eventData.position);
-                    }
-                    break;
-                case InputType.Inventory:
-                    {
-                        OnInventory.Invoke(index);
-                    }
-                    break;
-                case InputType.Options:
-                    {
-                        OptionAction(index);
-                    }
-                    break;
-            }
-        }
-
-        private void OnPointerDown(InputType type, int index, PointerEventData eventData)
-        {
-            switch(type)
-            {
-                case InputType.Target:
-                    {
-                        OnWorldPointerDown(eventData.position);
-                    }
-                    break;
-            }
-        }
+ 
 
         private void OptionAction(int index)
         {

@@ -8,7 +8,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    class GameplayController:BaseController
+    class GameplayController:BaseController, WorldInputController.IWorldClick, WorldInputController.IBeginPlayerDrag, WorldInputController.IEndWorldDrag, WorldInputController.IItemClick,
+        WorldInputController.IBeginItemDrag, InventoryController.IInventoryEnter, InventoryController.IInventoryExit, InventoryController.IInventoryBeginDrag, InventoryController.IInventoryEndDrag,
+        WorldInputController.IWorldEnter, InventoryController.IInventory
     {
         public interface IStopMove:IObserver { void OnStopMove(); }
         public interface IMove    :IObserver { void OnMove(Vector3 position); }
@@ -42,25 +44,11 @@ namespace Assets.Scripts.Controllers
             CurrentInventoryIndex = -1;
             CurrentDropItem = null;
 
-            InputController inputController = GetController<InputController>();
-
-            inputController.OnClickTarget += onMove;
-            inputController.OnClickTargetNormal += onShowMark;
-            inputController.OnPlayerStartDrag += OnPlayerStartDrag;
-            inputController.OnEndDrag += OnEndDrag;
-            inputController.OnDropItemClick += OnDropItemClick;
-            inputController.OnDropItemStartDrag += OnDropItemStartDrag;
-            inputController.OnInventoryEnter += OnInventoryEnter;
-            inputController.OnInventoryExit += OnInventoryExit;
-            inputController.OnInventoryStartDrag += OnInventoryStartDrag;
-            inputController.OnInventoryDrag += OnInventoryDrag;
-            inputController.OnInventoryEndDrag += OnInventoryEndDrag;
-            inputController.OnWorldEnter += OnWorldEnter;
-            inputController.OnWorldExit += OnWorldExit;
-
             Player = new Player();
 
-            inputController.OnInventory += Player.Inventory.OnInventory;
+            GetComponent<WorldInputController>().AddObserver(this);
+            GetComponent<InventoryController>().AddObserver(this);
+
 
             Player.Inventory.AddEvents(GameGUI.Instance);
             Player.AddEvents(GameGUI.Instance);
@@ -84,117 +72,32 @@ namespace Assets.Scripts.Controllers
 
             Observers.Clear();
             yield return null;
-        }
+        }       
 
-        private void OnWorldExit(Vector3 target)
+
+
+        public void OnWorldClick(Vector3 position, Vector3 normal)
         {
-            switch(CurrentDrag)
+            if(CurrentDrag == Drag.None)
             {
-                case Drag.Inventory:
-                    {
-
-                    }
-                    break;
+                OnMove.Invoke(position);
+                OnShowMark.Invoke(position, normal);
             }
         }
 
-        private void OnWorldEnter(Vector3 target)
+        public void OnBeginPlayerDrag(Vector3 position)
         {
-            switch(CurrentDrag)
-            {
-                case Drag.Inventory:
-                    {
-                        Player.Inventory.SetSelected(-1);
-                    }
-                    break;
-            }
+            CurrentDrag = Drag.Player;
         }
 
-        private void OnInventoryEndDrag(int index)
-        {
-            CurrentDrag = Drag.None;
-            Player.Inventory.EndDrag(index);
-        }
-
-        private void OnInventoryDrag(Vector2 target)
-        {
-        }
-
-        private void OnInventoryStartDrag(int index)
-        {
-            CurrentDrag = Drag.Inventory;
-            Player.Inventory.StartDrag(index);
-        }
-
-        private void OnTartgetExit(int index)
-        {
-
-        }
-
-        private void OnTartgetEnter(int index)
-        {
-            switch(CurrentDrag)
-            {
-                case Drag.Inventory:
-                    {
-                        Player.Inventory.SetSelected(-1);
-                    }
-                    break;
-            }
-        }
-
-        private void OnInventoryExit(int index)
+        public void OnEndWorldDrag(Vector2 position)
         {
             switch(CurrentDrag)
             {
                 case Drag.Item:
                     {
-                        CurrentInventoryIndex = -1;
-                    }
-                    break;
-            }
-        }
-
-        private void OnInventoryEnter(int index)
-        {
-            switch(CurrentDrag)
-            {
-                case Drag.Item:
-                    {
-                        CurrentInventoryIndex = index;
-                    }                
-                    break;
-                case Drag.Inventory:
-                    {
-                        Player.Inventory.SetSelected(index);
-                    }break;
-            }
-        }
-
-        private void OnDropItemStartDrag(Worlds.Items.DropItem dropItem)
-        {
-            CurrentDrag = Drag.Item;
-            CurrentDropItem = dropItem;
-            Player.Inventory.Highlight(dropItem.ID);
-        }
-
-        private void OnDropItemClick(Worlds.Items.DropItem dropItem)
-        {
-
-            if(Player.Inventory.AddItem(dropItem.ID))
-            {
-                Destroy(dropItem.gameObject);
-            }
-        }
-
-        private void OnEndDrag(Vector3 target)
-        {
-            switch(CurrentDrag)
-            {
-                case Drag.Item:
-                    {
-                        if(CurrentDropItem!=null &&CurrentInventoryIndex >=0)
-                            if(Player.Inventory.AddItem(CurrentDropItem.ID, CurrentInventoryIndex,1))                            
+                        if(CurrentDropItem != null && CurrentInventoryIndex >= 0)
+                            if(Player.Inventory.AddItem(CurrentDropItem.ID, CurrentInventoryIndex, 1))
                                 Destroy(CurrentDropItem.gameObject);
 
                         CurrentDropItem = null;
@@ -207,23 +110,77 @@ namespace Assets.Scripts.Controllers
             CurrentDrag = Drag.None;
         }
 
-        private void OnPlayerStartDrag(Vector3 target)
+        public void OnItemClick(DropItem item)
         {
-            CurrentDrag = Drag.Player;
+            if(Player.Inventory.AddItem(item.ID))
+            {
+                Destroy(item.gameObject);
+            }
         }
 
-        private void onMove(Vector3 target)
+        public void OnBeginItemDrag(DropItem item)
         {
-            if(CurrentDrag == Drag.None)
-                OnMove.Invoke(target);
+            CurrentDrag = Drag.Item;
+            CurrentDropItem = item;
+            Player.Inventory.Highlight(item.ID);
         }
 
-        private void onShowMark(Vector3 target, Vector3 normal)
+        public void OnInventoryEnter(int index)
         {
-            if(CurrentDrag == Drag.None)
-                OnShowMark.Invoke(target, normal);
+            switch(CurrentDrag)
+            {
+                case Drag.Item:
+                    {
+                        CurrentInventoryIndex = index;
+                    }
+                    break;
+                case Drag.Inventory:
+                    {
+                        Player.Inventory.SetSelected(index);
+                    }
+                    break;
+            }
         }
 
+        public void OnInventoryExit(int index)
+        {
+            switch(CurrentDrag)
+            {
+                case Drag.Item:
+                    {
+                        CurrentInventoryIndex = -1;
+                    }
+                    break;
+            }
+        }
 
+        public void OnInventoryBeginDrag(int index)
+        {
+            CurrentDrag = Drag.Inventory;
+            Player.Inventory.StartDrag(index);
+        }
+
+        public void OnInventoryEndDrag(int index)
+        {
+            CurrentDrag = Drag.None;
+            Player.Inventory.EndDrag(index);
+        }
+
+        public void OnWorldEnter(Vector2 position)
+        {
+            switch(CurrentDrag)
+            {
+                case Drag.Inventory:
+                    {
+                        Player.Inventory.SetSelected(-1);
+                    }
+                    break;
+            }
+        }
+
+        public void OnInventory(int index)
+        {
+            Player.Inventory.OnInventory(index);
+        }
     }
 }

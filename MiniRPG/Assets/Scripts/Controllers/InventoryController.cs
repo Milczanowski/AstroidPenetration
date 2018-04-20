@@ -1,16 +1,13 @@
 ﻿using Assets.Scripts.Controllers.Observers;
 using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Utils;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    class GUIInventoryController:BaseController
+    class InventoryController:BaseController
     {
         [SerializeField]
         private List <InventoryButton> InventoryButtons = new List<InventoryButton>();
@@ -81,4 +78,3 @@ namespace Assets.Scripts.Controllers
 
     }
 }
-/
