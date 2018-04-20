@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.Controllers
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController: BaseController, IEditorSerializable
+    public class PlayerController: BaseController, IEditorSerializable, GameplayController.IMove
     {
         [SerializeField]
         private CharacterController CharacterController = null;
@@ -26,12 +26,6 @@ namespace Assets.Scripts.Controllers
         public bool IsMoving { get; private set; }
              
 
-        private void Move(Vector3 position)
-        {
-            TartgetPosition = position;
-            TartgetAngle = Mathf.Rad2Deg * Mathf.Atan2(TartgetPosition.x - transform.position.x, TartgetPosition.z - transform.position.z);
-        }
-
         private void Update()
         {
             CurrnetAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TartgetAngle, ref angleVelocity, rotationSmoothTime);
@@ -41,6 +35,7 @@ namespace Assets.Scripts.Controllers
             IsMoving = CharacterController.velocity.magnitude > 1;
             CharacterController.Move(Vector3.down);
         }
+
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             Rigidbody rigidbody = hit.collider.attachedRigidbody;
@@ -59,10 +54,22 @@ namespace Assets.Scripts.Controllers
 
         protected override IEnumerator Init()
         {
-            GetController<GameplayController>().OnMove += Move;
+            GetController<GameplayController>().AddObserver(this);
+
             TartgetPosition = transform.position;
             TartgetAngle = CurrnetAngle = Mathf.Rad2Deg * Mathf.Atan2(TartgetPosition.x, TartgetPosition.z);
             yield return null;
+        }
+
+        protected override IEnumerable InitObservers()
+        {
+            yield return null;
+        }
+
+        public void OnMove(Vector3 position)
+        {
+            TartgetPosition = position;
+            TartgetAngle = Mathf.Rad2Deg * Mathf.Atan2(TartgetPosition.x - transform.position.x, TartgetPosition.z - transform.position.z);
         }
     }
 }

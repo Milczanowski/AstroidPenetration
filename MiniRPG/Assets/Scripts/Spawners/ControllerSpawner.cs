@@ -15,7 +15,6 @@ namespace Assets.Scripts.Spawners
             controllers.AddComponent<SaveController>();
             controllers.AddComponent<GameplayController>();
             controllers.AddComponent<EffectsController>();
-            controllers.AddComponent<InputController>();
 
 #if MMDevelop
             controllers.AddComponent<DevController>();

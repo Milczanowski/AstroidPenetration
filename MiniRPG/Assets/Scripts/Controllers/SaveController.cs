@@ -22,5 +22,10 @@ namespace Assets.Scripts.Controllers
         {
             StartCoroutine(base.Save());
         }
+
+        protected override IEnumerable InitObservers()
+        {
+            yield return null;
+        }
     }
 }

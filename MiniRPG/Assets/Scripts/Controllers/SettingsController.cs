@@ -77,5 +77,10 @@ namespace Assets.Scripts.Controllers
             ValueChanged = true;
             Instance.GUISize = value;
         }
+
+        protected override IEnumerable InitObservers()
+        {
+            yield return null;
+        }
     }
 }
