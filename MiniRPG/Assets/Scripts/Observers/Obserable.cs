@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Scripts.Obserwers
+namespace Assets.Scripts.Observers
 {
     /// <summary>
     /// The name of the interface method must be the same as the event name

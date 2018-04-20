@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.Observers;
 
 namespace Assets.Scripts.Controllers
 {

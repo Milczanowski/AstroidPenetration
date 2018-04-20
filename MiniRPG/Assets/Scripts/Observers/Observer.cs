@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Assets.Scripts.Obserwers
+namespace Assets.Scripts.Observers
 {
     public class Observer: IBindable, IObserable
     {

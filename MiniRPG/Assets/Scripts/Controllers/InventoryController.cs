@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Models.Basics;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.Observers;
 using Assets.Scripts.Players;
 using Assets.Scripts.ResourcesManagers;
 using Assets.Scripts.Utils;

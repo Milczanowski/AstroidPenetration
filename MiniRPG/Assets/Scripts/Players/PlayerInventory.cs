@@ -2,7 +2,7 @@
 using Assets.Scripts.Models.Basics;
 using Assets.Scripts.Models.Saves;
 using Assets.Scripts.Models.World.Items;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.Observers;
 using Assets.Scripts.Spawners;
 using Assets.Scripts.Utils;
 using System.Collections;

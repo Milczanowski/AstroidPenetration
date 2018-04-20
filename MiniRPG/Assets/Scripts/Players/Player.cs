@@ -2,7 +2,7 @@
 using Assets.Scripts.GUI.Game;
 using Assets.Scripts.Models.Saves;
 using Assets.Scripts.Models.World.Items;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.Observers;
 using Assets.Scripts.Utils;
 
 namespace Assets.Scripts.Players
@@ -41,8 +41,6 @@ namespace Assets.Scripts.Players
             OnExperienceChange += gui.SetExperienceValue;
             OnLevelChange += gui.SetLevelValue;
         }
-
-
 
         public void Load(SavePlayer savePlayer)
         {

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.GUI.Game;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.GUI.Menu;
+using Assets.Scripts.Observers;
 using Assets.Scripts.Players;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
@@ -54,8 +55,9 @@ namespace Assets.Scripts.Controllers
             Player.AddObserver(GameGUI.Instance);
             yield return  Player.Bind();
 
-
             Player.Load(GetComponent<SaveController>().Instance.Player);
+
+            MenuGUI.Instance.Hide();//<-- TODO;
             yield return null;
         }
      

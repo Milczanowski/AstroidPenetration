@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.GUI.Game;
-using Assets.Scripts.Obserwers;
+using Assets.Scripts.Observers;
 using Assets.Scripts.Utils;
 using Assets.Scripts.Worlds.Items;
 using System.Collections;

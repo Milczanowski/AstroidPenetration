@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Scripts.Obserwers
+namespace Assets.Scripts.Observers
 {
     public interface IBindable
     {
