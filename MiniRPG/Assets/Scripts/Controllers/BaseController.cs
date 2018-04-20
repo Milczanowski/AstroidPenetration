@@ -10,14 +10,14 @@ namespace Assets.Scripts.Controllers
     {
         private static Dictionary<Type, BaseController> Controllers = new Dictionary<Type, BaseController>();
 
-        private ObserverController Observer { get; set; }
+        private Observer Observer { get; set; }
 
         protected virtual void Awake()
         {
             if(Controllers.ContainsKey(GetType()))
                 throw new Exception("Doubled controller: " + GetType());
 
-            Observer = new ObserverController(this);
+            Observer = new Observer(this);
             Controllers.Add(GetType(), this);
             enabled = false;
         }

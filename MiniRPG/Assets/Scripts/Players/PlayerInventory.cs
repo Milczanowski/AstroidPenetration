@@ -60,7 +60,7 @@ namespace Assets.Scripts.Players
 
         private int CurrentSelected { get; set; }
 
-        public ObserverController Observer { get; private set; }
+        public Observer Observer { get; private set; }
 
 
         public PlayerInventory(int slotCount, int maxWeight)
@@ -85,7 +85,7 @@ namespace Assets.Scripts.Players
                 Slots.Add(i, inventorySlot);
             }
 
-            Observer = new ObserverController(this);
+            Observer = new Observer(this);
         }          
 
 

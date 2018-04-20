@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Assets.Scripts.Obserwers
 {
-    public class ObserverController: IBindable
+    public class Observer: IBindable
     {
         private List<IObserver> Observers { get; set; }
         private object Target { get; set; }
-        public ObserverController(IObserable watched)
+        public Observer(IObserable watched)
         {
             Observers = new List<IObserver>();
             Target = watched;
